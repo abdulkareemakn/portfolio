@@ -1,18 +1,29 @@
 ---
-
+import Layout from "../layouts/Layout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-        <p>Hello from Astro</p>
-	</body>
-</html>
+<Layout title="Abdul Kareem — Portfolio">
+  <section class="intro">
+    <h1 class="headline">Abdul Kareem</h1>
+    <p class="tagline">
+      I'm building <a href="/projects/ayak">Ayak</a>, a handmade jewelry
+      ecommerce platform, and <a href="/projects/orbit">Orbit</a>, an attendance
+      tracker for university courses.
+    </p>
+  </section>
+
+  <section class="status-block">
+    <div class="avatar" aria-hidden="true"></div>
+    <ul class="status-list">
+      <li><span class="icon">▶</span> Currently Reading: A Clash of Kings</li>
+      <li><span class="icon">◆</span> Self-hosting on Arch Linux + Hyprland</li>
+      <li><span class="icon">◇</span> CS student, Lahore, Pakistan</li>
+    </ul>
+  </section>
+
+  <p class="bio">
+    Full-stack developer with a self-hosting and Linux background. Currently
+    deep in TanStack Start and Cloudflare Workers. When not building, probably
+    tuning a Neovim config or arguing with Hyprland.
+  </p>
+</Layout>
