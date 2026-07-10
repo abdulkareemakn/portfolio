@@ -1,0 +1,72 @@
+---
+const items = [
+  "TanStack",
+  "Cloudflare Workers",
+  "D1",
+  "Drizzle",
+  "Bun",
+  "Astro",
+  "FastAPI",
+  "Vue",
+  "Neovim",
+  "Arch Linux",
+];
+---
+
+<div class="conveyor" role="presentation">
+  <div class="track">
+    {[...items, ...items].map((item) => <span class="chip">{item}</span>)}
+  </div>
+</div>
+
+<style>
+  .conveyor {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+  }
+
+  .track {
+    display: flex;
+    gap: 0.6rem;
+    width: max-content;
+    animation: scroll 22s linear infinite;
+  }
+
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.3rem 0.75rem;
+    white-space: nowrap;
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .track {
+      animation: none;
+    }
+  }
+</style>
