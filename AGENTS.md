@@ -1,22 +1,77 @@
+# Portfolio — Abdul Kareem
+
+## Stack
+
+- **Framework:** Astro (static site)
+- **Fonts:** DM Sans (body), Libre Baskerville (serif headings/nav), Martian Mono (mono)
+- **Base font-size:** 15px (`html { font-size: 15px }`)
+- **Layout:** Centered max-width (56rem), sidebar + content flex row on desktop
+
+## Layout structure
+
+```
+body (centered, max-width: 56rem, padding: 2rem 1.5rem 6rem 0)
+  main.page (flex row, gap: 0 on desktop)
+    aside.sidebar (150px, sticky, top: 2rem)
+    div.content (flex: 1, padding-left: 1.5rem)
+      <slot />
+```
+
+Sidebar is a child of `<main>`, not a sibling. Logo is on the left, nav below it.
+
+## Logo
+
+`src/components/Logo.astro` — custom "A" letter mark SVG (abstract monogram).
+- Uses `fill="currentColor"` 
+- Link wrapping it is `color: #000` in light mode, `color: #fff` in dark mode
+
+## Sidebar
+
+- Logo link: `margin-bottom: 2rem`, color inherits black/white by theme
+- Nav: serif font, `1.125rem`, `gap: 0.5rem`, link `opacity: 0.65`
+- Hover: `opacity: 1`, `color: var(--accent)`
+
+## Typography
+
+| Element | Font | Weight | Size | Color |
+|---------|------|--------|------|-------|
+| Headline | Libre Baskerville | 600 | `clamp(2rem, 5vw, 3rem)` | `var(--text)` |
+| Tagline | inherit (body) | — | `1.05rem` | `var(--text)` |
+| Status text | inherit | — | `0.9rem` | `var(--text)` |
+| Bio | inherit | — | `0.95rem` | `var(--text)` |
+| Nav links | Libre Baskerville | — | `1.125rem` | `var(--text)` |
+
+## Colors
+
+```css
+--bg: #fafaf8;       /* light background */
+--text: #17171a;     /* near-black text */
+--muted: #6b6b70;    /* secondary text */
+--accent: #3454d1;   /* links, hover */
+--border: #e4e4e1;   /* borders/placeholders */
+```
+
+Dark mode (`:root[data-theme="dark"]`):
+```css
+--bg: #0d0d0f;
+--text: #ececec;
+--muted: #8a8a90;
+--accent: #6d8dfc;
+--border: #232326;
+```
+
+## Status block
+
+Avatar (3rem circle, `background: var(--border)`) + inline status text (no list bullets). Uses `flex-start` alignment.
+
 ## Development
 
-When starting the dev server, use background mode:
-
+```sh
+astro dev --background   # start dev server in background
+astro dev stop           # stop it
+npx astro build          # verify build succeeds
 ```
-astro dev --background
-```
 
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+## Inspired by
 
-## Documentation
-
-Full documentation: https://docs.astro.build
-
-Consult these guides before working on related tasks:
-
-- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
-- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
-- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
-- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
-- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
-- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+https://hecker.vc — layout structure (sidebar inside main, 150px sidebar, centered max-width).
