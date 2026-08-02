@@ -54,19 +54,6 @@ const { username = "abdulkareemakn" } = Astro.props;
     height: auto;
   }
 
-  .gh-contributions .total {
-    fill: var(--muted);
-    font-family: var(--font-body, "DM Sans", sans-serif);
-    font-size: 0.75rem;
-  }
-
-  .gh-contributions .total a {
-    fill: var(--accent);
-    text-decoration: underline;
-    text-decoration-color: var(--muted);
-    text-underline-offset: 2px;
-  }
-
 </style>
 
 <script>
@@ -150,11 +137,14 @@ const { username = "abdulkareemakn" } = Astro.props;
         totalText.setAttribute("x", 0);
         totalText.setAttribute("y", height - 2);
         totalText.setAttribute("font-family", "DM Sans, sans-serif");
-        totalText.classList.add("total");
+        totalText.setAttribute("fill", "var(--muted)");
+        totalText.setAttribute("font-size", "13");
 
         const totalStr = `${total?.lastYear ?? 0} contributions in the last year on `;
         const totalSpan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
         totalSpan.textContent = totalStr;
+        totalSpan.setAttribute("fill", "var(--muted)");
+        totalSpan.setAttribute("font-family", "DM Sans, sans-serif");
         totalText.appendChild(totalSpan);
 
         const linkSpan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
@@ -163,9 +153,12 @@ const { username = "abdulkareemakn" } = Astro.props;
         link.setAttribute("target", "_blank");
         link.setAttribute("rel", "noopener");
         link.textContent = "GitHub";
+        link.setAttribute("fill", "var(--accent)");
+        link.setAttribute("font-family", "DM Sans, sans-serif");
+        link.setAttribute("text-decoration", "underline");
+        link.setAttribute("text-underline-offset", "2px");
+        link.setAttribute("text-decoration-color", "var(--muted)");
         linkSpan.appendChild(link);
-        linkSpan.classList.add("total");
-        linkSpan.querySelector("a")?.setAttribute("style", "fill: var(--accent); text-decoration: underline; text-decoration-color: var(--muted); text-underline-offset: 2px;");
         totalText.appendChild(linkSpan);
 
         svg.appendChild(totalText);
@@ -200,12 +193,23 @@ const { username = "abdulkareemakn" } = Astro.props;
       }
 
       getLevelColor(level) {
+        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+        if (isDark) {
+          const colors = [
+            "var(--border)",
+            "#0e4429",
+            "#006d32",
+            "#26a641",
+            "#39d353",
+          ];
+          return colors[level] || colors[0];
+        }
         const colors = [
           "var(--border)",
-          "color-mix(in srgb, var(--accent) 20%, transparent)",
-          "color-mix(in srgb, var(--accent) 45%, transparent)",
-          "color-mix(in srgb, var(--accent) 70%, transparent)",
-          "var(--accent)",
+          "#9be9a8",
+          "#40c463",
+          "#30a14e",
+          "#216e39",
         ];
         return colors[level] || colors[0];
       }
