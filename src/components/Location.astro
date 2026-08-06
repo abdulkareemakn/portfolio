@@ -1,0 +1,156 @@
+---
+const city = "Lahore";
+const country = "Pakistan";
+---
+
+<div class="location">
+  <div class="location-main">
+    <p class="location-name">{city}, {country}</p>
+    <p class="location-weather" data-weather></p>
+  </div>
+  <div class="location-clock">
+    <p class="clock-time" data-clock>--:--:--</p>
+    <p class="clock-meta">
+      <span data-date></span>
+      <span aria-hidden="true"> · </span>
+      <span data-utc>UTC</span>
+    </p>
+  </div>
+</div>
+
+<script>
+  const timezone = "Asia/Karachi";
+  const clockEl = document.querySelector<HTMLElement>("[data-clock]");
+  const dateEl = document.querySelector<HTMLElement>("[data-date]");
+  const utcEl = document.querySelector<HTMLElement>("[data-utc]");
+  const weatherEl = document.querySelector<HTMLElement>("[data-weather]");
+
+  const time = new Intl.DateTimeFormat("en-GB", {
+    timeZone: timezone,
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+  const date = new Intl.DateTimeFormat("en-GB", {
+    timeZone: timezone,
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+  });
+
+  function tick(): void {
+    const now = new Date();
+    if (clockEl) clockEl.textContent = time.format(now);
+    if (dateEl) dateEl.textContent = date.format(now);
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: timezone,
+    timeZoneName: "shortOffset",
+  }).formatToParts(new Date());
+  const offset = parts.find((p) => p.type === "timeZoneName")?.value;
+  if (utcEl) utcEl.textContent = offset ? `UTC${offset.replace(/^GMT/, "")}` : "UTC";
+
+  const weatherLabels: Record<number, string> = {
+    0: "Clear sky",
+    1: "Mainly clear",
+    2: "Partly cloudy",
+    3: "Overcast",
+    45: "Fog",
+    48: "Rime fog",
+    51: "Light drizzle",
+    53: "Drizzle",
+    55: "Heavy drizzle",
+    61: "Light rain",
+    63: "Rain",
+    65: "Heavy rain",
+    71: "Light snow",
+    73: "Snow",
+    75: "Heavy snow",
+    80: "Light showers",
+    81: "Showers",
+    82: "Heavy showers",
+    95: "Thunderstorm",
+    96: "Thunderstorm, slight hail",
+    99: "Thunderstorm, heavy hail",
+  };
+
+  fetch(
+    "https://api.open-meteo.com/v1/forecast?latitude=31.5497&longitude=74.3436&current=temperature_2m,weather_code",
+  )
+    .then((res) => res.json())
+    .then((data: { current: { temperature_2m: number; weather_code: number } }) => {
+      const temp = Math.round(data.current.temperature_2m);
+      const label = weatherLabels[data.current.weather_code] ?? "Clear sky";
+      if (weatherEl) weatherEl.textContent = `${label} · ${temp}°C`;
+    })
+    .catch(() => {
+      if (weatherEl) weatherEl.textContent = "";
+    });
+</script>
+
+<style>
+  .location {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    max-width: 26rem;
+    margin: 0 0 2rem;
+    padding: 0.9rem 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .location-name {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0 0 0.2rem;
+  }
+
+  .location-weather {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .location-clock {
+    text-align: right;
+  }
+
+  .clock-time {
+    font-family: var(--font-mono);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 400;
+    color: var(--accent);
+    margin: 0;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .clock-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin: 0.3rem 0 0;
+  }
+
+  @media (max-width: 480px) {
+    .location {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .location-clock {
+      text-align: left;
+    }
+  }
+</style>
