@@ -1,0 +1,79 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Kit — Abdul Kareem">
+  <article class="kit">
+    <h1 class="kit-title">Kit</h1>
+    <p class="kit-intro">
+      A directory of the software and tools I reach for most days, grouped by
+      what they do.
+    </p>
+
+    <ul class="kit-list">
+      <li><a class="kit-link" href="https://archlinux.org" target="_blank" rel="noreferrer">Arch Linux</a>, Operating System</li>
+      <li><a class="kit-link" href="https://hyprland.org" target="_blank" rel="noreferrer">Hyprland</a>, Wayland Tiling compositor</li>
+      <li><a class="kit-link" href="https://sw.kovidgoyal.net/kitty/" target="_blank" rel="noreferrer">Kitty</a>, Terminal</li>
+      <li><a class="kit-link" href="https://neovim.io" target="_blank" rel="noreferrer">Neovim</a>, Text Editor</li>
+      <li><a class="kit-link" href="https://www.zsh.org" target="_blank" rel="noreferrer">Zsh</a>, Shell</li>
+      <li><a class="kit-link" href="https://tailscale.com" target="_blank" rel="noreferrer">Tailscale</a>, Mesh Networking</li>
+      <li><a class="kit-link" href="https://www.digitalocean.com" target="_blank" rel="noreferrer">DigitalOcean</a>, Cloud</li>
+      <li><a class="kit-link" href="https://zen-browser.app" target="_blank" rel="noreferrer">Zen</a>, Browser</li>
+      <li><a class="kit-link" href="https://proton.me/mail" target="_blank" rel="noreferrer">Proton Mail</a>, Emails</li>
+      <li><a class="kit-link" href="https://typst.app" target="_blank" rel="noreferrer">Typst</a>, Documents &amp; Assignments</li>
+      <li><a class="kit-link" href="https://caddyserver.com" target="_blank" rel="noreferrer">Caddy</a>, Web Server</li>
+      <li><a class="kit-link" href="https://yazi-rs.github.io" target="_blank" rel="noreferrer">Yazi</a>, File Manager</li>
+      <li><a class="kit-link" href="https://raindrop.io" target="_blank" rel="noreferrer">Raindrop</a>, Bookmarks</li>
+      <li><a class="kit-link" href="https://www.hevy.com" target="_blank" rel="noreferrer">Hevy</a>, Workout Tracker</li>
+      <li><a class="kit-link" href="https://www.usememos.com" target="_blank" rel="noreferrer">Memos</a>, Notes</li>
+      <li><a class="kit-link" href="https://ticktick.com" target="_blank" rel="noreferrer">TickTick</a>, Todos</li>
+      <li><a class="kit-link" href="https://www.habitkit.app" target="_blank" rel="noreferrer">HabitKit</a>, Habit Tracking</li>
+      <li><a class="kit-link" href="https://bitwarden.com" target="_blank" rel="noreferrer">Bitwarden</a>, Password Manager</li>
+      <li><a class="kit-link" href="https://www.symfonium.app" target="_blank" rel="noreferrer">Symfonium</a>, Music Player</li>
+      <li><a class="kit-link" href="https://lichess.org" target="_blank" rel="noreferrer">Lichess</a>, Chess</li>
+    </ul>
+  </article>
+</Layout>
+
+<style>
+  .kit {
+    max-width: 42rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .kit-title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    margin: 0 0 1rem;
+  }
+
+  .kit-intro {
+    color: var(--muted);
+    margin: 0 0 2.5rem;
+  }
+
+  .kit-list {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  .kit-list li {
+    margin: 0 0 0.6rem;
+  }
+
+  .kit-link {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--muted);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s ease;
+  }
+
+  .kit-link:hover,
+  .kit-link:focus-visible {
+    text-decoration-color: var(--text);
+  }
+</style>
