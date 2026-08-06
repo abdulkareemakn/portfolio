@@ -3,6 +3,7 @@
 @import "@fontsource/libre-baskerville/latin-400.css";
 @import "@fontsource/libre-baskerville/latin-600.css";
 @import "@fontsource/martian-mono/latin-400.css";
+@import "@fontsource/noto-nastaliq-urdu/arabic-400.css";
 
 :root {
   --bg: #fafaf8;
@@ -14,6 +15,7 @@
   --font-body: "DM Sans", BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-serif: "Libre Baskerville", Georgia, serif;
   --font-mono: "Martian Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-urdu: "Noto Nastaliq Urdu", serif;
 
   --pad-top: clamp(1.5rem, 4vw, 3rem);
   --sidebar-width: 150px;
@@ -112,8 +114,38 @@ body {
   text-decoration: none;
 }
 
+.ipa {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.5em;
+  color: var(--muted);
+  vertical-align: 0.35em;
+  white-space: nowrap;
+}
+
+.urdu {
+  font-family: var(--font-urdu);
+  font-weight: 400;
+  color: var(--muted);
+  padding-inline-end: 0.75rem;
+}
+
+.urdu::after {
+  content: "\00a0·\00a0";
+  font-family: var(--font-serif);
+  color: var(--text);
+  opacity: 0.4;
+}
+
+.profession {
+  font-size: 1rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  margin: -1rem 0 1.5rem;
+}
+
 .tagline {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   line-height: 1.6;
   color: var(--text);
   max-width: 42rem;
@@ -146,14 +178,95 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text);
   line-height: 1.5;
 }
 
-.bio {
-  max-width: 42rem;
-  line-height: 1.7;
+.work {
+  margin: 2.5rem 0;
+}
+.work-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin: 0 0 1.5rem;
+}
+
+.marquee {
+  --gap: 1rem;
+  position: relative;
+  display: flex;
+  gap: var(--gap);
+  overflow: hidden;
+  padding: 0.5rem 0;
+  margin-bottom: 0.5rem;
+}
+
+.marquee-copy {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--gap);
+  animation: marquee var(--duration, 30s) linear infinite;
+}
+
+.marquee:hover .marquee-copy {
+  animation-play-state: paused;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.item-icon {
+  display: inline-flex;
+  width: 1.4rem;
+  height: 1.4rem;
   color: var(--text);
-  font-size: 0.95rem;
+  opacity: 0.75;
+}
+
+.item-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.fade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 5rem;
+  pointer-events: none;
+}
+
+.fade-left {
+  left: 0;
+  background: linear-gradient(to right, var(--bg), transparent);
+}
+
+.fade-right {
+  right: 0;
+  background: linear-gradient(to left, var(--bg), transparent);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-copy {
+    animation: none;
+  }
 }
