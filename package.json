@@ -18,6 +18,7 @@
 		"@fontsource/dm-sans": "^5.2.8",
 		"@fontsource/libre-baskerville": "^5.2.10",
 		"@fontsource/martian-mono": "^5.2.7",
+		"@fontsource/noto-nastaliq-urdu": "^5.3.0",
 		"astro": "^7.0.7"
 	},
 	"devDependencies": {
