@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Sidebar from "../components/Sidebar.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
   title: string;
@@ -27,6 +28,7 @@ const { title } = Astro.props;
       <Sidebar />
       <div class="content">
         <slot />
+        <Footer />
       </div>
     </main>
   </body>

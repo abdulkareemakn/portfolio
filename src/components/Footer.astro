@@ -1,0 +1,55 @@
+---
+import Socials from "./Socials.astro";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <p class="footer-line">
+    <span class="copyright">© {year} Abdul Kareem</span>
+    <span class="sep" aria-hidden="true">·</span>
+    <span>Built with Astro</span>
+  </p>
+  <Socials />
+</footer>
+
+<style>
+  .site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .footer-line {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .copyright {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .sep {
+    opacity: 0.5;
+  }
+
+  .site-footer :global(.socials) {
+    gap: 1.1rem;
+  }
+
+  .site-footer :global(.social) {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+</style>
