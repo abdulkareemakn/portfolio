@@ -9,7 +9,7 @@
   --bg: #fafaf8;
   --text: #17171a;
   --muted: #6b6b70;
-  --accent: #3454d1;
+  --accent: #15803d;
   --border: #e4e4e1;
 
   --font-body: "DM Sans", BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -25,7 +25,7 @@
   --bg: #0d0d0f;
   --text: #ececec;
   --muted: #8a8a90;
-  --accent: #6d8dfc;
+  --accent: #4ade80;
   --border: #232326;
 }
 
@@ -34,7 +34,7 @@
     --bg: #0d0d0f;
     --text: #ececec;
     --muted: #8a8a90;
-    --accent: #6d8dfc;
+    --accent: #4ade80;
     --border: #232326;
   }
 }
