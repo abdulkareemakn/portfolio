@@ -20,9 +20,17 @@ import Socials from "../components/Socials.astro";
   <div class="status-block">
     <div class="avatar" aria-hidden="true"></div>
     <div class="status-text">
-      <span>▶ Currently Reading: <strong>A Clash of Kings</strong></span>
-      <span>◆ Chess rating on Lichess: <strong data-lichess>1219</strong></span>
-      <span>◇ <strong data-aur>2</strong> packages maintained on the AUR</span>
+      <span>▶ Reading Now: <strong>A Clash of Kings</strong> by George R. R. Martin</span>
+      <span class="status-item">
+        <svg class="status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 22h12" />
+          <path d="M7 20h10" />
+          <path d="M9.5 4.5 8 3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v.5A3.5 3.5 0 0 1 16 7v.5a6 6 0 0 1-1.5 4l-2.5 2.5a2 2 0 0 0-.5 1V16" />
+          <path d="m13 9-3 3 2 2 3-3a2 2 0 0 0 0-2.83Z" />
+        </svg>
+        Rated <strong data-lichess>1219</strong> on Lichess
+      </span>
+      <span>◇ Maintaining <strong data-aur>2</strong> packages on the AUR</span>
     </div>
   </div>
 
