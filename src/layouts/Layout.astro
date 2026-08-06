@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Sidebar from "../components/Sidebar.astro";
 import Footer from "../components/Footer.astro";
+import { Sun, Moon, SunMoon } from "@lucide/astro";
 
 interface Props {
   title: string;
@@ -36,18 +37,9 @@ const { title } = Astro.props;
     </main>
 
     <button class="theme-toggle" data-theme-toggle type="button" aria-label="Cycle theme">
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21h8M12 17v4" />
-      </svg>
+      <SunMoon class="icon-sunmoon" />
+      <Sun class="icon-sun" />
+      <Moon class="icon-moon" />
     </button>
   </body>
 </html>
@@ -65,15 +57,6 @@ const { title } = Astro.props;
     dark: "Dark theme",
   };
 
-  const icons: Record<Theme, string> = {
-    system:
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
-    light:
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>',
-    dark:
-      '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
-  };
-
   function currentTheme(): Theme {
     const stored = localStorage.getItem("theme");
     return stored === "light" || stored === "dark" ? stored : "system";
@@ -89,7 +72,6 @@ const { title } = Astro.props;
     if (!toggle) return;
     toggle.setAttribute("aria-label", labels[theme]);
     toggle.setAttribute("title", labels[theme]);
-    toggle.innerHTML = icons[theme];
   }
 
   toggle?.addEventListener("click", () => {
@@ -127,6 +109,33 @@ const { title } = Astro.props;
   .theme-toggle svg {
     width: 1.35rem;
     height: 1.35rem;
+  }
+
+  .theme-toggle .icon-sunmoon {
+    display: inline-flex;
+  }
+
+  .theme-toggle .icon-sun,
+  .theme-toggle .icon-moon {
+    display: none;
+  }
+
+  :root[data-theme="light"] .theme-toggle .icon-sun {
+    display: inline-flex;
+  }
+
+  :root[data-theme="light"] .theme-toggle .icon-sunmoon,
+  :root[data-theme="light"] .theme-toggle .icon-moon {
+    display: none;
+  }
+
+  :root[data-theme="dark"] .theme-toggle .icon-moon {
+    display: inline-flex;
+  }
+
+  :root[data-theme="dark"] .theme-toggle .icon-sunmoon,
+  :root[data-theme="dark"] .theme-toggle .icon-sun {
+    display: none;
   }
 
   .theme-toggle:hover,
