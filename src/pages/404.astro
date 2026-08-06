@@ -1,0 +1,61 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="404 — Page not found | Abdul Kareem">
+  <section class="notfound">
+    <p class="notfound-code" role="presentation">404</p>
+    <h1 class="notfound-headline">This page went missing.</h1>
+    <p class="notfound-body">
+      The link may be broken, or the page may have been moved or never
+      existed in the first place.
+    </p>
+    <a class="notfound-link" href="/">← Back to home</a>
+  </section>
+</Layout>
+
+<style>
+  .notfound {
+    max-width: 42rem;
+  }
+
+  .notfound-code {
+    font-family: var(--font-mono);
+    font-size: clamp(3rem, 10vw, 5rem);
+    line-height: 1;
+    color: var(--accent);
+    margin: 0 0 1.5rem;
+  }
+
+  .notfound-headline {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    margin: 0 0 1rem;
+  }
+
+  .notfound-body {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--muted);
+    margin: 0 0 2rem;
+    max-width: 34rem;
+  }
+
+  .notfound-link {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    color: var(--text);
+    text-decoration: none;
+    opacity: 0.65;
+    transition:
+      opacity 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .notfound-link:hover,
+  .notfound-link:focus-visible {
+    opacity: 1;
+    color: var(--accent);
+  }
+</style>
