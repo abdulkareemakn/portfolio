@@ -9,7 +9,9 @@ const { username = "abdulkareemakn" } = Astro.props;
 >
   <div class="gh-card">
     <p class="gh-heading">GitHub Contributions</p>
-    <div class="gh-loading" aria-live="polite">Loading contributions…</div>
+    <div class="gh-scroll" tabindex="0" aria-label="Scrollable GitHub contribution chart">
+      <div class="gh-loading" aria-live="polite">Loading contributions…</div>
+    </div>
   </div>
 </div>
 
@@ -35,6 +37,7 @@ const { username = "abdulkareemakn" } = Astro.props;
     padding: 1.25rem 1.25rem 1rem;
     background: var(--bg);
     display: inline-block;
+    max-width: 100%;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   }
 
@@ -48,9 +51,22 @@ const { username = "abdulkareemakn" } = Astro.props;
     font-size: 0.85rem;
   }
 
+  .gh-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.35rem;
+    scrollbar-color: var(--border) transparent;
+    scrollbar-width: thin;
+  }
+
+  .gh-scroll:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
   .gh-contributions svg {
     display: block;
-    max-width: 100%;
     height: auto;
   }
 
@@ -58,8 +74,8 @@ const { username = "abdulkareemakn" } = Astro.props;
 
 <script>
   (() => {
-    const CELL_SIZE = 13;
-    const CELL_GAP = 3;
+    const CELL_SIZE = 9;
+    const CELL_GAP = 2;
 
 
     class GitHubContributions {
@@ -167,7 +183,8 @@ const { username = "abdulkareemakn" } = Astro.props;
         const loading = this.container.querySelector(".gh-loading");
         if (!card) return;
         if (loading) loading.remove();
-        card.appendChild(svg);
+        const scroll = card.querySelector(".gh-scroll");
+        if (scroll) scroll.appendChild(svg);
       }
 
       computePositions(contributions) {

@@ -114,13 +114,26 @@ body {
   text-decoration: none;
 }
 
+.name-line {
+  display: block;
+  white-space: nowrap;
+}
+
 .ipa {
+  display: block;
   font-family: var(--font-sans);
   font-weight: 400;
   font-size: 0.5em;
   color: var(--muted);
-  vertical-align: 0.35em;
   white-space: nowrap;
+  margin-top: 0.35em;
+  line-height: 1.2;
+}
+
+.name-separator {
+  color: var(--text);
+  opacity: 0.4;
+  margin: 0 0.25em;
 }
 
 .urdu {
@@ -128,13 +141,6 @@ body {
   font-weight: 400;
   color: var(--muted);
   padding-inline-end: 0.75rem;
-}
-
-.urdu::after {
-  content: "\00a0·\00a0";
-  font-family: var(--font-serif);
-  color: var(--text);
-  opacity: 0.4;
 }
 
 .profession {
