@@ -47,7 +47,7 @@ Sidebar is a child of `<main>`, not a sibling. Logo is on the left, nav below it
 --bg: #fafaf8;       /* light background */
 --text: #17171a;     /* near-black text */
 --muted: #6b6b70;    /* secondary text */
---accent: #3454d1;   /* links, hover */
+--accent: #15803d;   /* links, hover */
 --border: #e4e4e1;   /* borders/placeholders */
 ```
 
@@ -56,7 +56,7 @@ Dark mode (`:root[data-theme="dark"]`):
 --bg: #0d0d0f;
 --text: #ececec;
 --muted: #8a8a90;
---accent: #6d8dfc;
+--accent: #4ade80;
 --border: #232326;
 ```
 

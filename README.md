@@ -1,40 +1,43 @@
-# Portfolio — Abdul Kareem
+# Astro Starter Kit: Minimal
 
-The portfolio is a static Astro site deployed with Cloudflare Workers. Its
-production build also stages the separate sibling blog at `/blog`.
-
-## Repository layout
-
-```text
-Projects/
-├── portfolio/  # this repository
-└── blog/       # separate AstroPaper repository; base must be /blog
+```sh
+pnpm create astro@latest -- --template minimal
 ```
 
-The repositories remain independent. The portfolio build copies the blog's
-generated output into `portfolio/dist/blog` immediately before deployment.
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-## Commands
+## 🚀 Project Structure
 
-| Command | Purpose |
-| --- | --- |
-| `pnpm dev` | Run the portfolio only at `localhost:4321`. |
-| `pnpm build:portfolio` | Build the portfolio only. |
-| `pnpm build` | Build the portfolio and sibling blog, then stage the blog at `/blog`. |
-| `pnpm preview` | Preview the combined production build. |
-| `pnpm deploy` | Build the combined site and deploy `dist` with Wrangler. |
-
-`pnpm build` runs the blog's own `pnpm build`, including its Pagefind indexing
-step. Do not replace it with `astro build` when preparing a combined deploy.
-
-The deployment directory is a single static tree:
+Inside of your Astro project, you'll see the following folders and files:
 
 ```text
-dist/
-├── index.html       # portfolio
-└── blog/            # generated blog build
+/
+├── public/
+├── src/
+│   └── pages/
+│       └── index.astro
+└── package.json
 ```
 
-The blog path defaults to `../blog`. To use a different checkout location, set
-`PORTFOLIO_BLOG_DIR` to its absolute path. Keep the blog's Astro configuration
-at `base: "/blog"`; the build checks this before staging files.
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+
+Any static assets, like images, can be placed in the `public/` directory.
+
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `pnpm install`             | Installs dependencies                            |
+| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
+| `pnpm build`           | Build your production site to `./dist/`          |
+| `pnpm preview`         | Preview your build locally, before deploying     |
+| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+
+## 👀 Want to learn more?
+
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
