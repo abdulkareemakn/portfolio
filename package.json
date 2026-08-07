@@ -7,11 +7,12 @@
 	},
 	"scripts": {
 		"dev": "astro dev",
-		"build": "astro build",
-		"preview": "astro build && astro preview",
+		"build": "node ./scripts/build-with-blog.mjs",
+		"build:portfolio": "astro build",
+		"preview": "pnpm build && astro preview",
 		"astro": "astro",
 		"generate-types": "wrangler types",
-		"deploy": "astro build && wrangler deploy",
+		"deploy": "pnpm build && wrangler deploy",
 		"cf-typegen": "wrangler types"
 	},
 	"dependencies": {
