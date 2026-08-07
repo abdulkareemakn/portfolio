@@ -1,43 +1,40 @@
-# Astro Starter Kit: Minimal
+# Portfolio — Abdul Kareem
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+The portfolio is a static Astro site deployed with Cloudflare Workers. Its
+production build also stages the separate sibling blog at `/blog`.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Repository layout
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+Projects/
+├── portfolio/  # this repository
+└── blog/       # separate AstroPaper repository; base must be /blog
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+The repositories remain independent. The portfolio build copies the blog's
+generated output into `portfolio/dist/blog` immediately before deployment.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Commands
 
-Any static assets, like images, can be placed in the `public/` directory.
+| Command | Purpose |
+| --- | --- |
+| `pnpm dev` | Run the portfolio only at `localhost:4321`. |
+| `pnpm build:portfolio` | Build the portfolio only. |
+| `pnpm build` | Build the portfolio and sibling blog, then stage the blog at `/blog`. |
+| `pnpm preview` | Preview the combined production build. |
+| `pnpm deploy` | Build the combined site and deploy `dist` with Wrangler. |
 
-## 🧞 Commands
+`pnpm build` runs the blog's own `pnpm build`, including its Pagefind indexing
+step. Do not replace it with `astro build` when preparing a combined deploy.
 
-All commands are run from the root of the project, from a terminal:
+The deployment directory is a single static tree:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+```text
+dist/
+├── index.html       # portfolio
+└── blog/            # generated blog build
+```
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The blog path defaults to `../blog`. To use a different checkout location, set
+`PORTFOLIO_BLOG_DIR` to its absolute path. Keep the blog's Astro configuration
+at `base: "/blog"`; the build checks this before staging files.
