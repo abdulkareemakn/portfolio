@@ -3,7 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import Location from "../components/Location.astro";
 import GitHubContributions from "../components/GitHubContributions.astro";
 import Socials from "../components/Socials.astro";
-import { ChessRook, BookOpen, Package } from "@lucide/astro";
+import { BookOpen } from "@lucide/astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <Layout title="Abdul Kareem — Portfolio">
@@ -28,15 +29,15 @@ import { ChessRook, BookOpen, Package } from "@lucide/astro";
     <div class="avatar" aria-hidden="true"></div>
     <div class="status-text">
       <span class="status-item">
-        <BookOpen />
+        <BookOpen class="status-icon" />
         Reading Now: <strong>A Clash of Kings</strong> by George R. R. Martin
       </span>
       <span class="status-item">
-        <ChessRook />
+        <Icon name="simple-icons:lichess" class="status-icon" />
         Rated <strong data-lichess>1219</strong> on Lichess
       </span>
       <span class="status-item">
-        <Package />
+        <Icon name="simple-icons:archlinux" class="status-icon" />
         Maintaining <strong data-aur>2</strong> packages on the AUR
       </span>
     </div>
