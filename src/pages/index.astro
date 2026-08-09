@@ -38,7 +38,7 @@ import { Icon } from "astro-icon/components";
       </span>
       <span class="status-item">
         <Icon name="simple-icons:archlinux" class="status-icon" />
-        Maintaining <strong data-aur>2</strong> packages on the AUR
+        Maintaining <strong>2</strong> packages on the AUR
       </span>
     </div>
   </div>
@@ -51,17 +51,6 @@ import { Icon } from "astro-icon/components";
           const res = await fetch("https://lichess.org/api/user/Abdul_Kareem1");
           const user = await res.json();
           lichessEl.textContent = String(user.perfs.rapid.rating);
-        } catch {}
-      }
-
-      const aurEl = document.querySelector("[data-aur]");
-      if (aurEl) {
-        try {
-          const res = await fetch(
-            "https://aur.archlinux.org/rpc/v5/search?by=maintainer&arg=tmtaxman",
-          );
-          const data = await res.json();
-          aurEl.textContent = String(data.resultcount);
         } catch {}
       }
     }
