@@ -69,7 +69,7 @@ Avatar (3rem circle, `background: var(--border)`) + inline status text (no list 
 ```sh
 astro dev --background   # start dev server in background
 astro dev stop           # stop it
-npx astro build          # verify build succeeds
+pnpm run build          # verify build succeeds
 ```
 
 ## Inspired by
