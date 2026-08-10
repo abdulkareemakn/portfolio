@@ -1,64 +1,81 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Home } from "@lucide/astro";
 ---
 
 <Layout
-  title="404 — Page not found"
-  description="The requested page could not be found on Abdul Kareem's portfolio website. Return to the home page to continue browsing."
+  title="404 — Abdul Kareem"
+  description="The page you're looking for can't be found."
+  noindex={true}
+  showSidebar={false}
 >
-  <section class="notfound">
-    <p class="notfound-code" role="presentation">404</p>
-    <h1 class="notfound-headline">This page went missing.</h1>
-    <p class="notfound-body">
-      The link may be broken, or the page may have been moved or never
-      existed in the first place.
-    </p>
-    <a class="notfound-link" href="/">← Back to home</a>
-  </section>
+  <div class="container">
+    <h1 class="headline">404</h1>
+    <p class="exception">NullPointerException</p>
+    <p class="message">The page you're looking for can't be found.</p>
+    <a href="/" class="home-link">
+      <Home class="icon" />
+      Back Home
+    </a>
+  </div>
 </Layout>
 
 <style>
-  .notfound {
-    max-width: 42rem;
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 55vh;
+    text-align: center;
   }
 
-  .notfound-code {
-    font-family: var(--font-mono);
-    font-size: clamp(3rem, 10vw, 5rem);
+  .headline {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    margin: 0 0 1.25rem;
     line-height: 1;
-    color: var(--accent);
+  }
+
+  .exception {
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    color: var(--muted);
     margin: 0 0 1.5rem;
   }
 
-  .notfound-headline {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: clamp(1.5rem, 4vw, 2.25rem);
-    margin: 0 0 1rem;
-  }
-
-  .notfound-body {
-    font-size: 1.15rem;
-    line-height: 1.7;
-    color: var(--muted);
-    margin: 0 0 2rem;
-    max-width: 34rem;
-  }
-
-  .notfound-link {
-    font-family: var(--font-serif);
-    font-size: 1.125rem;
+  .message {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
     color: var(--text);
-    text-decoration: none;
-    opacity: 0.65;
-    transition:
-      opacity 0.15s ease,
-      color 0.15s ease;
+    margin: 0 0 2.25rem;
   }
 
-  .notfound-link:hover,
-  .notfound-link:focus-visible {
-    opacity: 1;
+  .home-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--muted);
+    text-underline-offset: 4px;
+    transition:
+      color 0.15s ease,
+      text-decoration-color 0.15s ease;
+  }
+
+  .home-link .icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex-shrink: 0;
+  }
+
+  .home-link:hover,
+  .home-link:focus-visible {
     color: var(--accent);
+    text-decoration-color: var(--accent);
   }
 </style>
