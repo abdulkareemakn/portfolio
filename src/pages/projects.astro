@@ -1,71 +1,128 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
+interface ProjectLink {
+  label: string;
+  href: string;
+}
+
+interface ProjectMetric {
+  label: string;
+  value: string;
+}
+
 interface Project {
+  id: string;
   name: string;
   date: string;
-  tech: string;
+  category: "Full-Stack" | "Web Apps" | "Static";
+  badgeTheme: "green" | "blue" | "yellow" | "red";
+  featured?: boolean;
+  status: "Production" | "Active Dev" | "Maintained";
+  role: string;
+  metrics?: ProjectMetric[];
   description: string;
+  tech: string[];
   bullets: string[];
-  links?: { label: string; href: string }[];
+  links?: ProjectLink[];
 }
 
 const projects: Project[] = [
   {
+    id: "ayak",
     name: "Ayak",
     date: "2026 — Present",
-    tech: "TanStack Start, Cloudflare Workers, D1, R2",
-    description:
-      "A full-stack ecommerce platform for a homemade jewelry store.",
+    category: "Full-Stack",
+    badgeTheme: "green",
+    featured: true,
+    status: "Production",
+    role: "Full-Stack Engineer & Creator",
+    metrics: [
+      { label: "Runtime Environment", value: "Cloudflare Workers (Edge)" },
+      { label: "Data & Blob Engine", value: "D1 SQLite + R2 Storage" },
+      { label: "Authentication System", value: "Email OTP (Passwordless)" },
+      { label: "Validation Engine", value: "Zod Schema Validation" },
+    ],
+    description: "A full-stack ecommerce platform custom-built for a homemade jewelry store with edge-native persistence and OTP authentication.",
+    tech: ["TanStack Start", "Cloudflare Workers", "D1 SQLite", "R2 Storage", "Zod", "Email OTP"],
     bullets: [
-      "Relational schema on Cloudflare D1 (SQLite) for products, orders, and payments, with Zod for end-to-end schema validation.",
-      "Bank-transfer payment verification workflow with proof-of-payment uploads stored via Cloudflare R2.",
-      "Authenticated checkout flow with email OTP-based authentication, eliminating password-related attack surfaces.",
+      "Relational schema on Cloudflare D1 (SQLite) for products, orders, and payments with Zod end-to-end validation.",
+      "Bank-transfer payment verification workflow with proof-of-payment uploads stored on Cloudflare R2.",
+      "Authenticated checkout flow with email OTP authentication, eliminating password attack surfaces.",
     ],
     links: [
       { label: "ayak.abdulkareemakn.workers.dev", href: "https://ayak.abdulkareemakn.workers.dev" },
     ],
   },
   {
+    id: "orbit",
     name: "Orbit",
     date: "2026 — Present",
-    tech: "FastAPI, Vue 3, PostgreSQL",
-    description:
-      "An attendance tracker for university courses.",
+    category: "Web Apps",
+    badgeTheme: "blue",
+    featured: true,
+    status: "Active Dev",
+    role: "Lead Full-Stack Developer",
+    metrics: [
+      { label: "Backend API Framework", value: "FastAPI (Render)" },
+      { label: "Database Layer", value: "Neon Serverless PostgreSQL" },
+      { label: "Frontend SPA", value: "Vue 3 (Cloudflare Pages)" },
+      { label: "Auth Provider", value: "Google OAuth 2.0" },
+    ],
+    description: "An academic performance and attendance tracker designed for university students to manage course loads and grade milestones.",
+    tech: ["FastAPI", "Vue 3", "PostgreSQL", "Neon", "Render", "Google OAuth"],
     bullets: [
       "REST API with FastAPI letting students track attendance, quiz, and assignment marks across courses.",
-      "PostgreSQL database on Neon, with the API hosted on Render.",
+      "PostgreSQL database on Neon, with backend API microservice hosted on Render.",
       "Vue 3 single-page frontend deployed on Cloudflare Pages.",
-      "Google OAuth authentication, scoped to university accounts.",
+      "Google OAuth authentication scoped strictly to university credentials.",
     ],
     links: [
       { label: "orbit-egw.pages.dev", href: "https://orbit-egw.pages.dev" },
     ],
   },
   {
+    id: "blog",
     name: "Personal Developer Blog",
     date: "2026 — Present",
-    tech: "Astro, Cloudflare Pages",
-    description:
-      "A blog on self-hosting, Linux, and software development.",
+    category: "Static",
+    badgeTheme: "yellow",
+    featured: false,
+    status: "Maintained",
+    role: "Author & System Admin",
+    metrics: [
+      { label: "Lighthouse Score", value: "100/100 Performance" },
+      { label: "Hosting Infrastructure", value: "Cloudflare Pages + CNAME DNS" },
+    ],
+    description: "A technical publication covering self-hosting, Linux administration, and modern software development.",
+    tech: ["Astro", "Cloudflare Pages", "CNAME DNS", "Google Search Console"],
     bullets: [
-      "Built with Astro on Cloudflare Pages, achieving a perfect 100 Lighthouse score.",
-      "Custom subdomain via CNAME DNS records.",
-      "Google Search Console integration for indexing and search performance monitoring.",
+      "Built with Astro on Cloudflare Pages, achieving a perfect 100 Lighthouse performance score.",
+      "Custom subdomain routing via CNAME DNS records.",
+      "Google Search Console integration for indexing and search performance telemetry.",
     ],
     links: [
       { label: "abdulkareem.is-a.dev", href: "https://abdulkareem.is-a.dev" },
     ],
   },
   {
+    id: "portfolio",
     name: "This Portfolio",
     date: "2026 — Present",
-    tech: "Astro, Cloudflare Pages",
-    description:
-      "The site you're reading — a static Astro site with live Lichess and AUR status, a GitHub contribution graph, and a print-friendly resume.",
+    category: "Static",
+    badgeTheme: "red",
+    featured: false,
+    status: "Production",
+    role: "Design & Development",
+    metrics: [
+      { label: "Architecture Pattern", value: "Static + Client API Hydration" },
+      { label: "Telemetry Feeds", value: "Lichess API" },
+    ],
+    description: "A minimal, document-style personal site featuring live service API integrations and a print-ready resume.",
+    tech: ["Astro", "TypeScript", "Cloudflare Pages", "Lichess API"],
     bullets: [
-      "Static-first with zero runtime JavaScript outside of the small status and theme scripts.",
-      "Live status hydration for Lichess rating and AUR package count.",
+      "Static-first architecture with minimal client JS runtime footprint.",
+      "Live status hydration for Lichess rating telemetry.",
     ],
     links: [
       { label: "GitHub — abdulkareemakn", href: "https://github.com/abdulkareemakn" },
@@ -74,144 +131,574 @@ const projects: Project[] = [
 ];
 ---
 
-<Layout title="Projects — Abdul Kareem">
-  <article class="projects">
-    <h1 class="projects-title">Projects</h1>
-    <p class="projects-intro">
-      A selection of things I've built. Live links where they exist.
-    </p>
-
-    {projects.map((p) => (
-      <section class="project">
-        <div class="project-head">
-          <h2 class="project-name">{p.name}</h2>
-          <span class="project-date">{p.date}</span>
+<Layout
+  title="Projects — Abdul Kareem"
+  description="Explore full-stack software applications, edge APIs, and web projects engineered by Abdul Kareem using Cloudflare Workers, Vue, and FastAPI."
+>
+  <article class="dossier-wrapper">
+    <!-- Editorial Header Section -->
+    <header class="dossier-header">
+      <div class="header-top">
+        <div class="meta-tag">
+          <span class="meta-dot pulse-dot"></span>
+          <span class="meta-label">ENGINEERING DOSSIER</span>
+          <span class="meta-count">[{projects.length.toString().padStart(2, "0")}]</span>
         </div>
-        <p class="project-tech">{p.tech}</p>
-        <p class="project-desc">{p.description}</p>
-        <ul class="project-bullets">
-          {p.bullets.map((b) => (
-            <li>{b}</li>
-          ))}
-        </ul>
-        {p.links && (
-          <ul class="project-links">
-            {p.links.map((l) => (
-              <li>
-                <a href={l.href} target="_blank" rel="noreferrer">
-                  {l.label} ↗
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-    ))}
+      </div>
+
+      <h1 class="projects-title">Projects</h1>
+      <p class="projects-intro">
+        Selected software systems, edge APIs, and full-stack applications engineered for production and active utility.
+      </p>
+    </header>
+
+    <!-- Dossier Cards Grid -->
+    <div class="dossiers-list">
+      {
+        projects.map((p) => {
+          return (
+            <section
+              class={`dossier-card ${p.featured ? "is-featured" : "is-standard"} theme-${p.badgeTheme}`}
+            >
+              <!-- Card Header -->
+              <div class="dossier-top-bar">
+                <div class="badge-group">
+                  <span class={`status-chip status-${p.status === "Production" ? "prod" : p.status === "Active Dev" ? "dev" : "maint"}`}>
+                    <span class="status-dot"></span>
+                    <span class="status-label">{p.status}</span>
+                  </span>
+                  <span class="category-chip">{p.category}</span>
+                </div>
+                <time class="dossier-date">{p.date}</time>
+              </div>
+
+              <!-- Main Content Split for Featured vs Standard -->
+              <div class="dossier-body">
+                <div class="dossier-main-info">
+                  <div class="title-block">
+                    <h2 class="dossier-title">{p.name}</h2>
+                    <span class="dossier-role">{p.role}</span>
+                  </div>
+
+                  <p class="dossier-desc">{p.description}</p>
+
+                  <div class="bullets-block">
+                    <h3 class="section-label">ENGINEERING HIGHLIGHTS</h3>
+                    <ul class="bullet-list">
+                      {p.bullets.map((b) => (
+                        <li>
+                          <span class="bullet-icon">↳</span>
+                          <span class="bullet-text">{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Specs Panel (Featured Layout Right Side / Standard Bottom) -->
+                {p.metrics && p.metrics.length > 0 && (
+                  <div class="dossier-spec-panel">
+                    <div class="spec-panel-header">
+                      <span class="spec-icon">⚡</span>
+                      <span class="spec-title">SYSTEM ARCHITECTURE</span>
+                    </div>
+                    <div class="spec-grid">
+                      {p.metrics.map((m) => (
+                        <div class="spec-item">
+                          <span class="spec-label">{m.label}</span>
+                          <span class="spec-value">{m.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <!-- Footer with Tech Stack Badges & Links -->
+              <footer class="dossier-footer">
+                <div class="tech-stack-row">
+                  <span class="tech-label">STACK:</span>
+                  <div class="tech-tags-list">
+                    {p.tech.map((t) => (
+                      <span class="tech-tag">{t}</span>
+                    ))}
+                  </div>
+                </div>
+
+                {p.links && p.links.length > 0 && (
+                  <div class="links-row">
+                    {p.links.map((l) => (
+                      <a
+                        href={l.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        class="dossier-link"
+                      >
+                        <span class="link-text">{l.label}</span>
+                        <svg
+                          class="link-arrow"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path d="M4.5 11.5L11.5 4.5" />
+                          <path d="M5 4.5H11.5V11" />
+                        </svg>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </footer>
+            </section>
+          );
+        })
+      }
+    </div>
   </article>
 </Layout>
 
 <style>
-  .projects {
-    max-width: 42rem;
-    font-size: 1.05rem;
-    line-height: 1.7;
+  /* Base Dossier Container */
+  .dossier-wrapper {
+    max-width: 44rem;
     color: var(--text);
+    padding-bottom: 2rem;
+  }
+
+  /* Surface & Scoped Variables */
+  .dossier-card {
+    --card-surface: #ffffff;
+    --card-border: var(--border);
+    --panel-bg: var(--bg);
+  }
+
+  :root[data-theme="dark"] .dossier-card {
+    --card-surface: #111114;
+    --card-border: #232326;
+    --panel-bg: #09090b;
+  }
+
+  /* Header Section */
+  .dossier-header {
+    margin-bottom: 2.25rem;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  .meta-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg);
+  }
+
+  .meta-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    display: inline-block;
+  }
+
+  .pulse-dot {
+    box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.4);
+    animation: status-pulse 2s infinite;
+  }
+
+  :root[data-theme="dark"] .pulse-dot {
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.4);
+  }
+
+  @keyframes status-pulse {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.5);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 6px rgba(21, 128, 61, 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(21, 128, 61, 0);
+    }
+  }
+
+  .meta-count {
+    color: var(--accent);
+    font-weight: 600;
   }
 
   .projects-title {
     font-family: var(--font-serif);
     font-weight: 600;
-    font-size: clamp(1.75rem, 4vw, 2.25rem);
-    margin: 0 0 1rem;
+    font-size: clamp(2rem, 4.5vw, 2.75rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 0.85rem;
+    color: var(--text);
   }
 
   .projects-intro {
+    font-size: 1.05rem;
+    line-height: 1.6;
     color: var(--muted);
-    margin: 0 0 2.5rem;
+    margin: 0;
+    max-width: 38rem;
   }
 
-  .project {
-    margin: 0 0 2.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--border);
+  /* Dossiers Grid List */
+  .dossiers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
-  .project:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
+  /* Card Base Styling */
+  .dossier-card {
+    background: var(--card-surface);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: relative;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
-  .project-head {
+  .dossier-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  }
+
+  .dossier-card.is-featured {
+    border-top: 3px solid var(--accent);
+  }
+
+  /* Dossier Card Header */
+  .dossier-top-bar {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     gap: 1rem;
   }
 
-  .project-name {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 1.35rem;
-    margin: 0;
+  .badge-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  .project-date {
+  .status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .status-chip.status-prod {
+    background: rgba(21, 128, 61, 0.1);
+    color: var(--accent);
+  }
+
+  .status-chip.status-dev {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+  }
+
+  .status-chip.status-maint {
+    background: rgba(234, 179, 8, 0.1);
+    color: #d97706;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: currentColor;
+  }
+
+  .category-chip {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     color: var(--muted);
-    font-size: 0.9rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  .dossier-date {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
     white-space: nowrap;
   }
 
-  .project-tech {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--accent);
-    margin: 0.35rem 0 0.75rem;
-  }
-
-  .project-desc {
-    margin: 0 0 0.75rem;
-  }
-
-  .project-bullets {
-    margin: 0 0 1rem;
-    padding-left: 1.2rem;
-  }
-
-  .project-bullets li {
-    margin: 0 0 0.4rem;
-  }
-
-  .project-links {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  /* Dossier Card Body */
+  .dossier-body {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 680px) {
+    .dossier-card.is-featured .dossier-body {
+      display: grid;
+      grid-template-columns: 1fr 18rem;
+      gap: 1.5rem;
+      align-items: start;
+    }
+  }
+
+  .dossier-main-info {
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
   }
 
-  .project-links a {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.15rem;
-    transition: border-color 0.15s ease;
-    overflow-wrap: anywhere;
+  .title-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
   }
 
-  .project-links a:hover,
-  .project-links a:focus-visible {
+  .dossier-title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    margin: 0;
+    color: var(--text);
+  }
+
+  .dossier-role {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+
+  .dossier-desc {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin: 0;
+  }
+
+  .bullets-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 0.2rem;
+  }
+
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .bullet-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  .bullet-icon {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    flex-shrink: 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .bullet-text {
+    flex: 1;
+  }
+
+  /* System Architecture Specs Panel */
+  .dossier-spec-panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .spec-panel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 0.5rem;
+  }
+
+  .spec-icon {
+    font-size: 0.85rem;
+  }
+
+  .spec-title {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .spec-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .spec-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .spec-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+  }
+
+  .spec-value {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* Card Footer */
+  .dossier-footer {
+    padding-top: 0.85rem;
+    border-top: 1px dashed var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  @media (min-width: 580px) {
+    .dossier-footer {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .tech-stack-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tech-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  .tech-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .tech-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  .links-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    align-items: center;
+  }
+
+  .dossier-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--accent);
+    text-decoration: none;
+    padding-bottom: 0.1rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+
+  .dossier-link:hover,
+  .dossier-link:focus-visible {
     border-color: var(--accent);
   }
 
-  @media (max-width: 480px) {
-    .project-head {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.2rem;
-    }
+  .link-arrow {
+    width: 0.85rem;
+    height: 0.85rem;
+    transition: transform 0.15s ease;
+  }
+
+  .dossier-link:hover .link-arrow {
+    transform: translate(3px, -3px);
   }
 </style>
