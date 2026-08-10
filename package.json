@@ -15,6 +15,7 @@
 		"cf-typegen": "wrangler types"
 	},
 	"dependencies": {
+		"@astrojs/sitemap": "^3.7.3",
 		"@fontsource/dm-sans": "^5.2.8",
 		"@fontsource/libre-baskerville": "^5.2.10",
 		"@fontsource/martian-mono": "^5.2.7",
