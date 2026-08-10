@@ -1,16 +1,19 @@
 ---
 import "../styles/global.css";
 import Sidebar from "../components/Sidebar.astro";
-import Footer from "../components/Footer.astro";
 import { Sun, Moon, SunMoon } from "@lucide/astro";
 
 interface Props {
   title: string;
   description?: string;
+  noindex?: boolean;
+  showSidebar?: boolean;
 }
 const {
   title,
   description = "Software engineer building full-stack applications with TypeScript, Cloudflare Workers, and modern web tech.",
+  noindex = false,
+  showSidebar = true,
 } = Astro.props;
 ---
 
@@ -23,6 +26,7 @@ const {
     <link rel="icon" href="/favicon.ico" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <title>{title}</title>
     <meta name="description" content={description} />
     <script is:inline>
@@ -35,10 +39,9 @@ const {
   </head>
   <body>
     <main class="page">
-      <Sidebar />
-      <div class="content">
+      {showSidebar && <Sidebar />}
+      <div class:list={["content", { "no-sidebar": !showSidebar }]}>
         <slot />
-        <Footer />
       </div>
     </main>
 
@@ -91,6 +94,10 @@ const {
 </script>
 
 <style is:global>
+  .content.no-sidebar {
+    padding-left: 0;
+  }
+
   .theme-toggle {
     position: fixed;
     top: 1.5rem;
