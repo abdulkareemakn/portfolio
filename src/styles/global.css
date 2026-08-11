@@ -2,35 +2,47 @@
 @import "@fontsource/dm-sans/latin-600.css";
 @import "@fontsource/libre-baskerville/latin-400.css";
 @import "@fontsource/libre-baskerville/latin-600.css";
-@import "@fontsource/martian-mono/latin-400.css";
+@import "@fontsource/google-sans-code/latin-400.css";
 @import "@fontsource/noto-nastaliq-urdu/arabic-400.css";
 
+@font-face {
+  font-family: "Vercetti";
+  src:
+    url("/fonts/Vercetti-Regular.woff2") format("woff2"),
+    url("/fonts/Vercetti-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Hedvig Letters Serif";
+  src: url("/fonts/HedvigLettersSerif[opsz].woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
+  color-scheme: light dark;
   --bg: #fafaf8;
   --text: #17171a;
   --muted: #6b6b70;
   --accent: #15803d;
   --border: #e4e4e1;
 
-  --font-body: "DM Sans", BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-serif: "Libre Baskerville", Georgia, serif;
-  --font-mono: "Martian Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-body: "Vercetti", BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: var(--font-body);
+  --font-serif: "Hedvig Letters Serif", Georgia, serif;
+  --font-mono: "Google Sans Code", ui-monospace, "SF Mono", Menlo, monospace;
   --font-urdu: "Noto Nastaliq Urdu", serif;
 
   --pad-top: clamp(1.5rem, 4vw, 3rem);
   --sidebar-width: 150px;
 }
 
-:root[data-theme="dark"] {
-  --bg: #0d0d0f;
-  --text: #ececec;
-  --muted: #8a8a90;
-  --accent: #4ade80;
-  --border: #232326;
-}
-
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
+  :root {
     --bg: #0d0d0f;
     --text: #ececec;
     --muted: #8a8a90;
@@ -126,7 +138,7 @@ body {
 
 .headline {
   font-family: var(--font-serif);
-  font-weight: 600;
+  font-weight: 700;
   font-size: clamp(2rem, 5vw, 3rem);
   margin: 0 0 1.5rem;
   line-height: 1;
