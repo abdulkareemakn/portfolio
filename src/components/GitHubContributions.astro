@@ -210,7 +210,7 @@ const { username = "abdulkareemakn" } = Astro.props;
       }
 
       getLevelColor(level) {
-        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+        const isDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
         if (isDark) {
           const colors = [
             "var(--border)",

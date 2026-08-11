@@ -30,12 +30,8 @@ import Logo from "./Logo.astro";
     }
   }
 
-  :root[data-theme="dark"] .logo-link {
-    color: #fff;
-  }
-
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme]) .logo-link {
+    .logo-link {
       color: #fff;
     }
   }

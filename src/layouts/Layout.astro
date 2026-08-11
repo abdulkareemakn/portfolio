@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import Sidebar from "../components/Sidebar.astro";
-import { Sun, Moon, SunMoon } from "@lucide/astro";
 
 interface Props {
   title: string;
@@ -22,6 +21,7 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -29,13 +29,6 @@ const {
     {noindex && <meta name="robots" content="noindex, follow" />}
     <title>{title}</title>
     <meta name="description" content={description} />
-    <script is:inline>
-      const storedTheme = localStorage.getItem("theme") ?? "system";
-      const root = document.documentElement;
-      if (storedTheme === "dark") root.setAttribute("data-theme", "dark");
-      else if (storedTheme === "light") root.setAttribute("data-theme", "light");
-      else root.removeAttribute("data-theme");
-    </script>
   </head>
   <body>
     <main class="page">
@@ -44,117 +37,11 @@ const {
         <slot />
       </div>
     </main>
-
-    <button class="theme-toggle" data-theme-toggle type="button" aria-label="Cycle theme">
-      <SunMoon class="icon-sunmoon" />
-      <Sun class="icon-sun" />
-      <Moon class="icon-moon" />
-    </button>
   </body>
 </html>
-
-<script>
-  const root = document.documentElement;
-  const toggle = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
-
-  const themes = ["system", "light", "dark"] as const;
-  type Theme = (typeof themes)[number];
-
-  const labels: Record<Theme, string> = {
-    system: "System theme",
-    light: "Light theme",
-    dark: "Dark theme",
-  };
-
-  function currentTheme(): Theme {
-    const stored = localStorage.getItem("theme");
-    return stored === "light" || stored === "dark" ? stored : "system";
-  }
-
-  function applyTheme(theme: Theme): void {
-    if (theme === "dark") root.setAttribute("data-theme", "dark");
-    else if (theme === "light") root.setAttribute("data-theme", "light");
-    else root.removeAttribute("data-theme");
-  }
-
-  function render(theme: Theme): void {
-    if (!toggle) return;
-    toggle.setAttribute("aria-label", labels[theme]);
-    toggle.setAttribute("title", labels[theme]);
-  }
-
-  toggle?.addEventListener("click", () => {
-    const next = themes[(themes.indexOf(currentTheme()) + 1) % themes.length];
-    localStorage.setItem("theme", next);
-    applyTheme(next);
-    render(next);
-  });
-
-  render(currentTheme());
-</script>
 
 <style is:global>
   .content.no-sidebar {
     padding-left: 0;
-  }
-
-  .theme-toggle {
-    position: fixed;
-    top: 1.5rem;
-    right: 1.5rem;
-    z-index: 50;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    padding: 0;
-    border: 1px solid var(--border);
-    border-radius: 0.5rem;
-    background: var(--bg);
-    color: var(--muted);
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-    transition:
-      border-color 0.15s ease,
-      color 0.15s ease;
-  }
-
-  .theme-toggle svg {
-    width: 1.35rem;
-    height: 1.35rem;
-  }
-
-  .theme-toggle .icon-sunmoon {
-    display: inline-flex;
-  }
-
-  .theme-toggle .icon-sun,
-  .theme-toggle .icon-moon {
-    display: none;
-  }
-
-  :root[data-theme="light"] .theme-toggle .icon-sun {
-    display: inline-flex;
-  }
-
-  :root[data-theme="light"] .theme-toggle .icon-sunmoon,
-  :root[data-theme="light"] .theme-toggle .icon-moon {
-    display: none;
-  }
-
-  :root[data-theme="dark"] .theme-toggle .icon-moon {
-    display: inline-flex;
-  }
-
-  :root[data-theme="dark"] .theme-toggle .icon-sunmoon,
-  :root[data-theme="dark"] .theme-toggle .icon-sun {
-    display: none;
-  }
-
-  .theme-toggle:hover,
-  .theme-toggle:focus-visible {
-    color: var(--accent);
-    border-color: var(--accent);
   }
 </style>
