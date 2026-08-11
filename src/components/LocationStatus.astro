@@ -1,0 +1,256 @@
+---
+import Logo from "./Logo.astro";
+import { BookOpen, MapPin } from "@lucide/astro";
+import { Icon } from "astro-icon/components";
+---
+
+<div class="status-block">
+  <div class="avatar-container">
+    <div class="avatar-ring">
+      <Logo />
+    </div>
+    <span class="presence-dot" title="Active in Lahore, Pakistan (PKT / UTC+5)" aria-hidden="true"></span>
+  </div>
+
+  <div class="status-text">
+    <span class="status-item">
+      <MapPin class="status-icon" />
+      <span>
+        <strong>Lahore, Pakistan</strong>
+        <span class="weather-text" data-weather></span>
+        <span class="item-sep" aria-hidden="true">·</span>
+        <span class="mono-time" data-clock>--:--:--</span> <span class="tz-code">PKT</span>
+        <span class="tz-diff" data-tz-diff></span>
+      </span>
+    </span>
+
+    <span class="status-item">
+      <BookOpen class="status-icon" />
+      <span>Reading Now: <strong>A Clash of Kings</strong> by George R. R. Martin</span>
+    </span>
+
+    <span class="status-item">
+      <Icon name="simple-icons:lichess" class="status-icon" />
+      <span>Rated <strong data-lichess>1219</strong> on Lichess</span>
+    </span>
+
+    <span class="status-item">
+      <Icon name="simple-icons:archlinux" class="status-icon" />
+      <span>Maintaining <strong>2</strong> packages on the AUR</span>
+    </span>
+  </div>
+</div>
+
+<script>
+  const timezone = "Asia/Karachi";
+  const clockEl = document.querySelector<HTMLElement>("[data-clock]");
+  const tzDiffEl = document.querySelector<HTMLElement>("[data-tz-diff]");
+  const weatherEl = document.querySelector<HTMLElement>("[data-weather]");
+  const lichessEl = document.querySelector<HTMLElement>("[data-lichess]");
+
+  // 1. Live Clock
+  const timeFormatter = new Intl.DateTimeFormat("en-GB", {
+    timeZone: timezone,
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+
+  function tick(): void {
+    if (clockEl) {
+      clockEl.textContent = timeFormatter.format(new Date());
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // 2. Visitor Timezone Difference
+  function updateTimezoneDifference(): void {
+    if (!tzDiffEl) return;
+    try {
+      const now = new Date();
+      const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+
+      const getOffsetMinutes = (tzName: string) => {
+        const parts = new Intl.DateTimeFormat("en-US", {
+          timeZone: tzName,
+          timeZoneName: "shortOffset",
+        }).formatToParts(now);
+        const val = parts.find((p) => p.type === "timeZoneName")?.value || "";
+        const match = val.match(/(?:GMT|UTC)?([+-]\d+)(?::(\d+))?/);
+        if (!match) return 0;
+        const h = parseInt(match[1], 10);
+        const m = match[2] ? parseInt(match[2], 10) : 0;
+        return h * 60 + (h < 0 ? -m : m);
+      };
+
+      const userOffset = getOffsetMinutes(userTz);
+      const lahoreOffset = 300; // UTC+5 in minutes
+      const diffMins = lahoreOffset - userOffset;
+      const diffHours = diffMins / 60;
+
+      if (Math.abs(diffMins) < 15) {
+        tzDiffEl.textContent = "";
+      } else {
+        const isAhead = diffMins > 0;
+        const absH = Math.abs(diffHours);
+        const formattedH = Number.isInteger(absH) ? `${absH}` : `${absH.toFixed(1)}`;
+        tzDiffEl.textContent = ` · (${formattedH}h ${isAhead ? "ahead of" : "behind"} your local time)`;
+      }
+    } catch {
+      tzDiffEl.textContent = "";
+    }
+  }
+  updateTimezoneDifference();
+
+  // 3. Open-Meteo Weather
+  const weatherLabels: Record<number, string> = {
+    0: "Clear sky",
+    1: "Mainly clear",
+    2: "Partly cloudy",
+    3: "Overcast",
+    45: "Fog",
+    48: "Rime fog",
+    51: "Light drizzle",
+    53: "Drizzle",
+    55: "Heavy drizzle",
+    61: "Light rain",
+    63: "Rain",
+    65: "Heavy rain",
+    80: "Light showers",
+    81: "Showers",
+    95: "Thunderstorm",
+  };
+
+  fetch("https://api.open-meteo.com/v1/forecast?latitude=31.5497&longitude=74.3436&current=temperature_2m,weather_code")
+    .then((res) => res.json())
+    .then((data: { current: { temperature_2m: number; weather_code: number } }) => {
+      const temp = Math.round(data.current.temperature_2m);
+      const label = weatherLabels[data.current.weather_code] ?? "Clear sky";
+      if (weatherEl) {
+        weatherEl.textContent = ` (${label} · ${temp}°C)`;
+      }
+    })
+    .catch(() => {
+      if (weatherEl) weatherEl.textContent = "";
+    });
+
+  // 4. Lichess Rating Hydration
+  async function hydrateLichess(): Promise<void> {
+    if (!lichessEl) return;
+    try {
+      const res = await fetch("https://lichess.org/api/user/Abdul_Kareem1");
+      const user = await res.json();
+      lichessEl.textContent = String(user.perfs.rapid.rating);
+    } catch {}
+  }
+  hydrateLichess();
+</script>
+
+<style>
+  .status-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .avatar-container {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    flex-shrink: 0;
+  }
+
+  .avatar-ring {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    padding: 0.55rem;
+    border: 1px solid var(--border);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .avatar-ring:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .presence-dot {
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 2px rgba(21, 128, 61, 0.2);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .presence-dot {
+      box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.25);
+    }
+  }
+
+  .status-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .status-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .status-icon {
+    width: 0.95em;
+    height: 0.95em;
+    flex-shrink: 0;
+    color: var(--muted);
+  }
+
+  .weather-text {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .item-sep {
+    color: var(--muted);
+    opacity: 0.6;
+    margin: 0 0.15rem;
+  }
+
+  .mono-time {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tz-code {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-left: 0.3em;
+  }
+
+  .tz-diff {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+</style>

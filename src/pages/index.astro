@@ -1,10 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Location from "../components/Location.astro";
+import LocationStatus from "../components/LocationStatus.astro";
+import TechConveyor from "../components/TechConveyor.astro";
 import GitHubContributions from "../components/GitHubContributions.astro";
 import Socials from "../components/Socials.astro";
-import { BookOpen } from "@lucide/astro";
-import { Icon } from "astro-icon/components";
 ---
 
 <Layout
@@ -15,7 +14,7 @@ import { Icon } from "astro-icon/components";
     <h1 class="headline">
       <span class="name-line">
         Abdul Kareem <span class="name-separator" aria-hidden="true">·</span>
-        <span class="urdu" lang="ur" dir="rtl">عبد الكريم</span>
+        <span class="urdu" lang="ur" dir="rtl">عبدالکریم</span>
       </span>
       <span class="ipa" lang="und-fonipa">[ʕab.dʊl ka'riːm]</span>
     </h1>
@@ -28,39 +27,9 @@ import { Icon } from "astro-icon/components";
     </p>
   </section>
 
-  <div class="status-block">
-    <div class="avatar" aria-hidden="true"></div>
-    <div class="status-text">
-      <span class="status-item">
-        <BookOpen class="status-icon" />
-        Reading Now: <strong>A Clash of Kings</strong> by George R. R. Martin
-      </span>
-      <span class="status-item">
-        <Icon name="simple-icons:lichess" class="status-icon" />
-        Rated <strong data-lichess>1219</strong> on Lichess
-      </span>
-      <span class="status-item">
-        <Icon name="simple-icons:archlinux" class="status-icon" />
-        Maintaining <strong>2</strong> packages on the AUR
-      </span>
-    </div>
-  </div>
+  <LocationStatus />
 
-  <script>
-    async function hydrateStatus() {
-      const lichessEl = document.querySelector("[data-lichess]");
-      if (lichessEl) {
-        try {
-          const res = await fetch("https://lichess.org/api/user/Abdul_Kareem1");
-          const user = await res.json();
-          lichessEl.textContent = String(user.perfs.rapid.rating);
-        } catch {}
-      }
-    }
-    hydrateStatus();
-  </script>
-
-  <!-- <Location /> -->
+  <TechConveyor />
 
   <div class="home-socials">
     <Socials />
