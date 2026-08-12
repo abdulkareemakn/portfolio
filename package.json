@@ -16,13 +16,8 @@
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "^3.7.3",
-		"@fontsource/dm-sans": "^5.2.8",
 		"@fontsource/google-sans-code": "^5.3.0",
-		"@fontsource/libre-baskerville": "^5.2.10",
-		"@fontsource/martian-mono": "^5.2.7",
-		"@fontsource/noto-kufi-arabic": "^5.3.0",
 		"@fontsource/noto-nastaliq-urdu": "^5.3.0",
-		"@fontsource/noto-sans-arabic": "^5.3.0",
 		"@lucide/astro": "^1.28.0",
 		"astro": "^7.0.7",
 		"astro-icon": "^1.1.5"
