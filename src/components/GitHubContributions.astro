@@ -9,74 +9,20 @@ const { username = "abdulkareemakn" } = Astro.props;
 >
   <div class="gh-card">
     <p class="gh-heading">GitHub Contributions</p>
-    <div class="gh-scroll" tabindex="0" aria-label="Scrollable GitHub contribution chart">
+    <div
+      class="gh-scroll"
+      tabindex="0"
+      aria-label="Scrollable GitHub contribution chart"
+    >
       <div class="gh-loading" aria-live="polite">Loading contributions…</div>
     </div>
   </div>
 </div>
 
-<style>
-  .gh-contributions {
-    margin: 2rem 0 1rem;
-    font-family: var(--font-mono, "Martian Mono", ui-monospace, monospace);
-    font-size: 0.95rem;
-    line-height: 1;
-  }
-
-  .gh-heading {
-    margin: 0 0 0.75rem;
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-    color: var(--text);
-    font-weight: 600;
-  }
-
-  .gh-card {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem 1.25rem 1rem;
-    background: var(--bg);
-    display: inline-block;
-    max-width: 100%;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  }
-
-  .gh-loading {
-    height: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-  }
-
-  .gh-scroll {
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 0.35rem;
-    scrollbar-color: var(--border) transparent;
-    scrollbar-width: thin;
-  }
-
-  .gh-scroll:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-  }
-
-  .gh-contributions svg {
-    display: block;
-    height: auto;
-  }
-
-</style>
-
 <script>
   (() => {
     const CELL_SIZE = 9;
     const CELL_GAP = 2;
-
 
     class GitHubContributions {
       constructor(container) {
@@ -88,7 +34,7 @@ const { username = "abdulkareemakn" } = Astro.props;
       async init() {
         try {
           const res = await fetch(
-            `https://github-contributions-api.jogruber.de/v4/${this.username}?y=last`
+            `https://github-contributions-api.jogruber.de/v4/${this.username}?y=last`,
           );
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const data = await res.json();
@@ -107,15 +53,19 @@ const { username = "abdulkareemakn" } = Astro.props;
           return;
         }
 
-        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        const svg = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "svg",
+        );
         svg.setAttribute("role", "img");
-        svg.setAttribute("aria-label", `GitHub contributions: ${total?.lastYear ?? 0} in the last year`);
+        svg.setAttribute(
+          "aria-label",
+          `GitHub contributions: ${total?.lastYear ?? 0} in the last year`,
+        );
 
         const dayPos = this.computePositions(contributions);
 
-        const totalWeeks = dayPos.length > 0
-          ? Math.ceil(dayPos.length / 7)
-          : 0;
+        const totalWeeks = dayPos.length > 0 ? Math.ceil(dayPos.length / 7) : 0;
         const width = totalWeeks * (CELL_SIZE + CELL_GAP);
         const headerH = 4;
         const footerH = 20;
@@ -134,7 +84,10 @@ const { username = "abdulkareemakn" } = Astro.props;
           const x = week * (CELL_SIZE + CELL_GAP);
           const y = headerH + day * (CELL_SIZE + CELL_GAP);
 
-          const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+          const rect = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "rect",
+          );
           rect.setAttribute("x", x);
           rect.setAttribute("y", y);
           rect.setAttribute("width", CELL_SIZE);
@@ -149,28 +102,40 @@ const { username = "abdulkareemakn" } = Astro.props;
         }
 
         // Footer: total count
-        const totalText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        const totalText = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "text",
+        );
         totalText.setAttribute("x", 0);
         totalText.setAttribute("y", height - 2);
-        totalText.setAttribute("font-family", "DM Sans, sans-serif");
+        totalText.setAttribute("font-family", "Vercetti, sans-serif");
         totalText.setAttribute("fill", "var(--muted)");
         totalText.setAttribute("font-size", "13");
 
         const totalStr = `${total?.lastYear ?? 0} contributions in the last year on `;
-        const totalSpan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+        const totalSpan = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "tspan",
+        );
         totalSpan.textContent = totalStr;
         totalSpan.setAttribute("fill", "var(--muted)");
-        totalSpan.setAttribute("font-family", "DM Sans, sans-serif");
+        totalSpan.setAttribute("font-family", "Vercetti, sans-serif");
         totalText.appendChild(totalSpan);
 
-        const linkSpan = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-        const link = document.createElementNS("http://www.w3.org/2000/svg", "a");
+        const linkSpan = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "tspan",
+        );
+        const link = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "a",
+        );
         link.setAttribute("href", `https://github.com/${this.username}`);
         link.setAttribute("target", "_blank");
         link.setAttribute("rel", "noopener");
         link.textContent = "GitHub";
         link.setAttribute("fill", "var(--accent)");
-        link.setAttribute("font-family", "DM Sans, sans-serif");
+        link.setAttribute("font-family", "Vercetti, sans-serif");
         link.setAttribute("text-decoration", "underline");
         link.setAttribute("text-underline-offset", "2px");
         link.setAttribute("text-decoration-color", "var(--muted)");
@@ -210,7 +175,9 @@ const { username = "abdulkareemakn" } = Astro.props;
       }
 
       getLevelColor(level) {
-        const isDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const isDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
         if (isDark) {
           const colors = [
             "var(--border)",
@@ -230,7 +197,6 @@ const { username = "abdulkareemakn" } = Astro.props;
         ];
         return colors[level] || colors[0];
       }
-
     }
 
     const container = document.querySelector(".gh-contributions");

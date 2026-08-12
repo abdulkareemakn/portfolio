@@ -13,7 +13,12 @@ import { Icon } from "astro-icon/components";
 
     <ul class="links-grid">
       <li>
-        <a class="link-item" href="https://github.com/abdulkareemakn" target="_blank" rel="noreferrer">
+        <a
+          class="link-item"
+          href="https://github.com/abdulkareemakn"
+          target="_blank"
+          rel="noreferrer"
+        >
           <span class="link-label">
             <Icon name="simple-icons:github" class="icon" />
             GitHub
@@ -22,7 +27,12 @@ import { Icon } from "astro-icon/components";
         </a>
       </li>
       <li>
-        <a class="link-item" href="https://www.linkedin.com/in/abdul-kareem-nasir/" target="_blank" rel="noreferrer">
+        <a
+          class="link-item"
+          href="https://www.linkedin.com/in/abdul-kareem-nasir/"
+          target="_blank"
+          rel="noreferrer"
+        >
           <span class="link-label">
             <Icon name="simple-icons:linkedin" class="icon" />
             LinkedIn
@@ -31,7 +41,12 @@ import { Icon } from "astro-icon/components";
         </a>
       </li>
       <li>
-        <a class="link-item" href="https://x.com/" target="_blank" rel="noreferrer">
+        <a
+          class="link-item"
+          href="https://x.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
           <span class="link-label">
             <Icon name="simple-icons:x" class="icon" />
             X (Twitter)
@@ -40,7 +55,12 @@ import { Icon } from "astro-icon/components";
         </a>
       </li>
       <li>
-        <a class="link-item" href="https://open.spotify.com" target="_blank" rel="noreferrer">
+        <a
+          class="link-item"
+          href="https://open.spotify.com"
+          target="_blank"
+          rel="noreferrer"
+        >
           <span class="link-label">
             <Icon name="simple-icons:spotify" class="icon" />
             Spotify
@@ -49,7 +69,12 @@ import { Icon } from "astro-icon/components";
         </a>
       </li>
       <li>
-        <a class="link-item" href="https://hevy.com" target="_blank" rel="noreferrer">
+        <a
+          class="link-item"
+          href="https://hevy.com"
+          target="_blank"
+          rel="noreferrer"
+        >
           <span class="link-label">
             <Icon name="simple-icons:hevy" class="icon" />
             Hevy
@@ -58,7 +83,12 @@ import { Icon } from "astro-icon/components";
         </a>
       </li>
       <li>
-        <a class="link-item" href="https://discord.com" target="_blank" rel="noreferrer">
+        <a
+          class="link-item"
+          href="https://discord.com"
+          target="_blank"
+          rel="noreferrer"
+        >
           <span class="link-label">
             <Icon name="simple-icons:discord" class="icon" />
             Discord
@@ -67,7 +97,12 @@ import { Icon } from "astro-icon/components";
         </a>
       </li>
       <li>
-        <a class="link-item" href="https://lichess.org" target="_blank" rel="noreferrer">
+        <a
+          class="link-item"
+          href="https://lichess.org"
+          target="_blank"
+          rel="noreferrer"
+        >
           <span class="link-label">
             <Icon name="simple-icons:lichess" class="icon" />
             Lichess
@@ -78,77 +113,3 @@ import { Icon } from "astro-icon/components";
     </ul>
   </article>
 </Layout>
-
-<style>
-  .connect {
-    max-width: 42rem;
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: var(--text);
-  }
-
-  .connect-title {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: clamp(1.75rem, 4vw, 2.25rem);
-    margin: 0 0 2rem;
-  }
-
-  .links-grid {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-  }
-
-  @media (max-width: 480px) {
-    .links-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .link-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.85rem 1.1rem;
-    border: 1px solid var(--border);
-    border-radius: 0.5rem;
-    color: var(--text);
-    text-decoration: none;
-    transition: border-color 0.15s ease, background-color 0.15s ease;
-  }
-
-  .link-item:hover,
-  .link-item:focus-visible {
-    border-color: var(--accent);
-  }
-
-  .link-label {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-weight: 500;
-    font-size: 0.95rem;
-  }
-
-  .icon {
-    width: 1.1rem;
-    height: 1.1rem;
-    flex-shrink: 0;
-  }
-
-  .arrow {
-    width: 1rem;
-    height: 1rem;
-    color: var(--muted);
-    transition: transform 0.15s ease, color 0.15s ease;
-  }
-
-  .link-item:hover .arrow {
-    transform: translate(2px, -2px);
-    color: var(--accent);
-  }
-</style>

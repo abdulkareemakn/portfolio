@@ -11,70 +11,9 @@ import Logo from "./Logo.astro";
     <a href="/about">About</a>
     <a href="/projects">Projects</a>
     <a href="/kit">Kit</a>
-    <a href="https://blog.abdulkareem.is-a.dev" target="_blank" rel="noopener">Blog</a>
+    <a href="https://blog.abdulkareem.is-a.dev" target="_blank" rel="noopener"
+      >Blog</a
+    >
     <a href="/connect">Connect</a>
   </nav>
 </aside>
-
-<style>
-  .logo-link {
-    display: inline-block;
-    margin-bottom: 0;
-    color: #000;
-  }
-
-  @media (min-width: 768px) {
-    .logo-link {
-      display: block;
-      margin-bottom: 2rem;
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .logo-link {
-      color: #fff;
-    }
-  }
-
-  .logo-link:hover {
-    color: var(--accent);
-  }
-
-  .nav {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.75rem 1.25rem;
-    font-family: var(--font-serif);
-    font-size: 1.05rem;
-  }
-
-  @media (min-width: 768px) {
-    .nav {
-      flex-direction: column;
-      gap: 0.5rem;
-      font-size: 1.125rem;
-    }
-  }
-
-  .nav a {
-    color: var(--text);
-    text-decoration: none;
-    opacity: 0.65;
-    transition: opacity 0.15s ease;
-  }
-
-  @media (pointer: coarse) {
-    .nav a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 2.75rem;
-    }
-  }
-
-  .nav a:hover,
-  .nav a:focus-visible {
-    opacity: 1;
-    color: var(--accent);
-  }
-</style>
