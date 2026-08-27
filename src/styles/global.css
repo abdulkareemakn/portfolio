@@ -1308,6 +1308,21 @@ body {
   font-size: 0.95rem;
 }
 
+.link-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.link-fingerprint {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--muted);
+  word-break: break-word;
+}
+
 .icon {
   width: 1.1rem;
   height: 1.1rem;
