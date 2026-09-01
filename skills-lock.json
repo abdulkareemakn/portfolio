@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "404-page-generator": {
+      "source": "kostja94/marketing-skills",
+      "sourceType": "github",
+      "skillPath": "skills/pages/utility/404/SKILL.md",
+      "computedHash": "f1550218df284f19934204075f9fd65668cf90ef6473ce5315c94d7aba668471"
+    },
     "design-taste-frontend": {
       "source": "Leonxlnx/taste-skill",
       "sourceType": "github",
@@ -30,6 +36,12 @@
       "sourceType": "github",
       "skillPath": "skills/redesign-skill/SKILL.md",
       "computedHash": "b405eee0e0e80fc243f731d9aa368bca307e356db7e6157d27101d369dac6726"
+    },
+    "robots-txt": {
+      "source": "kostja94/marketing-skills",
+      "sourceType": "github",
+      "skillPath": "skills/seo/technical/robots/SKILL.md",
+      "computedHash": "2e50515f8ab76bb4d5bf3fba1de5c8207fc1a91de2e7f6633b09077b9d2d3cbb"
     }
   }
 }
