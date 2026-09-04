@@ -11,40 +11,33 @@ import { Icon } from "astro-icon/components";
   <article class="connect">
     <h1 class="connect-title">Connect</h1>
 
-    <ul class="links-grid">
-      <li>
-        <a
-          class="link-item"
-          href="mailto:abdulkareemakn@proton.me"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <span class="link-label">
-            <Mail class="icon" />
-            Email
-          </span>
-          <ArrowUpRight class="arrow" />
-        </a>
-      </li>
+    <div class="contact-card">
+      <a
+        class="contact-row"
+        href="mailto:abdulkareemakn@proton.me"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span class="link-label">
+          <Mail class="icon" />
+          Email
+        </span>
+        <ArrowUpRight class="arrow" />
+      </a>
 
-      <li>
-        <a
-          class="link-item"
-          href="/pgp.asc"
-          target="_blank"
-          rel="noreferrer"
-        >
+      <a class="contact-row contact-row--pgp" href="/pgp.asc" target="_blank" rel="noreferrer">
+        <span class="link-label">
+          <KeyRound class="icon" />
           <span class="link-stack">
-            <span class="link-label">
-              <KeyRound class="icon" />
-              PGP key
-            </span>
+            PGP key
             <span class="link-fingerprint">36D4 7302 992E B464 A582 7601 A942 864C C3B0 172F</span>
           </span>
-          <ArrowUpRight class="arrow" />
-        </a>
-      </li>
+        </span>
+        <ArrowUpRight class="arrow" />
+      </a>
+    </div>
 
+    <ul class="links-grid">
       <li>
         <a
           class="link-item"
@@ -93,7 +86,7 @@ import { Icon } from "astro-icon/components";
       <li>
         <a
           class="link-item"
-          href="https://x.com/"
+          href="https://x.com/notabdulkareem"
           target="_blank"
           rel="noreferrer"
         >
@@ -108,7 +101,7 @@ import { Icon } from "astro-icon/components";
       <li>
         <a
           class="link-item"
-          href="https://open.spotify.com"
+          href="https://open.spotify.com/user/vaa5i5twowfp79bewq0h5j47h"
           target="_blank"
           rel="noreferrer"
         >
@@ -123,7 +116,7 @@ import { Icon } from "astro-icon/components";
       <li>
         <a
           class="link-item"
-          href="https://hevy.com"
+          href="https://hevy.com/profile/abdulkareemakn"
           target="_blank"
           rel="noreferrer"
         >
@@ -136,24 +129,19 @@ import { Icon } from "astro-icon/components";
       </li>
 
       <li>
-        <a
-          class="link-item"
-          href="https://discord.com"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <div class="link-item link-item--static">
           <span class="link-label">
             <Icon name="simple-icons:discord" class="icon" />
             Discord
           </span>
-          <ArrowUpRight class="arrow" />
-        </a>
+          <span class="link-value">@tmtaxman</span>
+        </div>
       </li>
 
       <li>
         <a
           class="link-item"
-          href="https://lichess.org"
+          href="https://lichess.org/@/Abdul_Kareem1"
           target="_blank"
           rel="noreferrer"
         >
