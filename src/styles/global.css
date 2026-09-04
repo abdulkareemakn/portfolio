@@ -266,7 +266,7 @@ body {
   display: flex;
   align-items: flex-start;
   gap: 1.25rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .avatar-container {
@@ -397,6 +397,31 @@ body {
 
 .home-socials {
   margin-top: 2.5rem;
+}
+
+.book-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.1rem;
+  background-color: #000;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.book-call:hover,
+.book-call:focus-visible {
+  opacity: 0.85;
+}
+
+.book-call-icon {
+  width: 1.1rem;
+  height: 1.1rem;
 }
 
 .work {
@@ -1266,6 +1291,40 @@ body {
   margin: 0 0 2rem;
 }
 
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 0 0 2rem;
+}
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.1rem;
+  color: var(--text);
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.contact-row:not(:last-child) {
+  border-bottom: 1px solid var(--border);
+}
+
+.contact-row:hover,
+.contact-row:focus-visible {
+  background-color: var(--surface, rgba(128, 128, 128, 0.06));
+}
+
+.contact-row--pgp .link-label {
+  align-items: flex-start;
+}
+
 .links-grid {
   list-style: none;
   padding: 0;
@@ -1298,6 +1357,20 @@ body {
 .link-item:hover,
 .link-item:focus-visible {
   border-color: var(--accent);
+}
+
+.link-item--static {
+  cursor: default;
+}
+
+.link-item--static:hover {
+  border-color: var(--border);
+}
+
+.link-value {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--muted);
 }
 
 .link-label {

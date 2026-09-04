@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import LocationStatus from "../components/LocationStatus.astro";
+import { CalendarDays } from "@lucide/astro";
 import TechConveyor from "../components/TechConveyor.astro";
 import GitHubContributions from "../components/GitHubContributions.astro";
 import HomeProjectsPreview from "../components/HomeProjectsPreview.astro";
@@ -29,6 +30,11 @@ import Socials from "../components/Socials.astro";
   </section>
 
   <LocationStatus />
+
+  <a class="book-call" href="https://cal.com/abdulkareem" target="_blank" rel="noreferrer">
+    <CalendarDays class="book-call-icon" />
+    Book a call
+  </a>
 
   <HomeProjectsPreview />
 
