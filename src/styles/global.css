@@ -28,11 +28,11 @@
 
 :root {
   color-scheme: light dark;
-  --bg: #EEF1EF;
-  --text: #241f1c;
-  --muted: #70615a;
-  --accent: #ff87ab;
-  --border: #c8b5aa;
+  --bg: #eef1ef;
+  --text: #202522;
+  --muted: #5f6963;
+  --accent: #dc5f89;
+  --border: #cad2cd;
   --gh-level-1: #9be9a8;
   --gh-level-2: #40c463;
   --gh-level-3: #30a14e;
@@ -471,7 +471,7 @@ body {
   padding: 0.55rem 0.75rem;
   border-radius: 0.4rem;
   background: var(--accent);
-  color: #241f1c;
+  color: var(--text);
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
@@ -481,7 +481,7 @@ body {
 .social:hover,
 .social:focus-visible {
   background: color-mix(in srgb, var(--accent), var(--text) 14%);
-  color: #241f1c;
+  color: var(--text);
   transform: translateY(-1px);
 }
 
