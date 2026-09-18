@@ -175,25 +175,12 @@ const { username = "abdulkareemakn" } = Astro.props;
       }
 
       getLevelColor(level) {
-        const isDark =
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches;
-        if (isDark) {
-          const colors = [
-            "var(--border)",
-            "#0e4429",
-            "#006d32",
-            "#26a641",
-            "#39d353",
-          ];
-          return colors[level] || colors[0];
-        }
         const colors = [
           "var(--border)",
-          "#9be9a8",
-          "#40c463",
-          "#30a14e",
-          "#216e39",
+          "var(--gh-level-1)",
+          "var(--gh-level-2)",
+          "var(--gh-level-3)",
+          "var(--gh-level-4)",
         ];
         return colors[level] || colors[0];
       }

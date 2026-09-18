@@ -1,5 +1,6 @@
 ---
 import Logo from "./Logo.astro";
+import { Moon, Sun } from "@lucide/astro";
 ---
 
 <aside class="sidebar">
@@ -7,13 +8,75 @@ import Logo from "./Logo.astro";
     <Logo />
   </a>
   <nav class="nav">
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/projects">Projects</a>
-    <a href="/kit">Kit</a>
-    <a href="https://abdulkareem.is-a.dev" target="_blank" rel="noopener"
-      >Blog</a
+    <a href="/" data-hotkey="h" aria-keyshortcuts="H"
+      ><span class="nav-hotkey" aria-hidden="true">[h]</span> Home</a
     >
-    <a href="/connect">Connect</a>
+    <a href="/about" data-hotkey="a" aria-keyshortcuts="A"
+      ><span class="nav-hotkey" aria-hidden="true">[a]</span> About</a
+    >
+    <a href="/projects" data-hotkey="p" aria-keyshortcuts="P"
+      ><span class="nav-hotkey" aria-hidden="true">[p]</span> Projects</a
+    >
+    <a href="/kit" data-hotkey="k" aria-keyshortcuts="K"
+      ><span class="nav-hotkey" aria-hidden="true">[k]</span> Kit</a
+    >
+    <a
+      href="https://abdulkareem.is-a.dev"
+      target="_blank"
+      rel="noopener"
+      data-hotkey="b"
+      aria-keyshortcuts="B"
+      ><span class="nav-hotkey" aria-hidden="true">[b]</span> Blog</a
+    >
+    <a href="/connect" data-hotkey="c" aria-keyshortcuts="C"
+      ><span class="nav-hotkey" aria-hidden="true">[c]</span> Connect</a
+    >
   </nav>
+  <button class="theme-toggle" type="button" aria-label="Switch theme">
+    <Moon class="theme-icon theme-icon-moon" aria-hidden="true" />
+    <Sun class="theme-icon theme-icon-sun" aria-hidden="true" />
+  </button>
 </aside>
+
+<script>
+  const toggle = document.querySelector(".theme-toggle");
+
+  if (toggle) {
+    const syncToggle = () => {
+      const isDark = document.documentElement.dataset.theme === "dark";
+      toggle.setAttribute(
+        "aria-label",
+        `Switch to ${isDark ? "light" : "dark"} theme`,
+      );
+      toggle.setAttribute("aria-pressed", String(isDark));
+    };
+
+    syncToggle();
+    toggle.addEventListener("click", () => {
+      const nextTheme =
+        document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      document.documentElement.dataset.theme = nextTheme;
+      try {
+        localStorage.setItem("theme", nextTheme);
+      } catch {}
+      syncToggle();
+    });
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (event.altKey || event.ctrlKey || event.metaKey || event.repeat) return;
+
+    const target = event.target;
+    if (
+      target instanceof HTMLElement &&
+      (target.isContentEditable ||
+        ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName))
+    )
+      return;
+
+    const link = document.querySelector<HTMLAnchorElement>(
+      `[data-hotkey="${event.key.toLowerCase()}"]`,
+    );
+    if (link) link.click();
+  });
+</script>
