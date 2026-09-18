@@ -38,12 +38,7 @@ const projects: PreviewProject[] = [
 ];
 ---
 
-<section class="projects-preview" aria-labelledby="projects-preview-title">
-  <div class="projects-heading">
-    <h2 id="projects-preview-title">Selected Projects</h2>
-    <a class="view-all" href="/projects">View all</a>
-  </div>
-
+<section class="projects-preview" aria-label="Projects">
   <div class="projects-grid">
     {
       projects.map((project) => (
@@ -73,33 +68,7 @@ const projects: PreviewProject[] = [
 
 <style>
   .projects-preview {
-    margin: 2.5rem 0;
-  }
-
-  .projects-heading {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1.2rem;
-  }
-
-  h2 {
-    margin: 0;
-    font-family: var(--font-serif);
-    font-size: 1.55rem;
-    font-weight: 600;
-  }
-
-  .view-all {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.95rem;
-  }
-
-  .view-all:hover,
-  .view-all:focus-visible {
-    color: var(--accent);
+    margin: 1.75rem 0 2.5rem;
   }
 
   .projects-grid {
