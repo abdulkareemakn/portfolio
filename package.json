@@ -16,7 +16,6 @@
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "^3.7.3",
-		"@fontsource/google-sans-code": "^5.3.0",
 		"@fontsource/noto-nastaliq-urdu": "^5.3.0",
 		"@lucide/astro": "^1.28.0",
 		"astro": "^7.0.7",
