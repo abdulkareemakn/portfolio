@@ -471,7 +471,7 @@ body {
   padding: 0.55rem 0.75rem;
   border-radius: 0.4rem;
   background: var(--accent);
-  color: var(--text);
+  color: #17171a;
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
@@ -481,7 +481,7 @@ body {
 .social:hover,
 .social:focus-visible {
   background: color-mix(in srgb, var(--accent), var(--text) 14%);
-  color: var(--text);
+  color: #17171a;
   transform: translateY(-1px);
 }
 
