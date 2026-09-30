@@ -23,13 +23,14 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <script is:inline>
-      const systemTheme = matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-      let theme = systemTheme;
+      const themes = ["ocean", "dark-graphite"];
+      const defaultTheme = matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark-graphite"
+        : "ocean";
+      let theme = defaultTheme;
       try {
         const savedTheme = localStorage.getItem("theme");
-        if (savedTheme === "light" || savedTheme === "dark") theme = savedTheme;
+        if (themes.includes(savedTheme)) theme = savedTheme;
       } catch {}
       document.documentElement.dataset.theme = theme;
     </script>

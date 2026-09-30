@@ -1,6 +1,6 @@
 ---
 import Logo from "./Logo.astro";
-import { Moon, Sun } from "@lucide/astro";
+import { Palette } from "@lucide/astro";
 ---
 
 <aside class="sidebar">
@@ -33,33 +33,38 @@ import { Moon, Sun } from "@lucide/astro";
     >
   </nav>
   <button class="theme-toggle" type="button" aria-label="Switch theme">
-    <Moon class="theme-icon theme-icon-moon" aria-hidden="true" />
-    <Sun class="theme-icon theme-icon-sun" aria-hidden="true" />
+    <Palette class="theme-icon" aria-hidden="true" />
   </button>
 </aside>
 
 <script>
   const toggle = document.querySelector(".theme-toggle");
+  const themes = ["ocean", "dark-graphite"];
+  const themeNames: Record<string, string> = {
+    ocean: "Ocean Blue",
+    "dark-graphite": "Graphite",
+  };
 
   if (toggle) {
     const syncToggle = () => {
-      const isDark = document.documentElement.dataset.theme === "dark";
+      const current = document.documentElement.dataset.theme ?? "ocean";
+      const next = themes[(themes.indexOf(current) + 1) % themes.length];
       toggle.setAttribute(
         "aria-label",
-        `Switch to ${isDark ? "light" : "dark"} theme`,
+        `Current theme: ${themeNames[current]}. Switch to ${themeNames[next]}`,
       );
-      toggle.setAttribute("aria-pressed", String(isDark));
     };
 
     syncToggle();
     toggle.addEventListener("click", () => {
-      const nextTheme =
-        document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      const current = document.documentElement.dataset.theme ?? "ocean";
+      const nextTheme = themes[(themes.indexOf(current) + 1) % themes.length];
       document.documentElement.dataset.theme = nextTheme;
       try {
         localStorage.setItem("theme", nextTheme);
       } catch {}
       syncToggle();
+      document.dispatchEvent(new Event("themechange"));
     });
   }
 
