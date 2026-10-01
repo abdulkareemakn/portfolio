@@ -1,6 +1,6 @@
 ---
 import Logo from "./Logo.astro";
-import { Palette } from "@lucide/astro";
+import { Monitor, Moon, Sun } from "@lucide/astro";
 ---
 
 <aside class="sidebar">
@@ -20,6 +20,9 @@ import { Palette } from "@lucide/astro";
     <a href="/kit" data-hotkey="k" aria-keyshortcuts="K"
       ><span class="nav-hotkey" aria-hidden="true">[k]</span> Kit</a
     >
+    <a href="/library" data-hotkey="l" aria-keyshortcuts="L"
+      ><span class="nav-hotkey" aria-hidden="true">[l]</span> Library</a
+    >
     <a
       href="https://abdulkareem.is-a.dev"
       target="_blank"
@@ -33,21 +36,24 @@ import { Palette } from "@lucide/astro";
     >
   </nav>
   <button class="theme-toggle" type="button" aria-label="Switch theme">
-    <Palette class="theme-icon" aria-hidden="true" />
+    <Sun class="theme-icon theme-icon-light" aria-hidden="true" />
+    <Moon class="theme-icon theme-icon-dark" aria-hidden="true" />
+    <Monitor class="theme-icon theme-icon-system" aria-hidden="true" />
   </button>
 </aside>
 
 <script>
   const toggle = document.querySelector(".theme-toggle");
-  const themes = ["ocean", "dark-graphite"];
+  const themes = ["system", "ocean", "dark-graphite"];
   const themeNames: Record<string, string> = {
+    system: "System",
     ocean: "Ocean Blue",
     "dark-graphite": "Graphite",
   };
 
   if (toggle) {
     const syncToggle = () => {
-      const current = document.documentElement.dataset.theme ?? "ocean";
+      const current = document.documentElement.dataset.theme ?? "system";
       const next = themes[(themes.indexOf(current) + 1) % themes.length];
       toggle.setAttribute(
         "aria-label",
@@ -57,11 +63,13 @@ import { Palette } from "@lucide/astro";
 
     syncToggle();
     toggle.addEventListener("click", () => {
-      const current = document.documentElement.dataset.theme ?? "ocean";
+      const current = document.documentElement.dataset.theme ?? "system";
       const nextTheme = themes[(themes.indexOf(current) + 1) % themes.length];
-      document.documentElement.dataset.theme = nextTheme;
+      if (nextTheme === "system") delete document.documentElement.dataset.theme;
+      else document.documentElement.dataset.theme = nextTheme;
       try {
-        localStorage.setItem("theme", nextTheme);
+        if (nextTheme === "system") localStorage.removeItem("theme");
+        else localStorage.setItem("theme", nextTheme);
       } catch {}
       syncToggle();
       document.dispatchEvent(new Event("themechange"));
