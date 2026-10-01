@@ -75,6 +75,22 @@
   --gh-level-4: #395465;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --accent-text: #17171a;
+    --text: #faf7f6;
+    --muted: #f2fbf9;
+    --accent: #5d91a7;
+    --border: #47423f;
+    --bg: #1b2021;
+    --gh-level-1: #97bbc9;
+    --gh-level-2: #497b91;
+    --gh-level-3: #40657a;
+    --gh-level-4: #395465;
+  }
+}
+
 ::selection {
   background: var(--accent);
   color: var(--accent-text);
