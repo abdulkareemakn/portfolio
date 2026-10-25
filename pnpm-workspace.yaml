@@ -1,7 +1,12 @@
 # Pre-approve build scripts for the packages C3 itself installs that need
-# them: `workerd` downloads the platform binary, `esbuild` and `sharp`
-# (via miniflare) download/build native bindings. Without these, pnpm 11+
-# aborts the install with ERR_PNPM_IGNORED_BUILDS.
+# them: `workerd` downloads the platform binary and `esbuild` downloads its
+# native binding. Without these, pnpm 11+ aborts the install with
+# ERR_PNPM_IGNORED_BUILDS.
+#
+# `sharp` ships prebuilt binaries, so its install script is only a global
+# libvips check plus a compile fallback. That fallback shells out to
+# `npm run build`, and only pnpm is installed here, so the script is skipped
+# and the prebuilt binary is used as-is.
 
 packages:
   - "."
@@ -9,7 +14,7 @@ packages:
 allowBuilds:
   esbuild: true
   workerd: true
-  sharp: true
+  sharp: false
 minimumReleaseAgeExclude:
   - miniflare@4.20260708.1
   - wrangler@4.110.0
