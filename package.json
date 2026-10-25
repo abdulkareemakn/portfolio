@@ -10,9 +10,7 @@
 		"build": "astro build",
 		"preview": "astro build && astro preview",
 		"astro": "astro",
-		"generate-types": "wrangler types",
-		"deploy": "astro build && wrangler deploy",
-		"cf-typegen": "wrangler types"
+		"deploy": "astro build && cf deploy"
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "^3.7.3",
@@ -24,6 +22,7 @@
 	},
 	"devDependencies": {
 		"@iconify-json/simple-icons": "^1.2.93",
+		"cf": "1.0.0-beta.21",
 		"prettier": "^3.9.4",
 		"prettier-plugin-astro": "^0.14.1",
 		"wrangler": "^4.152.0"
