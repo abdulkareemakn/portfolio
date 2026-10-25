@@ -1,6 +1,5 @@
 ---
 import Logo from "./Logo.astro";
-import { Monitor, Moon, Sun } from "@lucide/astro";
 ---
 
 <aside class="sidebar">
@@ -35,47 +34,9 @@ import { Monitor, Moon, Sun } from "@lucide/astro";
       ><span class="nav-hotkey" aria-hidden="true">[c]</span> Connect</a
     >
   </nav>
-  <button class="theme-toggle" type="button" aria-label="Switch theme">
-    <Sun class="theme-icon theme-icon-light" aria-hidden="true" />
-    <Moon class="theme-icon theme-icon-dark" aria-hidden="true" />
-    <Monitor class="theme-icon theme-icon-system" aria-hidden="true" />
-  </button>
 </aside>
 
 <script>
-  const toggle = document.querySelector(".theme-toggle");
-  const themes = ["system", "ocean", "dark-graphite"];
-  const themeNames: Record<string, string> = {
-    system: "System",
-    ocean: "Ocean Blue",
-    "dark-graphite": "Graphite",
-  };
-
-  if (toggle) {
-    const syncToggle = () => {
-      const current = document.documentElement.dataset.theme ?? "system";
-      const next = themes[(themes.indexOf(current) + 1) % themes.length];
-      toggle.setAttribute(
-        "aria-label",
-        `Current theme: ${themeNames[current]}. Switch to ${themeNames[next]}`,
-      );
-    };
-
-    syncToggle();
-    toggle.addEventListener("click", () => {
-      const current = document.documentElement.dataset.theme ?? "system";
-      const nextTheme = themes[(themes.indexOf(current) + 1) % themes.length];
-      if (nextTheme === "system") delete document.documentElement.dataset.theme;
-      else document.documentElement.dataset.theme = nextTheme;
-      try {
-        if (nextTheme === "system") localStorage.removeItem("theme");
-        else localStorage.setItem("theme", nextTheme);
-      } catch {}
-      syncToggle();
-      document.dispatchEvent(new Event("themechange"));
-    });
-  }
-
   document.addEventListener("keydown", (event) => {
     if (event.altKey || event.ctrlKey || event.metaKey || event.repeat) return;
 

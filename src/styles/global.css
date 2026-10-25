@@ -26,18 +26,28 @@
   font-display: swap;
 }
 
+/*
+ * Palette: Monokai Pro Light (Filter Sun) for light, Monokai Pro (Filter
+ * Spectrum) for dark — the same pairing used on the blog, so both sites read as
+ * one system. Light-mode foregrounds are the darker Sun variants so small text
+ * clears WCAG AA without leaving the hue family.
+ *
+ * --accent-text is the blog's --accent-foreground: the colour that is legible
+ * on top of an --accent fill.
+ */
 :root {
   color-scheme: light;
-  --bg: #fffcf7;
-  --accent: #0081a7;
-  --accent-text: #fff;
-  --text: #2a2d34;
-  --muted: #4a5263;
-  --border: #e4f0d0;
-  --gh-level-1: #9cf4ff;
-  --gh-level-2: #57e9ff;
-  --gh-level-3: #0cdcff;
-  --gh-level-4: #00c5ea;
+  --bg: #f8efe7;
+  --text: #2c232e;
+  --muted: #6b6266;
+  --accent: #b83a62;
+  --accent-text: #f8efe7;
+  --border: #ded5d0;
+  /* Contribution graph runs on Monokai's green, not the accent rose. */
+  --gh-level-1: #cfe3d5;
+  --gh-level-2: #9ccbb1;
+  --gh-level-3: #4f9d7d;
+  --gh-level-4: #1a6f5d;
 
   --font-body: "Vercetti", BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-sans: var(--font-body);
@@ -48,46 +58,20 @@
   --sidebar-width: 150px;
 }
 
-/* Theme presets: the sidebar switcher cycles through these names. */
-:root[data-theme="ocean"],
-.theme-preview[data-theme="ocean"] {
-  color-scheme: light;
-  --bg: #fffcf7;
-  --accent: #0081a7;
-  --accent-text: #fff;
-  --text: #2a2d34;
-  --muted: #4a5263;
-  --border: #e4f0d0;
-}
-
-:root[data-theme="dark-graphite"],
-.theme-preview[data-theme="dark-graphite"] {
-  color-scheme: dark;
-  --accent-text: #17171a;
-  --text: #faf7f6;
-  --muted: #f2fbf9;
-  --accent: #5d91a7;
-  --border: #47423f;
-  --bg: #1b2021;
-  --gh-level-1: #97bbc9;
-  --gh-level-2: #497b91;
-  --gh-level-3: #40657a;
-  --gh-level-4: #395465;
-}
-
+/* Dark mode follows the system preference; there is no in-page switcher. */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
+  :root {
     color-scheme: dark;
-    --accent-text: #17171a;
-    --text: #faf7f6;
-    --muted: #f2fbf9;
-    --accent: #5d91a7;
-    --border: #47423f;
-    --bg: #1b2021;
-    --gh-level-1: #97bbc9;
-    --gh-level-2: #497b91;
-    --gh-level-3: #40657a;
-    --gh-level-4: #395465;
+    --bg: #222222;
+    --text: #f7f1ff;
+    --muted: #bab6c0;
+    --accent: #fc618d;
+    --accent-text: #222222;
+    --border: #363537;
+    --gh-level-1: #3d5a45;
+    --gh-level-2: #4f7a58;
+    --gh-level-3: #63a06f;
+    --gh-level-4: #7bd88f;
   }
 }
 
@@ -237,53 +221,6 @@ body {
 .nav a:focus-visible {
   opacity: 1;
   color: var(--accent);
-}
-
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  margin-top: 1.75rem;
-  padding: 0;
-  border: 1px solid var(--border);
-  border-radius: 0.5rem;
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-}
-
-.theme-toggle:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-}
-
-.theme-toggle:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-
-.theme-toggle:active {
-  transform: translateY(1px);
-}
-
-.theme-icon {
-  display: none;
-  width: 1.1rem;
-  height: 1.1rem;
-}
-
-:root:not([data-theme]) .theme-icon-system,
-:root[data-theme="ocean"] .theme-icon-light,
-:root[data-theme="dark-graphite"] .theme-icon-dark {
-  display: block;
-}
-
-@media (max-width: 767px) {
-  .theme-toggle {
-    margin-top: 0;
-  }
 }
 
 .content {
@@ -480,7 +417,9 @@ body {
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
-  transition: background-color 0.15s ease, transform 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease;
 }
 
 .social:hover,
@@ -504,7 +443,6 @@ body {
 .home-socials {
   margin-top: 2.5rem;
 }
-
 
 .gh-contributions {
   margin: 2rem 0 1rem;
@@ -733,28 +671,22 @@ body {
 }
 
 .pulse-dot {
-  box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.4);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 40%, transparent);
   animation: status-pulse 2s infinite;
-}
-
-@media (prefers-color-scheme: dark) {
-  .pulse-dot {
-    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.4);
-  }
 }
 
 @keyframes status-pulse {
   0% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.5);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 50%, transparent);
   }
   70% {
     transform: scale(1);
-    box-shadow: 0 0 0 6px rgba(21, 128, 61, 0);
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 0%, transparent);
   }
   100% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(21, 128, 61, 0);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent);
   }
 }
 

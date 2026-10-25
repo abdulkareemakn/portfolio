@@ -51,16 +51,18 @@ CSS is written in component files.
 
 ```css
 :root {
-  --bg: #fafaf8;           /* light background */
-  --text: #17171a;         /* near-black text */
-  --muted: #6b6b70;        /* secondary text */
-  --accent: #15803d;       /* links, hover */
-  --border: #e4e4e1;       /* borders, placeholders */
+  --bg: #f8efe7;           /* Monokai Pro Light (Filter Sun) background */
+  --text: #2c232e;         /* body text */
+  --muted: #6b6266;        /* secondary text */
+  --accent: #b83a62;       /* links, hover, filled surfaces */
+  --accent-text: #f8efe7;  /* text on an --accent fill */
+  --border: #ded5d0;       /* borders, placeholders */
 }
 ```
 
-Dark mode is applied via `@media (prefers-color-scheme: dark)` and follows the
-system preference. Base font size is `15px`.
+Dark mode is Monokai Pro (Filter Spectrum), applied by
+`@media (prefers-color-scheme: dark)`; there is no manual theme switcher.
+Base font size is `15px`.
 
 ## Structure
 

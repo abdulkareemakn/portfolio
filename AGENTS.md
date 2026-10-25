@@ -43,22 +43,31 @@ Sidebar is a child of `<main>`, not a sibling. Logo is on the left, nav below it
 
 ## Colors
 
+Monokai Pro — Light (Filter Sun) by default, Dark (Filter Spectrum) when the
+system prefers dark. Matches the palette used in `~/code/blog`.
+
 ```css
---bg: #fafaf8;       /* light background */
---text: #17171a;     /* near-black text */
---muted: #6b6b70;    /* secondary text */
---accent: #15803d;   /* links, hover */
---border: #e4e4e1;   /* borders/placeholders */
+/* Light — Monokai Pro Light (Filter Sun) */
+--bg: #f8efe7;
+--text: #2c232e;
+--muted: #6b6266;
+--accent: #b83a62;
+--accent-text: #f8efe7;
+--border: #ded5d0;
 ```
 
-Dark mode (`@media (prefers-color-scheme: dark)`):
+Dark (`prefers-color-scheme: dark`):
 ```css
---bg: #0d0d0f;
---text: #ececec;
---muted: #8a8a90;
---accent: #4ade80;
---border: #232326;
+--bg: #222222;
+--text: #f7f1ff;
+--muted: #bab6c0;
+--accent: #fc618d;
+--accent-text: #222222;
+--border: #363537;
 ```
+
+There is no in-page theme switcher — dark mode follows the system preference
+only. `--gh-level-1..4` is the contribution-graph ramp, built on Monokai green.
 
 ## Status block
 
