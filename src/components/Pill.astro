@@ -1,0 +1,87 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+/**
+ * The pill: an icon slot, a label and an optional mono suffix. See DESIGN.md.
+ *
+ * - With `href` it is a link; without, it is a static fill with no border.
+ * - `icon` is an emoji; pass an SVG through the `icon` slot instead if needed.
+ * - `after` is trailing punctuation that must stay attached to the pill.
+ */
+interface Props extends Omit<HTMLAttributes<"a">, "size"> {
+  hue: "rose" | "blue" | "yellow" | "green" | "orange" | "purple";
+  size?: "inline" | "sm" | "md" | "lg";
+  href?: string;
+  icon?: string;
+  suffix?: string;
+  /** Marks the suffix so a script can hydrate it, e.g. the Lichess rating. */
+  suffixId?: string;
+  after?: string;
+  external?: boolean;
+  solid?: boolean;
+}
+
+const {
+  hue,
+  size = "md",
+  href,
+  icon,
+  suffix,
+  suffixId,
+  after,
+  external = false,
+  solid = false,
+  class: className,
+  ...attrs
+} = Astro.props;
+
+const Tag = href ? "a" : "span";
+const hasIconSlot = Astro.slots.has("icon");
+const classes = [
+  "pill",
+  `hue-${hue}`,
+  size !== "md" && `pill-${size}`,
+  solid && "pill-solid",
+  className,
+];
+const linkProps = href
+  ? {
+      href,
+      ...(external ? { target: "_blank", rel: "noreferrer" } : {}),
+    }
+  : {};
+---
+
+<span class="pill-unit"
+  ><Tag class:list={classes} {...linkProps} {...attrs}
+    >{
+      (icon || hasIconSlot) && (
+        <span class="pill-icon" aria-hidden="true">
+          {icon}
+          <slot name="icon" />
+        </span>
+      )
+    }<span class="pill-label"><slot /></span>{
+      suffix && (
+        <span class="pill-suffix" data-pill-suffix={suffixId}>
+          {suffix}
+        </span>
+      )
+    }{
+      external && (
+        <svg
+          class="pill-ext"
+          viewBox="0 0 12 12"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M3 9 9 3M4 3h5v5" />
+        </svg>
+      )
+    }</Tag
+  >{after}</span
+>

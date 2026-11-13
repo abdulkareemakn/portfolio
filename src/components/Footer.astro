@@ -1,14 +1,42 @@
 ---
-import Socials from "./Socials.astro";
-
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <p class="footer-line">
-    <span class="copyright">© {year} Abdul Kareem</span>
-    <span class="sep" aria-hidden="true">·</span>
+  <span>© {year} Abdul Kareem</span>
+  <span class="footer-links">
+    <a href="/colophon">Colophon</a>
+    <span aria-hidden="true">·</span>
     <span>Built with Astro</span>
-  </p>
-  <Socials />
+  </span>
 </footer>
+
+<style>
+  .site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-top: var(--section-gap);
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.9333rem;
+    color: var(--muted);
+  }
+
+  .footer-links {
+    display: inline-flex;
+    gap: 0.5rem;
+  }
+
+  a {
+    color: inherit;
+    text-underline-offset: 0.3em;
+  }
+
+  a:hover,
+  a:focus-visible {
+    color: var(--text);
+  }
+</style>

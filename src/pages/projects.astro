@@ -1,36 +1,31 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import HomeProjectsPreview from "../components/HomeProjectsPreview.astro";
+import ProjectList from "../components/ProjectList.astro";
 ---
 
 <Layout
-  title="Projects - Abdul Kareem"
+  title="Projects — Abdul Kareem"
   description="Selected full-stack applications built by Abdul Kareem with Cloudflare Workers, TanStack Start, React, and modern web technologies."
+  hue="blue"
 >
-  <header class="projects-header">
-    <h1>Projects</h1>
-    <p>Selected products I have designed, built, and shipped.</p>
+  <header class="head">
+    <h1 class="page-title">Projects</h1>
+    <p class="lead">Selected products I have designed, built, and shipped.</p>
   </header>
 
-  <HomeProjectsPreview />
+  <ProjectList />
 </Layout>
 
 <style>
-  .projects-header {
+  .head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
     max-width: 38rem;
+    margin-bottom: 2.6667rem;
   }
 
-  h1 {
-    margin: 0 0 0.75rem;
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 4.5vw, 2.75rem);
-    line-height: 1.15;
-  }
-
-  p {
-    margin: 0;
+  .lead {
     color: var(--muted);
-    font-size: 1.05rem;
-    line-height: 1.6;
   }
 </style>

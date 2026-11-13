@@ -1,83 +1,88 @@
 ---
 import GitHubContributions from "../components/GitHubContributions.astro";
 import Layout from "../layouts/Layout.astro";
+import Pill from "../components/Pill.astro";
 ---
 
 <Layout
   title="About — Abdul Kareem"
-  description="Learn about Abdul Kareem, a software engineering student based in Lahore building web apps with TypeScript, Cloudflare Workers, Linux, and self-hosted tech."
+  description="Abdul Kareem is a software engineering student at COMSATS in Lahore and a freelance developer who builds full-stack TypeScript apps, umpires cricket and cares about typefaces."
 >
   <article class="about">
-    <h1 class="about-title">About</h1>
+    <h1 class="page-title">About</h1>
 
-    <p class="about-intro">
-      Full-stack developer with a self-hosting and Linux background. Currently
-      deep in TanStack Start and Cloudflare Workers. When not building, probably
-      tuning a Neovim config or arguing with Hyprland.
-    </p>
-
-    <section class="about-section">
-      <h2>Who I am</h2>
-      <p>
-        I'm a software engineering student at COMSATS University Islamabad,
-        based in Lahore, Pakistan. I care about the web as a medium and about
-        the people and tools behind it — which is why I spend as much time on my
-        own infrastructure as I do on the apps I build.
+    <div class="prose">
+      <p class="lead">
+        I'm Abdul Kareem, a software engineering student at COMSATS in Lahore
+        and a freelance developer the rest of the time. I build full-stack
+        TypeScript apps, run my own servers behind <Pill
+          hue="blue"
+          size="inline"
+          icon="🖥️">Caddy</Pill
+        >, and keep more notes than any one person reasonably should.
       </p>
-    </section>
 
-    <section class="about-section">
-      <h2>What I build</h2>
       <p>
-        Full-stack, TypeScript-first. On the front end that means React and
-        TanStack Start; on the back end I work close to the platform with
-        Cloudflare Workers, D1, and R2. I like APIs and products that are fast
-        by default and cheap to run.
+        Most weeks are split between client work (an ecommerce platform for a
+        handmade jewelry brand), <Pill
+          hue="blue"
+          size="inline"
+          href="https://getcursus.cc"
+          external>Cursus</Pill
+        > (the attendance tracker I built because I needed one, which a handful of
+        classmates now use too), and seven courses I'm determined to get A's in, Algorithms
+        retake included.
       </p>
-    </section>
 
-    <section class="about-section">
-      <h2>How I work</h2>
       <p>
-        A lot of how I think about software comes from running my own stack
-        rather than clicking through a dashboard:
+        Off the keyboard, I <Pill hue="orange" size="inline" icon="🏏"
+          >umpire cricket matches</Pill
+        > and watch far too much cricket and football. I play chess on <Pill
+          hue="yellow"
+          size="inline"
+          icon="♟️"
+          href="https://lichess.org/@/Abdul_Kareem1"
+          external>Lichess</Pill
+        > with mixed results. I've been lifting for four months, chasing a <Pill
+          hue="green"
+          size="inline"
+          icon="🏋️"
+          href="/training">100 kg bench</Pill
+        > and dodging bicep curls wherever possible. I've also quit sugar, doodh soda
+        included, which anyone from Lahore will understand is a real sacrifice.
       </p>
-      <ul class="about-list">
-        <li>
-          <strong>Arch Linux</strong> daily driver, <strong>Hyprland</strong> as my
-          window manager, and a <strong>Neovim</strong> config I'm never fully satisfied
-          with.
-        </li>
-        <li>
-          A self-hosted homelab on a DigitalOcean VPS — Docker Compose services
-          behind <strong>Caddy</strong>, a private <strong>Tailscale</strong> tailnet,
-          and OIDC auth in front of apps that shouldn't be public.
-        </li>
-        <li>
-          Deploying to <strong>Cloudflare Workers</strong> as the default, and keeping
-          local tooling as close to production as I can.
-        </li>
-        <li>
-          Authoring <strong>AUR packages</strong> and getting involved in the open-source
-          tooling I use every day.
-        </li>
-      </ul>
-    </section>
 
-    <section class="about-section">
-      <h2>Outside of code</h2>
-      <ul class="about-list">
-        <li>
-          Chess — you can usually find my rating ticking up (or down) on
-          <strong> Lichess</strong>.
-        </li>
-        <li>
-          Reading, slowly working through A Song of Ice and Fire right now.
-        </li>
-        <li>Ruining my sleep schedule adding yet another tweak to a config.</li>
-      </ul>
-    </section>
+      <p>
+        I care about typefaces more than is probably healthy. Every font here
+        was picked on purpose; <Pill
+          hue="rose"
+          size="inline"
+          href="/colophon"
+          after=" explains why.">the colophon</Pill
+        >
+      </p>
+    </div>
 
-      <GitHubContributions username="abdulkareemakn" />
+    <GitHubContributions username="abdulkareemakn" />
   </article>
 </Layout>
+
+<style>
+  .about {
+    max-width: 42rem;
+  }
+
+  .prose {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4667rem;
+    margin-top: 1.6rem;
+    font-size: 1.1333rem;
+    line-height: 1.7647;
+  }
+
+  .prose .lead {
+    font-size: 1.4rem;
+    line-height: 1.5238;
+  }
+</style>

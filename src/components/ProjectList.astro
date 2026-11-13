@@ -1,0 +1,278 @@
+---
+import { Image } from "astro:assets";
+import { projects as allProjects, type Project } from "../data/projects";
+
+interface Props {
+  projects?: Project[];
+}
+
+const { projects = allProjects } = Astro.props;
+---
+
+<ul class="projects hue-blue">
+  {
+    projects.map((project) => (
+      <li class="project">
+        <div class="project-head">
+          {project.href ? (
+            <a class="project-title" href={project.href}>
+              {project.name}
+            </a>
+          ) : (
+            <span class="project-title is-plain">{project.name}</span>
+          )}
+          {project.status && <span class="tag">{project.status}</span>}
+        </div>
+        <p class="project-summary">{project.summary}</p>
+
+        {project.preview && (
+          <div class="preview" aria-hidden="true">
+            <Image
+              class="preview-image"
+              src={project.preview.image}
+              alt=""
+              width={720}
+              height={400}
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="preview-body">
+              <div class="preview-head">
+                <span class="preview-name">{project.name}</span>
+                {project.host && (
+                  <span class="preview-host">{project.host} ↗</span>
+                )}
+              </div>
+              <p class="preview-blurb">{project.preview.blurb}</p>
+              <ul class="stack">
+                {project.preview.stack.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <span class="tail" />
+          </div>
+        )}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .projects {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .project {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .project:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .project-head,
+  .project-summary {
+    max-width: 22rem;
+  }
+
+  .project-head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.8rem;
+  }
+
+  .project-title {
+    font-family: var(--font-serif);
+    font-size: 1.7333rem;
+    line-height: 1.2308;
+    color: var(--hue-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    text-decoration-color: color-mix(in srgb, var(--hue) 40%, transparent);
+    transition:
+      text-decoration-color 0.15s ease,
+      text-decoration-thickness 0.15s ease;
+  }
+
+  .project-title.is-plain {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  a.project-title:hover,
+  a.project-title:focus-visible,
+  .project:hover a.project-title {
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--hue);
+  }
+
+  .tag {
+    padding: 0.1333rem 0.5333rem;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.3333;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .project-summary {
+    color: var(--muted);
+    line-height: 1.4667;
+  }
+
+  /* ------------------------------------------------------- The preview */
+
+  .preview {
+    position: absolute;
+    z-index: 10;
+    top: calc(100% - 0.4rem);
+    left: 0;
+    width: 24rem;
+    max-width: calc(100vw - 2 * var(--gutter));
+    padding: 0.5333rem;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
+    box-shadow: var(--shadow-popover);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(4px);
+    pointer-events: none;
+    transition:
+      opacity 0.14s ease,
+      transform 0.14s ease,
+      visibility 0s linear 0.14s;
+  }
+
+  .preview-image {
+    display: block;
+    width: 100%;
+    height: 13.3333rem;
+    object-fit: cover;
+    object-position: top;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .preview-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5333rem;
+    padding: 0.6667rem 0.5333rem 0.5333rem;
+  }
+
+  .preview-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .preview-name {
+    font-family: var(--font-serif);
+    font-size: 1.3333rem;
+    line-height: 1.3;
+    color: var(--text);
+  }
+
+  .preview-host {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--hue-ink);
+  }
+
+  .preview-blurb {
+    font-size: 0.9333rem;
+    line-height: 1.4286;
+    color: var(--muted);
+  }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .stack li {
+    padding: 0.1333rem 0.5333rem;
+    border-radius: 9999px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.3333;
+    color: var(--hue-ink);
+    background: color-mix(in srgb, var(--hue) var(--tint), var(--surface));
+  }
+
+  .tail {
+    position: absolute;
+    top: -8px;
+    left: 28px;
+    width: 14px;
+    height: 14px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    transform: rotate(45deg);
+  }
+
+  /* Only where there is a pointer to hover with; touch just navigates. */
+  @media (hover: hover) {
+    .project:hover .preview,
+    .project:focus-within .preview {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.12s;
+    }
+  }
+
+  /* Wide: the preview opens into the empty right half of the column. */
+  @media (min-width: 900px) {
+    .preview {
+      top: 2px;
+      left: 25.3333rem;
+    }
+
+    .tail {
+      top: 30px;
+      left: -8px;
+      border-top: 0;
+      border-left: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Near the end of the list, anchor to the bottom so it stays on screen. */
+    .project:nth-last-child(-n + 2) .preview {
+      top: auto;
+      bottom: 2px;
+    }
+
+    .project:nth-last-child(-n + 2) .tail {
+      top: auto;
+      bottom: 30px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .preview {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

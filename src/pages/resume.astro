@@ -189,19 +189,28 @@ import Layout from "../layouts/Layout.astro";
 
   <style is:global>
     @media print {
-      .sidebar,
+      /* A printed resume is always dark ink on white, whatever the theme. */
+      :root {
+        --bg: #fff;
+        --text: #000;
+        --muted: #444;
+        --border: #ccc;
+        --hue-ink: #000;
+      }
+
+      .topbar,
+      .site-footer,
       .print-btn,
       .resume-toolbar {
         display: none !important;
       }
 
-      body {
-        max-width: none;
+      .page {
         padding: 0;
       }
 
-      .content {
-        padding-left: 0;
+      .column {
+        width: auto;
       }
 
       .resume {
