@@ -1,22 +1,18 @@
 ---
 import "../styles/global.css";
-import TopBar from "../components/TopBar.astro";
-import Footer from "../components/Footer.astro";
+import Sidebar from "../components/Sidebar.astro";
 
 interface Props {
   title: string;
   description?: string;
   noindex?: boolean;
-  /** Page accent. Each part of the site owns one hue; see DESIGN.md. */
-  hue?: "rose" | "blue" | "yellow" | "green" | "orange" | "purple";
-  showChrome?: boolean;
+  showSidebar?: boolean;
 }
 const {
   title,
   description = "Software engineer building full-stack applications with TypeScript, Cloudflare Workers, and modern web tech.",
   noindex = false,
-  hue = "rose",
-  showChrome = true,
+  showSidebar = true,
 } = Astro.props;
 ---
 
@@ -26,8 +22,6 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#f8efe7" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -36,15 +30,12 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
   </head>
-  <body data-hue={hue}>
-    {showChrome && <TopBar />}
-    <div class="page">
-      <div class="column">
-        <main>
-          <slot />
-        </main>
-        {showChrome && <Footer />}
+  <body>
+    <main class="page">
+      {showSidebar && <Sidebar />}
+      <div class:list={["content", { "no-sidebar": !showSidebar }]}>
+        <slot />
       </div>
-    </div>
+    </main>
   </body>
 </html>

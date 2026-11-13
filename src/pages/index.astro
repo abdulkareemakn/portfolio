@@ -1,166 +1,34 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Pill from "../components/Pill.astro";
-import Quote from "../components/Quote.astro";
-import ProjectList from "../components/ProjectList.astro";
 import LocationStatus from "../components/LocationStatus.astro";
+import GitHubContributions from "../components/GitHubContributions.astro";
 import Socials from "../components/Socials.astro";
-import { site } from "../data/site";
 ---
 
 <Layout
   title="Abdul Kareem — Portfolio"
-  description="Abdul Kareem is a software engineering student and freelance developer in Lahore, building Ayak and Cursus with full-stack TypeScript and Cloudflare Workers."
+  description="Abdul Kareem is a Software Engineer building Ayak and Cursus, focusing on full-stack web applications, Cloudflare Workers, and open-source tooling."
 >
-  <div class="stack">
-    <section class="name-block">
-      <h1 class="name">
-        <span class="name-latin">Abdul Kareem</span>
-        <span class="name-urdu" lang="ur" dir="rtl">عبدالکریم</span>
-      </h1>
-      <p class="ipa" lang="und-fonipa">[ʕab.dʊl ka'riːm]</p>
-      <div class="intro lead">
-        <p>Software engineering student and freelance developer in Lahore.</p>
-        <p>
-          Off the keyboard, a <Pill
-            hue="orange"
-            size="inline"
-            icon="🏏"
-            after=".">cricket umpire</Pill
-          >
-        </p>
-      </div>
-    </section>
+  <section class="intro">
+    <h1 class="headline">
+      <span class="name-line">
+        Abdul Kareem <span class="name-separator" aria-hidden="true">·</span>
+        <span class="urdu" lang="ur" dir="rtl">عبدالکریم</span>
+      </span>
+      <span class="ipa" lang="und-fonipa">[ʕab.dʊl ka'riːm]</span>
+    </h1>
+    <p class="tagline">
+      I'm building <a href="https://ayak.abdulkareemakn.workers.dev">Ayak</a>, a
+      handmade jewelry ecommerce platform, and <a
+        href="https://getcursus.cc">Cursus</a
+      >, a timetable sync tool for university students.
+    </p>
+  </section>
 
-    {site.homeQuote && <Quote text={site.homeQuote.text} cite={site.homeQuote.cite} />}
+  <LocationStatus />
 
-    <section class="block" aria-labelledby="now-title">
-      <h2 class="section-title" id="now-title">Now</h2>
-      <div class="pills">
-        <Pill hue="yellow" icon="📖" href="/library">A Dance with Dragons</Pill>
-        <Pill hue="green" icon="🏋️" href="/training">Bench → 100 kg</Pill>
-        <Pill
-          hue="yellow"
-          icon="♟️"
-          href="https://lichess.org/@/Abdul_Kareem1"
-          external
-          suffix="1219"
-          suffixId="lichess">Lichess</Pill
-        >
-        <Pill
-          hue="blue"
-          icon="📦"
-          href="https://aur.archlinux.org/account/tmtaxman"
-          external>Maintaining 6 AUR packages</Pill
-        >
-        <Pill hue="orange" icon="🏏">Pakistan</Pill>
-        <Pill hue="orange" icon="⚽">Real Madrid</Pill>
-      </div>
-    </section>
-
-    <section class="block" aria-labelledby="projects-title">
-      <div class="block-head">
-        <h2 class="section-title" id="projects-title">Selected projects</h2>
-        <a class="text-link hue-blue all" href="/projects">All projects →</a>
-      </div>
-      <ProjectList />
-    </section>
-
-    <div class="contact">
-      <LocationStatus />
-      <Socials />
-    </div>
+  <div class="home-socials">
+    <Socials />
   </div>
+
 </Layout>
-
-<script>
-  // The Lichess pill ships with the last known rating and refreshes it live.
-  async function hydrateLichess(): Promise<void> {
-    const el = document.querySelector<HTMLElement>(
-      '[data-pill-suffix="lichess"]',
-    );
-    if (!el) return;
-    try {
-      const res = await fetch("https://lichess.org/api/user/Abdul_Kareem1");
-      const user = await res.json();
-      el.textContent = String(user.perfs.rapid.rating);
-    } catch {}
-  }
-  hydrateLichess();
-</script>
-
-<style>
-  .stack {
-    display: flex;
-    flex-direction: column;
-    gap: var(--section-gap);
-  }
-
-  .name-block {
-    display: flex;
-    flex-direction: column;
-    gap: 1.3333rem;
-  }
-
-  .name {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0 1.8667rem;
-  }
-
-  .name-latin {
-    font-size: clamp(2.9333rem, 11vw, 5.0667rem);
-    line-height: 1.0526;
-    letter-spacing: -0.025em;
-  }
-
-  .name-urdu {
-    font-family: var(--font-urdu);
-    font-size: clamp(2.1333rem, 7vw, 3.4667rem);
-    line-height: 2.1154;
-    color: var(--rose-ink);
-  }
-
-  .ipa {
-    margin-top: -1.0667rem;
-    font-size: 1.2rem;
-    line-height: 1.4444;
-    color: var(--muted);
-  }
-
-  .intro {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .block {
-    display: flex;
-    flex-direction: column;
-    gap: 1.3333rem;
-  }
-
-  .block-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .all {
-    font-size: 0.9333rem;
-  }
-
-  .pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6667rem;
-  }
-
-  .contact {
-    display: flex;
-    flex-direction: column;
-    gap: 1.6rem;
-  }
-</style>
