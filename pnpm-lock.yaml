@@ -17,6 +17,9 @@ importers:
       '@fontsource-variable/geist-mono':
         specifier: ^5.3.0
         version: 5.3.0
+      '@fontsource/noto-nastaliq-urdu':
+        specifier: ^5.3.0
+        version: 5.3.0
       '@lucide/astro':
         specifier: ^1.28.0
         version: 1.28.0(astro@7.0.7(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.2.0))
@@ -602,6 +605,9 @@ packages:
 
   '@fontsource-variable/geist@5.3.0':
     resolution: {integrity: sha512-j0m+vLQuG5XAYoHtGCVu0spvlGreR3EzpECUVzkFmI1mTVnAO38l/NEPDCFgZ177JxzYJCLSmTQibIiYPilGrA==}
+
+  '@fontsource/noto-nastaliq-urdu@5.3.0':
+    resolution: {integrity: sha512-rhozTu22mlnDp5R8A4gGeNJvoLroHEV0TytCwly20w1LMA+VXs/MyhORGJu3i3SWZFdyeCFe5EF5xzraq6zd6A==}
 
   '@iconify-json/simple-icons@1.2.93':
     resolution: {integrity: sha512-/XhANjfGYOuqvSR3TmUnkQkINvQ4GVjVuukvymRbxtVFBvIq/yiXJqCDycKcQPT401OYT9H2vIY6ihAlz1QIAw==}
@@ -2362,6 +2368,8 @@ snapshots:
   '@fontsource-variable/geist-mono@5.3.0': {}
 
   '@fontsource-variable/geist@5.3.0': {}
+
+  '@fontsource/noto-nastaliq-urdu@5.3.0': {}
 
   '@iconify-json/simple-icons@1.2.93':
     dependencies:

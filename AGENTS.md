@@ -3,7 +3,7 @@
 ## Stack
 
 - **Framework:** Astro (static site)
-- **Fonts:** Geist Sans + Geist Mono (Fontsource variable packages; no self-hosted font files)
+- **Fonts:** Geist Sans + Geist Mono (Fontsource variable packages), Geist Serif (self-hosted), Noto Nastaliq Urdu (Fontsource, Arabic name)
 - **Base font-size:** 16px (`html { font-size: 16px }`)
 - **Layout:** Centered max-width (56rem), sidebar + content flex row on desktop
 
@@ -35,7 +35,7 @@ Sidebar is a child of `<main>`, not a sibling. Logo is on the left, nav below it
 
 | Element | Font | Weight | Size | Color |
 |---------|------|--------|------|-------|
-| Headline | Geist Sans | 700 | `clamp(2rem, 5vw, 2.5rem)` | `var(--text)` |
+| Headline | Geist Serif | 700 | `clamp(2rem, 5vw, 2.5rem)` | `var(--text)` |
 | Tagline | inherit (body) | — | `1.05rem` | `var(--text)` |
 | Status text | inherit | — | `0.9rem` | `var(--text)` |
 | Bio | inherit | — | `0.95rem` | `var(--text)` |
