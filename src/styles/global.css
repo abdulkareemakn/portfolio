@@ -23,10 +23,10 @@
   --bg: #ffffff;
   --text: #2c232e;
   --muted: #6b6266;
-  --accent: #b83a62;
-  --accent-text: #f8efe7;
+  --accent: #1a6f5d;
+  --accent-text: #ffffff;
   --border: #ded5d0;
-  /* Contribution graph runs on Monokai's green, not the accent rose. */
+  /* Contribution graph uses its own Monokai green ramp (levels 0-4). */
   --gh-level-0: #f0eae6;
   --gh-level-1: #cfe3d5;
   --gh-level-2: #9ccbb1;
@@ -49,7 +49,7 @@
     --bg: #222222;
     --text: #f7f1ff;
     --muted: #bab6c0;
-    --accent: #fc618d;
+    --accent: #7bd88f;
     --accent-text: #222222;
     --border: #363537;
     --gh-level-0: #2b2a2c;

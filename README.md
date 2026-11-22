@@ -61,8 +61,8 @@ CSS is written in component files.
   --bg: #ffffff;           /* plain white light-mode background */
   --text: #2c232e;         /* body text */
   --muted: #6b6266;        /* secondary text */
-  --accent: #b83a62;       /* links, hover, filled surfaces */
-  --accent-text: #f8efe7;  /* text on an --accent fill */
+  --accent: #1a6f5d;       /* links, hover, filled surfaces */
+  --accent-text: #ffffff;  /* text on an --accent fill */
   --border: #ded5d0;       /* borders, placeholders */
 }
 ```
