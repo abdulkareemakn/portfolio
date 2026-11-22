@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+
 interface Props {
   username?: string;
 }
@@ -112,6 +114,15 @@ const height = LABEL_HEIGHT + 7 * (BLOCK + GAP) - GAP;
 {
   weeks.length > 0 && (
     <div class="gh-contributions">
+      <p class="gh-heading">
+        See my code on{" "}
+        <a href={profileUrl} target="_blank" rel="noopener noreferrer">
+          <Icon name="simple-icons:github" />
+          GitHub
+        </a>
+        .
+      </p>
+
       <div
         class="gh-scroll"
         tabindex="0"

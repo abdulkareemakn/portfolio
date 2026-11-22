@@ -438,6 +438,19 @@ body {
   line-height: 1.4;
 }
 
+.gh-heading {
+  margin: 0 0 0.75rem;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.gh-heading svg {
+  width: 1.15em;
+  height: 1.15em;
+  margin-right: 0.3rem;
+  vertical-align: -0.3em;
+}
+
 .gh-scroll {
   width: fit-content;
   max-width: 100%;
@@ -504,15 +517,15 @@ body {
   margin: 0;
 }
 
-.gh-total a {
+:is(.gh-total, .gh-heading) a {
   color: var(--text);
   text-decoration: underline;
   text-decoration-color: var(--muted);
   text-underline-offset: 2px;
 }
 
-.gh-total a:hover,
-.gh-total a:focus-visible {
+:is(.gh-total, .gh-heading) a:hover,
+:is(.gh-total, .gh-heading) a:focus-visible {
   color: var(--accent);
   text-decoration-color: var(--accent);
 }
