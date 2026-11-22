@@ -1,191 +1,215 @@
 ---
+interface Props {
+  username?: string;
+}
+
 const { username = "abdulkareemakn" } = Astro.props;
+const profileUrl = `https://github.com/${username}`;
+
+type Activity = { date: string; count: number; level: number };
+type Cell = Activity | undefined;
+
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+const BLOCK = 11;
+const GAP = 3;
+const LABEL_HEIGHT = 20;
+
+const toDate = (value: string) => new Date(`${value}T00:00:00Z`);
+const toKey = (date: Date) => date.toISOString().slice(0, 10);
+
+let activities: Activity[] = [];
+try {
+  const response = await fetch(
+    `https://github-contributions-api.jogruber.de/v4/${username}?y=last`,
+  );
+  if (response.ok) {
+    const payload = await response.json();
+    if (Array.isArray(payload.contributions))
+      activities = payload.contributions;
+  }
+} catch {
+  // A build with no network access renders no graph rather than a broken one.
+}
+
+const sorted = [...activities].sort((a, b) => a.date.localeCompare(b.date));
+const byDate = new Map(activities.map((activity) => [activity.date, activity]));
+const firstDate = sorted[0] ? toDate(sorted[0].date) : undefined;
+const lastDate = sorted.at(-1) ? toDate(sorted.at(-1)!.date) : undefined;
+
+// Pad back to Sunday so every column is a complete week, and fill missing days.
+const weeks: Cell[][] = [];
+if (firstDate && lastDate) {
+  const cursor = new Date(firstDate);
+  cursor.setUTCDate(cursor.getUTCDate() - cursor.getUTCDay());
+  let week: Cell[] = [];
+  while (cursor <= lastDate) {
+    const key = toKey(cursor);
+    week.push(byDate.get(key) ?? { date: key, count: 0, level: 0 });
+    if (week.length === 7) {
+      weeks.push(week);
+      week = [];
+    }
+    cursor.setUTCDate(cursor.getUTCDate() + 1);
+  }
+}
+
+// Only label months with enough weeks to fit the label.
+const monthLabels: { weekIndex: number; label: string }[] = [];
+weeks.forEach((week, weekIndex) => {
+  const firstDay = week.find(Boolean);
+  if (!firstDay) return;
+  const label = MONTHS[toDate(firstDay.date).getUTCMonth()];
+  const previous = monthLabels.at(-1);
+  if (weekIndex === 0 || !previous || previous.label !== label) {
+    monthLabels.push({ weekIndex, label });
+  }
+});
+const visibleMonths = monthLabels.filter(({ weekIndex }, index, all) => {
+  if (index === 0) return Boolean(all[1]) && all[1].weekIndex - weekIndex >= 3;
+  if (index === all.length - 1) return weeks.length - weekIndex >= 3;
+  return true;
+});
+
+const totalCount = activities.reduce(
+  (sum, activity) => sum + activity.count,
+  0,
+);
+const year = lastDate?.getUTCFullYear() ?? new Date().getUTCFullYear();
+
+const formatDate = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
+const rangeLabel =
+  firstDate && lastDate
+    ? ` from ${formatDate.format(firstDate)} to ${formatDate.format(lastDate)}`
+    : " in the last year";
+const describe = (activity: Activity) =>
+  `${activity.count.toLocaleString("en-US")} contribution${
+    activity.count === 1 ? "" : "s"
+  } on ${formatDate.format(toDate(activity.date))}`;
+
+const width = weeks.length * (BLOCK + GAP) - GAP;
+const height = LABEL_HEIGHT + 7 * (BLOCK + GAP) - GAP;
 ---
 
-<div
-  class="gh-contributions"
-  data-username={username}
-  aria-label="GitHub contribution chart for the past year"
->
-  <div class="gh-card">
-    <p class="gh-heading">GitHub Contributions</p>
-    <div
-      class="gh-scroll"
-      tabindex="0"
-      aria-label="Scrollable GitHub contribution chart"
-    >
-      <div class="gh-loading" aria-live="polite">Loading contributions…</div>
+{
+  weeks.length > 0 && (
+    <div class="gh-contributions">
+      <div
+        class="gh-scroll"
+        tabindex="0"
+        aria-label="GitHub contributions, scroll horizontally for the full year"
+      >
+        <svg
+          class="gh-graph"
+          width={width}
+          height={height}
+          viewBox={`0 0 ${width} ${height}`}
+          role="img"
+          aria-label={`${totalCount.toLocaleString("en-US")} contributions${rangeLabel} on GitHub`}
+        >
+          <g class="gh-months" dominant-baseline="hanging">
+            {visibleMonths.map(({ weekIndex, label }) => (
+              <text x={weekIndex * (BLOCK + GAP)} y="0">
+                {label}
+              </text>
+            ))}
+          </g>
+          {weeks.map((week, weekIndex) =>
+            week.map(
+              (activity, dayIndex) =>
+                activity && (
+                  <rect
+                    class="gh-cell"
+                    x={weekIndex * (BLOCK + GAP)}
+                    y={LABEL_HEIGHT + dayIndex * (BLOCK + GAP)}
+                    width={BLOCK}
+                    height={BLOCK}
+                    rx="2"
+                    data-level={activity.level}
+                    data-tip={describe(activity)}
+                  />
+                ),
+            ),
+          )}
+        </svg>
+      </div>
+
+      <div class="gh-footer">
+        <p class="gh-total">
+          {totalCount.toLocaleString("en-US")} contributions in {year} on{" "}
+          <a href={profileUrl} target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+          .
+        </p>
+        <div class="gh-legend" aria-hidden="true">
+          <span>Less</span>
+          {[0, 1, 2, 3, 4].map((level) => (
+            <svg width={BLOCK} height={BLOCK} viewBox={`0 0 ${BLOCK} ${BLOCK}`}>
+              <rect width={BLOCK} height={BLOCK} rx="2" data-level={level} />
+            </svg>
+          ))}
+          <span>More</span>
+        </div>
+      </div>
+
+      <div class="gh-tooltip" role="tooltip" hidden />
     </div>
-  </div>
-</div>
+  )
+}
 
 <script>
-  (() => {
-    const CELL_SIZE = 9;
-    const CELL_GAP = 2;
+  const root = document.querySelector<HTMLElement>(".gh-contributions");
+  const graph = root?.querySelector<SVGSVGElement>(".gh-graph");
+  const tooltip = root?.querySelector<HTMLElement>(".gh-tooltip");
 
-    class GitHubContributions {
-      constructor(container) {
-        this.container = container;
-        this.username = container.dataset.username;
-        this.init();
-      }
+  if (graph && tooltip) {
+    const hide = () => {
+      tooltip.hidden = true;
+    };
 
-      async init() {
-        try {
-          const res = await fetch(
-            `https://github-contributions-api.jogruber.de/v4/${this.username}?y=last`,
-          );
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const data = await res.json();
-          this.render(data);
-        } catch {
-          const loading = this.container.querySelector(".gh-loading");
-          if (loading) loading.textContent = "Failed to load contributions.";
-        }
-      }
+    graph.addEventListener("pointerover", (event) => {
+      const cell = (event.target as Element).closest<SVGRectElement>(
+        ".gh-cell",
+      );
+      if (!cell) return;
 
-      render(data) {
-        const { contributions, total } = data;
-        if (!contributions?.length) {
-          const loading = this.container.querySelector(".gh-loading");
-          if (loading) loading.textContent = "No contribution data.";
-          return;
-        }
+      tooltip.textContent = cell.dataset.tip ?? "";
+      tooltip.hidden = false;
+      const bounds = cell.getBoundingClientRect();
+      const half = tooltip.offsetWidth / 2;
+      const x = Math.min(
+        Math.max(bounds.left + bounds.width / 2, half + 8),
+        window.innerWidth - half - 8,
+      );
+      tooltip.style.left = `${x}px`;
+      tooltip.style.top = `${bounds.top}px`;
+    });
 
-        const svg = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "svg",
-        );
-        svg.setAttribute("role", "img");
-        svg.setAttribute(
-          "aria-label",
-          `GitHub contributions: ${total?.lastYear ?? 0} in the last year`,
-        );
+    graph.addEventListener("pointerout", (event) => {
+      if ((event.target as Element).closest(".gh-cell")) hide();
+    });
 
-        const dayPos = this.computePositions(contributions);
-
-        const totalWeeks = dayPos.length > 0 ? Math.ceil(dayPos.length / 7) : 0;
-        const width = totalWeeks * (CELL_SIZE + CELL_GAP);
-        const headerH = 4;
-        const footerH = 20;
-        const height = 7 * (CELL_SIZE + CELL_GAP) + headerH + footerH;
-
-        svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-        svg.setAttribute("width", width);
-        svg.setAttribute("height", height);
-
-        // Cells
-        for (let i = 0; i < dayPos.length; i++) {
-          const d = dayPos[i];
-          if (!d) continue;
-          const week = Math.floor(i / 7);
-          const day = i % 7;
-          const x = week * (CELL_SIZE + CELL_GAP);
-          const y = headerH + day * (CELL_SIZE + CELL_GAP);
-
-          const rect = document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "rect",
-          );
-          rect.setAttribute("x", x);
-          rect.setAttribute("y", y);
-          rect.setAttribute("width", CELL_SIZE);
-          rect.setAttribute("height", CELL_SIZE);
-          rect.setAttribute("rx", "2");
-          rect.setAttribute("fill", this.getLevelColor(d.level));
-          rect.dataset.count = d.count;
-          rect.dataset.date = d.date;
-          rect.dataset.level = d.level;
-
-          svg.appendChild(rect);
-        }
-
-        // Footer: total count
-        const totalText = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "text",
-        );
-        totalText.setAttribute("x", 0);
-        totalText.setAttribute("y", height - 2);
-        totalText.setAttribute("fill", "var(--muted)");
-        totalText.setAttribute("font-size", "13");
-
-        const totalStr = `${total?.lastYear ?? 0} contributions in the last year on `;
-        const totalSpan = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "tspan",
-        );
-        totalSpan.textContent = totalStr;
-        totalSpan.setAttribute("fill", "var(--muted)");
-        totalText.appendChild(totalSpan);
-
-        const linkSpan = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "tspan",
-        );
-        const link = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "a",
-        );
-        link.setAttribute("href", `https://github.com/${this.username}`);
-        link.setAttribute("target", "_blank");
-        link.setAttribute("rel", "noopener");
-        link.textContent = "GitHub";
-        link.setAttribute("fill", "var(--accent)");
-        link.setAttribute("text-decoration", "underline");
-        link.setAttribute("text-underline-offset", "2px");
-        link.setAttribute("text-decoration-color", "var(--muted)");
-        linkSpan.appendChild(link);
-        totalText.appendChild(linkSpan);
-
-        svg.appendChild(totalText);
-
-        const card = this.container.querySelector(".gh-card");
-        const loading = this.container.querySelector(".gh-loading");
-        if (!card) return;
-        if (loading) loading.remove();
-        const scroll = card.querySelector(".gh-scroll");
-        if (scroll) scroll.appendChild(svg);
-      }
-
-      computePositions(contributions) {
-        const map = {};
-        for (const c of contributions) {
-          map[c.date] = c;
-        }
-
-        const result = [];
-        const end = new Date();
-        const start = new Date(end);
-        start.setFullYear(start.getFullYear() - 1);
-        start.setDate(start.getDate() + 1);
-
-        const current = new Date(start);
-        while (current <= end) {
-          const key = current.toISOString().slice(0, 10);
-          result.push(map[key] || { date: key, count: 0, level: 0 });
-          current.setDate(current.getDate() + 1);
-        }
-
-        return result;
-      }
-
-      getLevelColor(level) {
-        const colors = [
-          "var(--border)",
-          "var(--gh-level-1)",
-          "var(--gh-level-2)",
-          "var(--gh-level-3)",
-          "var(--gh-level-4)",
-        ];
-        return colors[level] || colors[0];
-      }
-    }
-
-    const container = document.querySelector(".gh-contributions");
-    if (container) {
-      new GitHubContributions(container);
-    }
-  })();
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") hide();
+    });
+  }
 </script>

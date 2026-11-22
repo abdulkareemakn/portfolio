@@ -27,6 +27,7 @@
   --accent-text: #f8efe7;
   --border: #ded5d0;
   /* Contribution graph runs on Monokai's green, not the accent rose. */
+  --gh-level-0: #f0eae6;
   --gh-level-1: #cfe3d5;
   --gh-level-2: #9ccbb1;
   --gh-level-3: #4f9d7d;
@@ -51,6 +52,7 @@
     --accent: #fc618d;
     --accent-text: #222222;
     --border: #363537;
+    --gh-level-0: #2b2a2c;
     --gh-level-1: #3d5a45;
     --gh-level-2: #4f7a58;
     --gh-level-3: #63a06f;
@@ -431,44 +433,16 @@ body {
 
 .gh-contributions {
   margin: 2rem 0 1rem;
-  font-family: var(--font-mono, "Martian Mono", ui-monospace, monospace);
-  font-size: 0.95rem;
-  line-height: 1;
-}
-
-.gh-heading {
-  margin: 0 0 0.75rem;
-  font-family: var(--font-body);
-  font-size: 1.05rem;
-  color: var(--text);
-  font-weight: 600;
-}
-
-.gh-card {
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.25rem 1.25rem 1rem;
-  background: var(--bg);
-  display: inline-block;
-  max-width: 100%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-}
-
-.gh-loading {
-  height: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--muted);
   font-family: var(--font-body);
   font-size: 0.85rem;
+  line-height: 1.4;
 }
 
 .gh-scroll {
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  padding-bottom: 0.35rem;
+  padding-bottom: 0.25rem;
   scrollbar-color: var(--border) transparent;
   scrollbar-width: thin;
 }
@@ -478,9 +452,94 @@ body {
   outline-offset: 3px;
 }
 
-.gh-contributions svg {
+.gh-graph,
+.gh-legend svg {
   display: block;
   height: auto;
+}
+
+.gh-months text {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  fill: var(--muted);
+}
+
+:is(.gh-cell, .gh-legend rect) {
+  fill: var(--gh-level-0);
+}
+
+:is(.gh-cell, .gh-legend rect)[data-level="1"] {
+  fill: var(--gh-level-1);
+}
+
+:is(.gh-cell, .gh-legend rect)[data-level="2"] {
+  fill: var(--gh-level-2);
+}
+
+:is(.gh-cell, .gh-legend rect)[data-level="3"] {
+  fill: var(--gh-level-3);
+}
+
+:is(.gh-cell, .gh-legend rect)[data-level="4"] {
+  fill: var(--gh-level-4);
+}
+
+.gh-cell:hover {
+  stroke: var(--text);
+  stroke-width: 1.25px;
+}
+
+.gh-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-top: 0.4rem;
+  color: var(--muted);
+}
+
+.gh-total {
+  margin: 0;
+}
+
+.gh-total a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--muted);
+  text-underline-offset: 2px;
+}
+
+.gh-total a:hover,
+.gh-total a:focus-visible {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+.gh-legend {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: auto;
+}
+
+.gh-tooltip {
+  position: fixed;
+  z-index: 50;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 8px));
+  background: var(--text);
+  color: var(--bg);
+  border-radius: 6px;
+  padding: 0.35rem 0.55rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.gh-tooltip[hidden] {
+  display: none;
 }
 
 .site-footer {
