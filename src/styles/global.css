@@ -276,11 +276,33 @@ body {
   margin: 0 0 2.5rem;
 }
 
+.tagline-line {
+  display: block;
+}
+
+.tagline-line + .tagline-line {
+  margin-top: 0.75rem;
+}
+
 .tagline a {
   color: var(--text);
   text-decoration: underline;
   text-decoration-color: var(--muted);
   text-underline-offset: 3px;
+}
+
+.tagline a:hover,
+.tagline a:focus-visible {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+.reach-out a svg {
+  width: 1.15em;
+  height: 1.15em;
+  margin-right: 0.3rem;
+  vertical-align: -0.3em;
+  fill: currentColor;
 }
 
 .status-block {
@@ -351,6 +373,14 @@ body {
   height: 0.95em;
   flex-shrink: 0;
   color: var(--muted);
+}
+
+.icon svg,
+.arrow svg,
+.status-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .weather-text {
@@ -425,10 +455,6 @@ body {
   width: 1rem;
   height: 1rem;
   flex-shrink: 0;
-}
-
-.home-socials {
-  margin-top: 2.5rem;
 }
 
 .gh-contributions {

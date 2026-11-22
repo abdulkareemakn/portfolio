@@ -1,7 +1,6 @@
 ---
 import Logo from "./Logo.astro";
-import { BookOpen, MapPin } from "@lucide/astro";
-import { Icon } from "astro-icon/components";
+import { RuneIcon } from "runeicons-astro";
 ---
 
 <div class="status-block">
@@ -17,7 +16,9 @@ import { Icon } from "astro-icon/components";
 
   <div class="status-text">
     <span class="status-item">
-      <MapPin class="status-icon" />
+      <span class="status-icon"
+        ><RuneIcon name="tools-map-pin" size={16} /></span
+      >
       <span>
         <strong>Lahore, Pakistan</strong>
         <span class="weather-text" data-weather></span>
@@ -29,20 +30,12 @@ import { Icon } from "astro-icon/components";
     </span>
 
     <span class="status-item">
-      <BookOpen class="status-icon" />
+      <span class="status-icon"
+        ><RuneIcon name="documents-book-bookmark" size={16} /></span
+      >
       <span
         >Reading Now: <strong>A Dance with Dragons</strong> by George R. R. Martin</span
       >
-    </span>
-
-    <span class="status-item">
-      <Icon name="simple-icons:lichess" class="status-icon" />
-      <span>Rated <strong data-lichess>1219</strong> on Lichess</span>
-    </span>
-
-    <span class="status-item">
-      <Icon name="simple-icons:archlinux" class="status-icon" />
-      <span>Maintaining <strong>6</strong> packages on the AUR</span>
     </span>
   </div>
 </div>
@@ -52,7 +45,6 @@ import { Icon } from "astro-icon/components";
   const clockEl = document.querySelector<HTMLElement>("[data-clock]");
   const tzDiffEl = document.querySelector<HTMLElement>("[data-tz-diff]");
   const weatherEl = document.querySelector<HTMLElement>("[data-weather]");
-  const lichessEl = document.querySelector<HTMLElement>("[data-lichess]");
 
   // 1. Live Clock
   const timeFormatter = new Intl.DateTimeFormat("en-GB", {
@@ -147,15 +139,4 @@ import { Icon } from "astro-icon/components";
     .catch(() => {
       if (weatherEl) weatherEl.textContent = "";
     });
-
-  // 4. Lichess Rating Hydration
-  async function hydrateLichess(): Promise<void> {
-    if (!lichessEl) return;
-    try {
-      const res = await fetch("https://lichess.org/api/user/Abdul_Kareem1");
-      const user = await res.json();
-      lichessEl.textContent = String(user.perfs.rapid.rating);
-    } catch {}
-  }
-  hydrateLichess();
 </script>

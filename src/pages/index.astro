@@ -2,12 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import LocationStatus from "../components/LocationStatus.astro";
 import GitHubContributions from "../components/GitHubContributions.astro";
-import Socials from "../components/Socials.astro";
+import { RuneIcon } from "runeicons-astro";
+import linkedinSvg from "../assets/icons/linkedin.svg?raw";
 ---
 
 <Layout
   title="Abdul Kareem — Portfolio"
-  description="Abdul Kareem is a Software Engineer building Ayak and Cursus, focusing on full-stack web applications, Cloudflare Workers, and open-source tooling."
+  description="Abdul Kareem is a Software Engineer building Cursus, focusing on full-stack web applications, Cloudflare Workers, and open-source tooling."
 >
   <section class="intro">
     <h1 class="headline">
@@ -18,18 +19,38 @@ import Socials from "../components/Socials.astro";
       <span class="ipa" lang="und-fonipa">[ʕab.dʊl ka'riːm]</span>
     </h1>
     <p class="tagline">
-      I'm building <a href="https://ayak.abdulkareemakn.workers.dev">Ayak</a>, a
-      handmade jewelry ecommerce platform, and <a
-        href="https://getcursus.cc">Cursus</a
-      >, a timetable sync tool for university students.
+      <span class="tagline-line">
+        Hi. I'm Abdul Kareem, a software engineer based in Pakistan. I like
+        making clean interfaces, contributing to open-source software and
+        hosting my own applications and data.
+      </span>
+      <span class="tagline-line">
+        I play chess, watch football and read books.
+      </span>
+      <span class="tagline-line">
+        I'm currently building <a href="https://getcursus.cc">Cursus</a>, a
+        timetable sync tool for university students.
+      </span>
+      <span class="tagline-line reach-out">
+        You can reach out to me on{" "}
+        <a
+          href="https://www.linkedin.com/in/abdul-kareem-nasir/"
+          target="_blank"
+          rel="noreferrer"><Fragment set:html={linkedinSvg} />LinkedIn</a
+        >{" "}
+        or{" "}
+        <a href="mailto:abdulkareemakn@proton.me"
+          ><RuneIcon name="messaging-mail" size={16} />Email</a
+        >{" "}
+        or schedule a call on{" "}
+        <a href="https://cal.com/abdulkareem" target="_blank" rel="noreferrer"
+          >Cal.com</a
+        >.
+      </span>
     </p>
   </section>
 
   <LocationStatus />
-
-  <div class="home-socials">
-    <Socials />
-  </div>
 
   <GitHubContributions username="abdulkareemakn" />
 </Layout>

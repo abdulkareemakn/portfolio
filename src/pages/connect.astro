@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { ArrowUpRight, KeyRound, Mail } from "@lucide/astro";
+import { RuneIcon } from "runeicons-astro";
 import { Icon } from "astro-icon/components";
 ---
 
@@ -19,21 +19,32 @@ import { Icon } from "astro-icon/components";
         rel="noreferrer"
       >
         <span class="link-label">
-          <Mail class="icon" />
+          <span class="icon"><RuneIcon name="messaging-mail" size={18} /></span>
           Email
         </span>
-        <ArrowUpRight class="arrow" />
+        <span class="arrow"
+          ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
+        >
       </a>
 
-      <a class="contact-row contact-row--pgp" href="/pgp.asc" target="_blank" rel="noreferrer">
+      <a
+        class="contact-row contact-row--pgp"
+        href="/pgp.asc"
+        target="_blank"
+        rel="noreferrer"
+      >
         <span class="link-label">
-          <KeyRound class="icon" />
+          <span class="icon"><RuneIcon name="identity-lock" size={18} /></span>
           <span class="link-stack">
             PGP key
-            <span class="link-fingerprint">36D4 7302 992E B464 A582 7601 A942 864C C3B0 172F</span>
+            <span class="link-fingerprint"
+              >36D4 7302 992E B464 A582 7601 A942 864C C3B0 172F</span
+            >
           </span>
         </span>
-        <ArrowUpRight class="arrow" />
+        <span class="arrow"
+          ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
+        >
       </a>
     </div>
 
@@ -49,7 +60,9 @@ import { Icon } from "astro-icon/components";
             <Icon name="simple-icons:github" class="icon" />
             GitHub
           </span>
-          <ArrowUpRight class="arrow" />
+          <span class="arrow"
+            ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
+          >
         </a>
       </li>
 
@@ -64,7 +77,9 @@ import { Icon } from "astro-icon/components";
             <Icon name="simple-icons:archlinux" class="icon" />
             AUR
           </span>
-          <ArrowUpRight class="arrow" />
+          <span class="arrow"
+            ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
+          >
         </a>
       </li>
 
@@ -79,7 +94,9 @@ import { Icon } from "astro-icon/components";
             <Icon name="simple-icons:linkedin" class="icon" />
             LinkedIn
           </span>
-          <ArrowUpRight class="arrow" />
+          <span class="arrow"
+            ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
+          >
         </a>
       </li>
 
@@ -94,7 +111,9 @@ import { Icon } from "astro-icon/components";
             <Icon name="simple-icons:x" class="icon" />
             X (Twitter)
           </span>
-          <ArrowUpRight class="arrow" />
+          <span class="arrow"
+            ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
+          >
         </a>
       </li>
 
@@ -109,7 +128,9 @@ import { Icon } from "astro-icon/components";
             <Icon name="simple-icons:spotify" class="icon" />
             Spotify
           </span>
-          <ArrowUpRight class="arrow" />
+          <span class="arrow"
+            ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
+          >
         </a>
       </li>
 
@@ -124,7 +145,9 @@ import { Icon } from "astro-icon/components";
             <Icon name="simple-icons:hevy" class="icon" />
             Hevy
           </span>
-          <ArrowUpRight class="arrow" />
+          <span class="arrow"
+            ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
+          >
         </a>
       </li>
 
@@ -149,7 +172,9 @@ import { Icon } from "astro-icon/components";
             <Icon name="simple-icons:lichess" class="icon" />
             Lichess
           </span>
-          <ArrowUpRight class="arrow" />
+          <span class="arrow"
+            ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
+          >
         </a>
       </li>
     </ul>

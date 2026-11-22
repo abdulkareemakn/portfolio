@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Home } from "@lucide/astro";
+import { RuneIcon } from "runeicons-astro";
 ---
 
 <Layout
@@ -14,7 +14,7 @@ import { Home } from "@lucide/astro";
     <p class="exception">NullPointerException</p>
     <p class="message">The page you're looking for can't be found.</p>
     <a href="/" class="home-link">
-      <Home class="icon" />
+      <span class="icon"><RuneIcon name="tools-house" size={18} /></span>
       Back Home
     </a>
   </div>
