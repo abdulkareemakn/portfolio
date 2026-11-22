@@ -108,7 +108,6 @@ const { username = "abdulkareemakn" } = Astro.props;
         );
         totalText.setAttribute("x", 0);
         totalText.setAttribute("y", height - 2);
-        totalText.setAttribute("font-family", "Allo, sans-serif");
         totalText.setAttribute("fill", "var(--muted)");
         totalText.setAttribute("font-size", "13");
 
@@ -119,7 +118,6 @@ const { username = "abdulkareemakn" } = Astro.props;
         );
         totalSpan.textContent = totalStr;
         totalSpan.setAttribute("fill", "var(--muted)");
-        totalSpan.setAttribute("font-family", "Allo, sans-serif");
         totalText.appendChild(totalSpan);
 
         const linkSpan = document.createElementNS(
@@ -135,7 +133,6 @@ const { username = "abdulkareemakn" } = Astro.props;
         link.setAttribute("rel", "noopener");
         link.textContent = "GitHub";
         link.setAttribute("fill", "var(--accent)");
-        link.setAttribute("font-family", "Allo, sans-serif");
         link.setAttribute("text-decoration", "underline");
         link.setAttribute("text-underline-offset", "2px");
         link.setAttribute("text-decoration-color", "var(--muted)");

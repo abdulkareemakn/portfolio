@@ -19,7 +19,7 @@ Workers.
 ## Stack
 
 - **Framework:** Astro (static, no server runtime on the edge)
-- **Fonts:** Allo (body), Hedvig Letters Serif (serif), Google Sans Code (mono), Noto Nastaliq Urdu (Arabic name)
+- **Fonts:** Geist Sans (body/headings) + Geist Mono, via Fontsource variable packages
 - **Icons:** `astro-icon` (Simple Icons) + `@lucide/astro`
 - **Data feeds at runtime:** Open-Meteo weather, Lichess rating, GitHub contributions
 - **Deploy:** Cloudflare Workers static assets (`cf`) with sitemap + robots.txt baked in
@@ -57,7 +57,7 @@ CSS is written in component files.
 
 ```css
 :root {
-  --bg: #f8efe7;           /* Monokai Pro Light (Filter Sun) background */
+  --bg: #ffffff;           /* plain white light-mode background */
   --text: #2c232e;         /* body text */
   --muted: #6b6266;        /* secondary text */
   --accent: #b83a62;       /* links, hover, filled surfaces */

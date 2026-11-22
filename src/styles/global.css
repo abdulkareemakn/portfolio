@@ -1,34 +1,17 @@
-@import "@fontsource/noto-nastaliq-urdu/arabic-400.css";
-@import "allo-font";
-
-@font-face {
-  font-family: "0xProto";
-  src: url("/fonts/0xProto-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Hedvig Letters Serif";
-  src: url("/fonts/HedvigLettersSerif[opsz].woff2") format("woff2");
-  font-weight: 400 700;
-  font-style: normal;
-  font-display: swap;
-}
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
 
 /*
- * Palette: Monokai Pro Light (Filter Sun) for light, Monokai Pro (Filter
- * Spectrum) for dark — the same pairing used on the blog, so both sites read as
- * one system. Light-mode foregrounds are the darker Sun variants so small text
- * clears WCAG AA without leaving the hue family.
+ * Palette: Monokai Pro Light (Filter Sun) foregrounds on a plain white light
+ * background, Monokai Pro (Filter Spectrum) for dark. Light-mode foregrounds
+ * are the darker Sun variants so small text clears WCAG AA.
  *
  * --accent-text is the blog's --accent-foreground: the colour that is legible
  * on top of an --accent fill.
  */
 :root {
   color-scheme: light;
-  --bg: #f8efe7;
+  --bg: #ffffff;
   --text: #2c232e;
   --muted: #6b6266;
   --accent: #b83a62;
@@ -40,11 +23,11 @@
   --gh-level-3: #4f9d7d;
   --gh-level-4: #1a6f5d;
 
-  --font-body: "Allo", BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Geist Variable", BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-sans: var(--font-body);
-  --font-serif: "Hedvig Letters Serif", Georgia, serif;
-  --font-mono: "0xProto", ui-monospace, "SF Mono", Menlo, monospace;
-  --font-urdu: "Noto Nastaliq Urdu", serif;
+  --font-serif: var(--font-body);
+  --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-urdu: var(--font-body);
 
   --sidebar-width: 150px;
 }
@@ -86,8 +69,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
-  /* Allo's roundness axis: 0 is sharp, 50 is the default, 100 is fully round. */
-  font-variation-settings: "ROND" 75;
+  /* Keep fallback/swap text at the same x-height as the web font. */
+  font-size-adjust: from-font;
   transition:
     background 0.2s ease,
     color 0.2s ease;
@@ -235,7 +218,7 @@ body {
 .headline {
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(2rem, 5vw, 2.5rem);
   margin: 0 0 1.5rem;
   line-height: 1;
 }
@@ -619,6 +602,66 @@ body {
 .about-list li {
   margin: 0 0 0.75rem;
   padding-left: 0.25rem;
+}
+
+.specimen {
+  max-width: 42rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.specimen-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  margin: 0 0 1.5rem;
+}
+
+.specimen-intro {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin: 0 0 2.5rem;
+}
+
+.specimen-section {
+  margin: 0 0 2.25rem;
+}
+
+.specimen-section h2 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 0 0 1rem;
+}
+
+.specimen-section p {
+  margin: 0 0 0.5rem;
+}
+
+.specimen-pangram {
+  font-size: 1.35rem;
+}
+
+.specimen-weights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+
+.specimen-w400 {
+  font-weight: 400;
+}
+
+.specimen-w500 {
+  font-weight: 500;
+}
+
+.specimen-w700 {
+  font-weight: 700;
+}
+
+.specimen-switch a {
+  color: var(--accent);
 }
 
 .dossier-wrapper {

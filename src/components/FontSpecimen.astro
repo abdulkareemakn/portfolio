@@ -1,0 +1,39 @@
+---
+interface Props {
+  name: string;
+  note: string;
+  otherName: string;
+  otherHref: string;
+}
+const { name, note, otherName, otherHref } = Astro.props;
+---
+
+<article class="specimen">
+  <h1 class="specimen-title">{name}</h1>
+  <p class="specimen-intro">{note}</p>
+
+  <section class="specimen-section">
+    <h2>Body</h2>
+    <p>
+      Typography sets the tone long before anyone reads a word. A rounded
+      terminal softens a sentence, a tight counter sharpens it. This paragraph
+      is set in {name}, the body font for this route.
+    </p>
+  </section>
+
+  <section class="specimen-section">
+    <h2>Pangram</h2>
+    <p class="specimen-pangram">Sphinx of black quartz, judge my vow. 0123456789</p>
+  </section>
+
+  <section class="specimen-section">
+    <h2>Weights</h2>
+    <p class="specimen-weights">
+      <span class="specimen-w400">Regular 400</span>
+      <span class="specimen-w500">Medium 500</span>
+      <span class="specimen-w700">Bold 700</span>
+    </p>
+  </section>
+
+  <p class="specimen-switch"><a href={otherHref}>See {otherName} →</a></p>
+</article>

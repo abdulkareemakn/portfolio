@@ -3,7 +3,7 @@
 ## Stack
 
 - **Framework:** Astro (static site)
-- **Fonts:** Allo (body), Hedvig Letters Serif (serif headings/nav), Google Sans Code (mono)
+- **Fonts:** Geist Sans + Geist Mono (Fontsource variable packages; no self-hosted font files)
 - **Base font-size:** 16px (`html { font-size: 16px }`)
 - **Layout:** Centered max-width (56rem), sidebar + content flex row on desktop
 
@@ -28,27 +28,27 @@ Sidebar is a child of `<main>`, not a sibling. Logo is on the left, nav below it
 ## Sidebar
 
 - Logo link: `margin-bottom: 2rem`, color inherits black/white by theme
-- Nav: serif font, `1.125rem`, `gap: 0.5rem`, link `opacity: 0.65`
+- Nav: Geist Sans, `1.125rem`, `gap: 0.5rem`, link `opacity: 0.65`
 - Hover: `opacity: 1`, `color: var(--accent)`
 
 ## Typography
 
 | Element | Font | Weight | Size | Color |
 |---------|------|--------|------|-------|
-| Headline | Hedvig Letters Serif | 700 | `clamp(2rem, 5vw, 3rem)` | `var(--text)` |
+| Headline | Geist Sans | 700 | `clamp(2rem, 5vw, 2.5rem)` | `var(--text)` |
 | Tagline | inherit (body) | — | `1.05rem` | `var(--text)` |
 | Status text | inherit | — | `0.9rem` | `var(--text)` |
 | Bio | inherit | — | `0.95rem` | `var(--text)` |
-| Nav links | Hedvig Letters Serif | — | `1.125rem` | `var(--text)` |
+| Nav links | Geist Sans | — | `1.125rem` | `var(--text)` |
 
 ## Colors
 
-Monokai Pro — Light (Filter Sun) by default, Dark (Filter Spectrum) when the
-system prefers dark. Matches the palette used in `~/code/blog`.
+Monokai Pro — Light (Filter Sun) foregrounds on a plain white background by
+default, Dark (Filter Spectrum) when the system prefers dark.
 
 ```css
-/* Light — Monokai Pro Light (Filter Sun) */
---bg: #f8efe7;
+/* Light — Monokai Pro Light (Filter Sun) foregrounds, white background */
+--bg: #ffffff;
 --text: #2c232e;
 --muted: #6b6266;
 --accent: #b83a62;
