@@ -433,6 +433,7 @@ body {
 
 .gh-contributions {
   margin: 2rem 0 1rem;
+  padding-inline: 1rem;
   font-family: var(--font-body);
   font-size: 0.85rem;
   line-height: 1.4;
