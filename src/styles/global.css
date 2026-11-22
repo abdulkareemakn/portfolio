@@ -1,14 +1,5 @@
 @import "@fontsource/noto-nastaliq-urdu/arabic-400.css";
-
-@font-face {
-  font-family: "Vercetti";
-  src:
-    url("/fonts/Vercetti-Regular.woff2") format("woff2"),
-    url("/fonts/Vercetti-Regular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+@import "allo-font";
 
 @font-face {
   font-family: "0xProto";
@@ -49,7 +40,7 @@
   --gh-level-3: #4f9d7d;
   --gh-level-4: #1a6f5d;
 
-  --font-body: "Vercetti", BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Allo", BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-sans: var(--font-body);
   --font-serif: "Hedvig Letters Serif", Georgia, serif;
   --font-mono: "0xProto", ui-monospace, "SF Mono", Menlo, monospace;
@@ -85,7 +76,7 @@
 }
 
 html {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 html,
@@ -95,6 +86,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
+  /* Allo's roundness axis: 0 is sharp, 50 is the default, 100 is fully round. */
+  font-variation-settings: "ROND" 75;
   transition:
     background 0.2s ease,
     color 0.2s ease;

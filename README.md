@@ -19,7 +19,7 @@ Workers.
 ## Stack
 
 - **Framework:** Astro (static, no server runtime on the edge)
-- **Fonts:** Vercetti (body), Hedvig Letters Serif (serif), Google Sans Code (mono), Noto Nastaliq Urdu (Arabic name)
+- **Fonts:** Allo (body), Hedvig Letters Serif (serif), Google Sans Code (mono), Noto Nastaliq Urdu (Arabic name)
 - **Icons:** `astro-icon` (Simple Icons) + `@lucide/astro`
 - **Data feeds at runtime:** Open-Meteo weather, Lichess rating, GitHub contributions
 - **Deploy:** Cloudflare Workers static assets (`cf`) with sitemap + robots.txt baked in
@@ -68,7 +68,7 @@ CSS is written in component files.
 
 Dark mode is Monokai Pro (Filter Spectrum), applied by
 `@media (prefers-color-scheme: dark)`; there is no manual theme switcher.
-Base font size is `15px`.
+Base font size is `16px`.
 
 ## Structure
 

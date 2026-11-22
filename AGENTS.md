@@ -3,8 +3,8 @@
 ## Stack
 
 - **Framework:** Astro (static site)
-- **Fonts:** Vercetti (body), Hedvig Letters Serif (serif headings/nav), Google Sans Code (mono)
-- **Base font-size:** 15px (`html { font-size: 15px }`)
+- **Fonts:** Allo (body), Hedvig Letters Serif (serif headings/nav), Google Sans Code (mono)
+- **Base font-size:** 16px (`html { font-size: 16px }`)
 - **Layout:** Centered max-width (56rem), sidebar + content flex row on desktop
 
 ## Layout structure
