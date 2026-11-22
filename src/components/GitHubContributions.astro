@@ -150,24 +150,24 @@ const height = LABEL_HEIGHT + 7 * (BLOCK + GAP) - GAP;
             ),
           )}
         </svg>
-      </div>
 
-      <div class="gh-footer">
-        <p class="gh-total">
-          {totalCount.toLocaleString("en-US")} contributions in {year} on{" "}
-          <a href={profileUrl} target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          .
-        </p>
-        <div class="gh-legend" aria-hidden="true">
-          <span>Less</span>
-          {[0, 1, 2, 3, 4].map((level) => (
-            <svg width={BLOCK} height={BLOCK} viewBox={`0 0 ${BLOCK} ${BLOCK}`}>
-              <rect width={BLOCK} height={BLOCK} rx="2" data-level={level} />
-            </svg>
-          ))}
-          <span>More</span>
+        <div class="gh-footer">
+          <p class="gh-total">
+            {totalCount.toLocaleString("en-US")} contributions in {year} on{" "}
+            <a href={profileUrl} target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+            .
+          </p>
+          <div class="gh-legend" aria-hidden="true">
+            <span>Less</span>
+            {[0, 1, 2, 3, 4].map((level) => (
+              <svg width={BLOCK} height={BLOCK} viewBox={`0 0 ${BLOCK} ${BLOCK}`}>
+                <rect width={BLOCK} height={BLOCK} rx="2" data-level={level} />
+              </svg>
+            ))}
+            <span>More</span>
+          </div>
         </div>
       </div>
 
