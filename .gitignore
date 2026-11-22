@@ -3,6 +3,7 @@ dist/
 .cloudflare/
 # generated types
 .astro/
+.claude/
 
 # dependencies
 node_modules/
@@ -30,5 +31,5 @@ pnpm-debug.log*
 !.dev.vars.example
 !.env.example
 
-lighthouse-reports
-parse_lighthouse_results.py
+dark.json
+light.json
