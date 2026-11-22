@@ -21,7 +21,6 @@ Workers.
 - **Framework:** Astro (static, no server runtime on the edge)
 - **Fonts:** Geist Sans (body) + Geist Mono (code) via Fontsource variable packages, Geist Serif (headings, self-hosted), Noto Nastaliq Urdu (Arabic name)
 - **Icons:** `astro-icon` (Simple Icons for brands) + `runeicons-astro` (UI icons)
-- **Data feeds at runtime:** Open-Meteo weather
 - **Data fetched at build time:** GitHub contributions
 - **Deploy:** Cloudflare Workers static assets (`cf`) with sitemap + robots.txt baked in
 

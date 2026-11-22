@@ -33,3 +33,6 @@ pnpm-debug.log*
 
 dark.json
 light.json
+
+# local notes
+notes.md
