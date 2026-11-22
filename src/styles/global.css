@@ -19,19 +19,21 @@
  * on top of an --accent fill.
  */
 :root {
-  color-scheme: light;
-  --bg: #ffffff;
-  --text: #2c232e;
-  --muted: #6b6266;
-  --accent: #1a6f5d;
-  --accent-text: #ffffff;
-  --border: #ded5d0;
+  /* Each colour lists its light and dark form. `light-dark()` resolves them
+     against `color-scheme`, so the toggle only has to flip that one property. */
+  color-scheme: light dark;
+  --bg: light-dark(#ffffff, #222222);
+  --text: light-dark(#2c232e, #f7f1ff);
+  --muted: light-dark(#6b6266, #bab6c0);
+  --accent: light-dark(#1a6f5d, #7bd88f);
+  --accent-text: light-dark(#ffffff, #222222);
+  --border: light-dark(#ded5d0, #363537);
   /* Contribution graph uses its own Monokai green ramp (levels 0-4). */
-  --gh-level-0: #f0eae6;
-  --gh-level-1: #cfe3d5;
-  --gh-level-2: #9ccbb1;
-  --gh-level-3: #4f9d7d;
-  --gh-level-4: #1a6f5d;
+  --gh-level-0: light-dark(#f0eae6, #2b2a2c);
+  --gh-level-1: light-dark(#cfe3d5, #3d5a45);
+  --gh-level-2: light-dark(#9ccbb1, #4f7a58);
+  --gh-level-3: light-dark(#4f9d7d, #63a06f);
+  --gh-level-4: light-dark(#1a6f5d, #7bd88f);
 
   --font-body: "Geist Variable", BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-sans: var(--font-body);
@@ -39,25 +41,20 @@
   --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
   --font-urdu: "Noto Nastaliq Urdu", serif;
 
-  --sidebar-width: 150px;
+  /* 15vw gutters at 1920px, easing down to a small fixed gutter on narrow
+     screens. All page content lives in one centered, readable column. */
+  --gutter: max(1.5rem, min(15vw, (100vw - 72rem) / 2));
+  --content-width: 42rem;
 }
 
-/* Dark mode follows the system preference; there is no in-page switcher. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --bg: #222222;
-    --text: #f7f1ff;
-    --muted: #bab6c0;
-    --accent: #7bd88f;
-    --accent-text: #222222;
-    --border: #363537;
-    --gh-level-0: #2b2a2c;
-    --gh-level-1: #3d5a45;
-    --gh-level-2: #4f7a58;
-    --gh-level-3: #63a06f;
-    --gh-level-4: #7bd88f;
-  }
+/* With no explicit choice, `light dark` follows the system preference.
+   Ctrl/Cmd+B sets data-theme, which pins the palette to one of the two. */
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 ::selection {
@@ -71,6 +68,8 @@
 
 html {
   font-size: 16px;
+  /* Keep focused elements clear of the fixed top bar. */
+  scroll-padding-top: 7rem;
 }
 
 html,
@@ -88,69 +87,43 @@ body {
 }
 
 body {
-  max-width: 72rem;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 6rem 1.5rem;
+  padding: 7rem var(--gutter) 6rem;
   min-height: 100vh;
 }
 
-@media (min-width: 768px) {
-  body {
-    padding: 6rem 1.5rem 6rem 0;
-  }
-}
-
-.page {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-@media (min-width: 768px) {
-  .page {
-    flex-direction: row;
-    gap: 0;
-  }
-}
-
-.sidebar {
-  flex-shrink: 0;
+.content {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-  position: relative;
-  top: 0;
-  height: auto;
+  max-width: var(--content-width);
+  margin-inline: auto;
 }
 
-@media (min-width: 768px) {
-  .sidebar {
-    width: var(--sidebar-width);
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 0;
-    position: sticky;
-    top: 2rem;
-    height: fit-content;
-  }
+.topbar {
+  position: fixed;
+  inset-block-start: 1rem;
+  inset-inline: 0;
+  z-index: 10;
+  background: var(--bg);
+}
+
+.topbar-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: calc(var(--content-width) + 3rem);
+  margin-inline: auto;
+  padding: 0.9rem 1.5rem;
 }
 
 .logo-link {
-  display: inline-block;
-  margin-bottom: 0;
+  display: inline-flex;
   color: var(--text);
 }
 
-@media (min-width: 768px) {
-  .logo-link {
-    display: block;
-    margin-bottom: 2rem;
-  }
+.logo-link svg {
+  width: 2.25rem;
+  height: 2.25rem;
 }
 
 .logo-link:hover {
@@ -159,46 +132,29 @@ body {
 
 .nav {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  gap: 0.75rem 1.25rem;
+  justify-content: center;
+  gap: 0.35rem 1.5rem;
   font-family: var(--font-body);
-  font-size: 1.05rem;
-}
-
-@media (min-width: 768px) {
-  .nav {
-    flex-direction: column;
-    gap: 0.5rem;
-    font-size: 1.125rem;
-  }
+  font-size: 1rem;
 }
 
 .nav a {
   display: inline-flex;
   align-items: baseline;
-  gap: 0.45rem;
   color: var(--text);
   text-decoration: none;
   opacity: 0.65;
   transition: opacity 0.15s ease;
 }
 
-.nav-hotkey {
-  font-family: var(--font-mono);
-  font-size: 1em;
-  color: var(--muted);
-  letter-spacing: 0;
-}
-
-.nav a:hover .nav-hotkey,
-.nav a:focus-visible .nav-hotkey {
-  color: currentColor;
+.nav a[aria-current="page"] {
+  opacity: 1;
+  color: var(--accent);
 }
 
 @media (pointer: coarse) {
   .nav a {
-    display: inline-flex;
     align-items: center;
     min-height: 2.75rem;
   }
@@ -210,20 +166,10 @@ body {
   color: var(--accent);
 }
 
-.content {
-  flex: 1;
-  min-width: 0;
-  padding-left: 0;
-}
-
-@media (min-width: 768px) {
-  .content {
-    padding-left: 1.5rem;
-  }
-}
-
-.content.no-sidebar {
-  padding-left: 0;
+.nav a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
 }
 
 .headline {
@@ -272,7 +218,6 @@ body {
   font-size: 1.15rem;
   line-height: 1.6;
   color: var(--text);
-  max-width: 42rem;
   margin: 0 0 2.5rem;
 }
 
@@ -357,7 +302,6 @@ body {
 
 .gh-contributions {
   margin: 2rem 0 1rem;
-  padding-inline: 1rem;
   font-family: var(--font-body);
   font-size: 0.85rem;
   line-height: 1.4;
@@ -379,6 +323,7 @@ body {
 .gh-scroll {
   width: fit-content;
   max-width: 100%;
+  margin-inline: auto;
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 0.25rem;
@@ -397,9 +342,14 @@ body {
   height: auto;
 }
 
+/* Scale the graph to the readable column so it lines up with the text. */
+.gh-graph {
+  width: 100%;
+}
+
 .gh-months text {
   font-family: var(--font-body);
-  font-size: 0.7rem;
+  font-size: 0.95rem;
   fill: var(--muted);
 }
 
@@ -566,7 +516,6 @@ body {
 }
 
 .about {
-  max-width: 42rem;
   font-size: 1.05rem;
   line-height: 1.7;
   color: var(--text);
@@ -612,7 +561,6 @@ body {
 }
 
 .specimen {
-  max-width: 42rem;
   font-size: 1.05rem;
   line-height: 1.7;
 }
@@ -672,7 +620,6 @@ body {
 }
 
 .dossier-wrapper {
-  max-width: 44rem;
   color: var(--text);
   padding-bottom: 2rem;
 }
@@ -753,7 +700,6 @@ body {
   line-height: 1.6;
   color: var(--muted);
   margin: 0;
-  max-width: 38rem;
 }
 
 .dossiers-list {
@@ -1081,7 +1027,6 @@ body {
 }
 
 .resume {
-  max-width: 42rem;
   font-size: 0.95rem;
   line-height: 1.6;
   color: var(--text);
@@ -1191,7 +1136,6 @@ body {
 }
 
 .connect {
-  max-width: 42rem;
   font-size: 1.05rem;
   line-height: 1.7;
   color: var(--text);
@@ -1330,7 +1274,6 @@ body {
 }
 
 .kit {
-  max-width: 42rem;
   font-size: 1.05rem;
   line-height: 1.7;
   color: var(--text);

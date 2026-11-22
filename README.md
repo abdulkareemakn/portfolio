@@ -9,7 +9,6 @@ Workers.
 | Route       | Description                                    |
 | :---------- | :--------------------------------------------- |
 | `/`         | Intro, live status block, tech marquee, socials, GitHub contributions |
-| `/about`    | Background, tooling, and working preferences   |
 | `/projects` | Engineering dossier of selected projects       |
 | `/kit`      | Directory of daily-use software and tools      |
 | `/resume`   | Print-ready resume (Print / Save as PDF)       |
@@ -75,7 +74,7 @@ Base font size is `16px`.
 ```
 ├── public/                 # static assets (fonts, favicon, robots.txt)
 ├── src/
-│   ├── components/         # Sidebar, Socials, LocationStatus, TechConveyor, GitHubContributions, Footer, Logo
+│   ├── components/         # Topbar, Socials, GitHubContributions, Footer, Logo
 │   ├── layouts/Layout.astro
 │   ├── pages/              # one .astro file per route (404.astro for the 404 page)
 │   └── styles/global.css   # the only stylesheet
@@ -87,5 +86,5 @@ Base font size is `16px`.
 
 ## Inspired by
 
-The layout structure (centered max-width, sidebar inside `<main>`) is
-influenced by https://hecker.vc.
+The centered max-width container and restrained navigation are influenced by
+https://hecker.vc.

@@ -1,0 +1,88 @@
+---
+import Logo from "./Logo.astro";
+
+const links = [
+  { href: "/", label: "Home", hotkey: "h", external: false },
+  { href: "/projects", label: "Projects", hotkey: "p", external: false },
+  { href: "/kit", label: "Kit", hotkey: "k", external: false },
+  {
+    href: "https://abdulkareem.is-a.dev",
+    label: "Blog",
+    hotkey: "b",
+    external: true,
+  },
+  { href: "/connect", label: "Connect", hotkey: "c", external: false },
+];
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="logo-link" href="/" aria-label="Abdul Kareem">
+      <Logo />
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      {
+        links.map(({ href, label, hotkey, external }) => (
+          <a
+            href={href}
+            data-hotkey={hotkey}
+            aria-keyshortcuts={hotkey.toUpperCase()}
+            aria-current={!external && path === href ? "page" : undefined}
+            {...(external ? { target: "_blank", rel: "noopener" } : {})}
+          >
+            {label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<script>
+  const root = document.documentElement;
+
+  function currentTheme() {
+    const chosen = root.dataset.theme;
+    if (chosen === "light" || chosen === "dark") return chosen;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
+
+  document.addEventListener("keydown", (event) => {
+    // Ctrl/Cmd+B toggles the theme; page hotkeys stay modifier-free.
+    if (
+      (event.ctrlKey || event.metaKey) &&
+      !event.altKey &&
+      !event.shiftKey &&
+      !event.repeat &&
+      event.key.toLowerCase() === "b"
+    ) {
+      event.preventDefault();
+      const next = currentTheme() === "dark" ? "light" : "dark";
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem("theme", next);
+      } catch {}
+      return;
+    }
+
+    if (event.altKey || event.ctrlKey || event.metaKey || event.repeat) return;
+
+    const target = event.target;
+    if (
+      target instanceof HTMLElement &&
+      (target.isContentEditable ||
+        ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName))
+    )
+      return;
+
+    const link = document.querySelector<HTMLAnchorElement>(
+      `[data-hotkey="${event.key.toLowerCase()}"]`,
+    );
+    if (link) link.click();
+  });
+</script>

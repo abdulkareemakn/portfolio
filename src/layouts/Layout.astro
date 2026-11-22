@@ -1,18 +1,18 @@
 ---
 import "../styles/global.css";
-import Sidebar from "../components/Sidebar.astro";
+import Topbar from "../components/Topbar.astro";
 
 interface Props {
   title: string;
   description?: string;
   noindex?: boolean;
-  showSidebar?: boolean;
+  showTopbar?: boolean;
 }
 const {
   title,
   description = "Software engineer building full-stack applications with TypeScript, Cloudflare Workers, and modern web tech.",
   noindex = false,
-  showSidebar = true,
+  showTopbar = true,
 } = Astro.props;
 ---
 
@@ -22,6 +22,16 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
+    <script is:inline>
+      // Apply the saved theme before first paint so reloading never flashes
+      // the wrong palette. Ctrl/Cmd+B writes this value in Topbar's handler.
+      try {
+        const theme = localStorage.getItem("theme");
+        if (theme === "light" || theme === "dark") {
+          document.documentElement.dataset.theme = theme;
+        }
+      } catch {}
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -31,9 +41,9 @@ const {
     <meta name="description" content={description} />
   </head>
   <body>
+    {showTopbar && <Topbar />}
     <main class="page">
-      {showSidebar && <Sidebar />}
-      <div class:list={["content", { "no-sidebar": !showSidebar }]}>
+      <div class="content">
         <slot />
       </div>
     </main>

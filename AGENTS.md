@@ -66,8 +66,10 @@ Dark (`prefers-color-scheme: dark`):
 --border: #363537;
 ```
 
-There is no in-page theme switcher — dark mode follows the system preference
-only. `--gh-level-1..4` is the contribution-graph ramp, built on Monokai green.
+Dark mode follows the system preference until Ctrl/Cmd+B toggles it; the choice
+is stored in `localStorage` and applied via `data-theme` on `<html>` before
+first paint. `--gh-level-1..4` is the contribution-graph ramp, built on Monokai
+green. Page hotkeys (h, p, k, b, c) live in `src/components/Topbar.astro`.
 
 ## Status block
 

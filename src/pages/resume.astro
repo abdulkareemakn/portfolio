@@ -189,7 +189,7 @@ import Layout from "../layouts/Layout.astro";
 
   <style is:global>
     @media print {
-      .sidebar,
+      .topbar,
       .print-btn,
       .resume-toolbar {
         display: none !important;
@@ -201,7 +201,7 @@ import Layout from "../layouts/Layout.astro";
       }
 
       .content {
-        padding-left: 0;
+        max-width: none;
       }
 
       .resume {
