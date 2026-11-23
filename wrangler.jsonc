@@ -1,15 +1,13 @@
 {
-    "$schema": "./node_modules/wrangler/config-schema.json",
-    "compatibility_date": "2026-07-09",
-    "compatibility_flags": [
-        "global_fetch_strictly_public"
-    ],
-    "name": "portfolio",
-    "assets": {
-        "directory": "./dist",
-        "not_found_handling": "404-page",
-    },
-    "observability": {
-        "enabled": true
-    }
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "compatibility_date": "2026-07-09",
+  "compatibility_flags": ["global_fetch_strictly_public"],
+  "name": "portfolio",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+  },
+  "observability": {
+    "enabled": true,
+  },
 }

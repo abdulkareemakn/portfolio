@@ -37,40 +37,38 @@ const projects: PreviewProject[] = [
 
 <section class="mt-7 mb-10" aria-label="Projects">
   <div class="grid grid-cols-1 gap-5">
-    {
-      projects.map((project) => (
-        <a
-          class="group no-underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-          href={project.href}
-        >
-          <article class="grid min-h-[clamp(24rem,68vh,38rem)] grid-rows-[auto_auto_auto_1fr] gap-4 rounded-[1.15rem] bg-accent p-[1.4rem] text-accent-text transition-[transform,box-shadow] group-hover:-translate-y-[3px] group-hover:shadow-[0_10px_24px_rgba(0,0,0,0.16)] group-focus-visible:-translate-y-[3px] group-focus-visible:shadow-[0_10px_24px_rgba(0,0,0,0.16)] max-[700px]:min-h-0 max-[700px]:p-4">
-            <p class="m-0 font-mono text-[0.78rem] tracking-[0.08em] uppercase opacity-75">
-              {project.name}
-            </p>
-            <h3 class="m-0 text-[1.18rem] leading-[1.2] tracking-[-0.02em] text-balance">
-              {project.title}
-            </h3>
-            <p class="m-0 text-[0.9rem] leading-[1.45] opacity-90">
-              {project.summary}
-            </p>
+    {projects.map((project) => (
+      <a
+        class="group no-underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+        href={project.href}
+      >
+        <article class="grid min-h-[clamp(24rem,68vh,38rem)] grid-rows-[auto_auto_auto_1fr] gap-4 rounded-[1.15rem] bg-accent p-[1.4rem] text-accent-text transition-[transform,box-shadow] group-hover:-translate-y-[3px] group-hover:shadow-[0_10px_24px_rgba(0,0,0,0.16)] group-focus-visible:-translate-y-[3px] group-focus-visible:shadow-[0_10px_24px_rgba(0,0,0,0.16)] max-[700px]:min-h-0 max-[700px]:p-4">
+          <p class="m-0 font-mono text-[0.78rem] tracking-[0.08em] uppercase opacity-75">
+            {project.name}
+          </p>
+          <h3 class="m-0 text-[1.18rem] leading-[1.2] tracking-[-0.02em] text-balance">
+            {project.title}
+          </h3>
+          <p class="m-0 text-[0.9rem] leading-[1.45] opacity-90">
+            {project.summary}
+          </p>
 
-            <div
-              class="flex min-h-[12.5rem] items-center justify-center overflow-hidden rounded-[0.9rem] border border-[rgba(23,23,23,0.14)] bg-[rgba(255,255,255,0.15)] p-[0.65rem]"
-              aria-hidden="true"
-            >
-              <Image
-                class="block size-full rounded-[0.6rem] object-contain object-top"
-                src={project.image}
-                alt={project.alt}
-                loading="lazy"
-                decoding="async"
-                widths={[640, 960, 1280]}
-                sizes="(max-width: 900px) 100vw, 70vw"
-              />
-            </div>
-          </article>
-        </a>
-      ))
-    }
+          <div
+            class="flex min-h-[12.5rem] items-center justify-center overflow-hidden rounded-[0.9rem] border border-[rgba(23,23,23,0.14)] bg-[rgba(255,255,255,0.15)] p-[0.65rem]"
+            aria-hidden="true"
+          >
+            <Image
+              class="block size-full rounded-[0.6rem] object-contain object-top"
+              src={project.image}
+              alt={project.alt}
+              loading="lazy"
+              decoding="async"
+              widths={[640, 960, 1280]}
+              sizes="(max-width: 900px) 100vw, 70vw"
+            />
+          </div>
+        </article>
+      </a>
+    ))}
   </div>
 </section>

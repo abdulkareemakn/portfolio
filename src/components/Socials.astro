@@ -53,27 +53,25 @@ const socials: Social[] = [
 ---
 
 <div class="flex flex-wrap items-center gap-2" aria-label="Find me online">
-  {
-    socials.map((s) => (
-      <a
-        class="inline-flex min-h-10 items-center justify-center gap-[0.45rem] rounded-[0.4rem] bg-accent px-3 py-[0.55rem] text-[0.85rem] font-semibold text-accent-text no-underline transition-[background-color,transform] hover:-translate-y-px hover:bg-[color-mix(in_srgb,var(--accent),var(--text)_14%)] focus-visible:-translate-y-px focus-visible:bg-[color-mix(in_srgb,var(--accent),var(--text)_14%)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-accent [&_svg]:size-4 [&_svg]:shrink-0"
-        href={s.href}
-        target={s.target}
-        rel={s.target === "_blank" ? "noreferrer" : undefined}
-        aria-label={s.label}
-        title={s.label}
-        data-cal-link={s.cal ? "abdulkareem" : undefined}
-        data-cal-config={s.cal ? '{"layout":"month_view"}' : undefined}
-      >
-        {s.icon ? (
-          <Icon name={s.icon} />
-        ) : (
-          <RuneIcon name={s.rune ?? "messaging-mail"} size={18} />
-        )}
-        <span>{s.name}</span>
-      </a>
-    ))
-  }
+  {socials.map((s) => (
+    <a
+      class="inline-flex min-h-10 items-center justify-center gap-[0.45rem] rounded-[0.4rem] bg-accent px-3 py-[0.55rem] text-[0.85rem] font-semibold text-accent-text no-underline transition-[background-color,transform] hover:-translate-y-px hover:bg-[color-mix(in_srgb,var(--accent),var(--text)_14%)] focus-visible:-translate-y-px focus-visible:bg-[color-mix(in_srgb,var(--accent),var(--text)_14%)] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-accent [&_svg]:size-4 [&_svg]:shrink-0"
+      href={s.href}
+      target={s.target}
+      rel={s.target === "_blank" ? "noreferrer" : undefined}
+      aria-label={s.label}
+      title={s.label}
+      data-cal-link={s.cal ? "abdulkareem" : undefined}
+      data-cal-config={s.cal ? '{"layout":"month_view"}' : undefined}
+    >
+      {s.icon ? (
+        <Icon name={s.icon} />
+      ) : (
+        <RuneIcon name={s.rune ?? "messaging-mail"} size={18} />
+      )}
+      <span>{s.name}</span>
+    </a>
+  ))}
 </div>
 
 <script is:inline>

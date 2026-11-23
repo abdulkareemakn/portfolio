@@ -4,12 +4,12 @@ import Socials from "./Socials.astro";
 const year = new Date().getFullYear();
 ---
 
-<footer
-  class="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6 text-sm text-muted"
->
+<footer class="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6 text-sm text-muted">
   <p class="m-0 inline-flex flex-wrap items-center gap-2">
     <span class="font-semibold text-text">© {year} Abdul Kareem</span>
-    <span class="opacity-50" aria-hidden="true">·</span>
+    <span class="opacity-50" aria-hidden="true">
+      ·
+    </span>
     <span>Built with Astro</span>
   </p>
   <Socials />

@@ -116,108 +116,102 @@ const linkTone =
   "text-text underline decoration-muted underline-offset-2 hover:text-accent hover:decoration-accent";
 ---
 
-{
-  weeks.length > 0 && (
-    <div class="gh-contributions mt-8 mb-4 font-sans text-[0.85rem] leading-[1.4]">
-      <p class="mb-3 text-base text-text">
-        See my code on{" "}
-        <a
-          class={`${linkTone} [&_svg]:mr-[0.3rem] [&_svg]:inline [&_svg]:size-[1.15em] [&_svg]:align-[-0.3em]`}
-          href={profileUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Icon name="simple-icons:github" />
-          GitHub
-        </a>
-        .
-      </p>
-
-      <div
-        class="mx-auto w-fit max-w-full [scrollbar-width:thin] [scrollbar-color:var(--border)_transparent] overflow-x-auto overflow-y-hidden pb-1 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-accent"
-        tabindex="0"
-        aria-label="GitHub contributions, scroll horizontally for the full year"
+{weeks.length > 0 && (
+  <div class="gh-contributions mt-8 mb-4 font-sans text-[0.85rem] leading-[1.4]">
+    <p class="mb-3 text-base text-text">
+      See my code on{" "}
+      <a
+        class={`${linkTone} [&_svg]:mr-[0.3rem] [&_svg]:inline [&_svg]:size-[1.15em] [&_svg]:align-[-0.3em]`}
+        href={profileUrl}
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        <svg
-          class="gh-graph block h-auto w-full"
-          width={width}
-          height={height}
-          viewBox={`0 0 ${width} ${height}`}
-          role="img"
-          aria-label={`${totalCount.toLocaleString("en-US")} contributions${rangeLabel} on GitHub`}
-        >
-          <g
-            class="[&_text]:fill-muted [&_text]:font-sans [&_text]:text-[0.95rem]"
-            dominant-baseline="hanging"
-          >
-            {visibleMonths.map(({ weekIndex, label }) => (
-              <text x={weekIndex * (BLOCK + GAP)} y="0">
-                {label}
-              </text>
-            ))}
-          </g>
-          {weeks.map((week, weekIndex) =>
-            week.map(
-              (activity, dayIndex) =>
-                activity && (
-                  <rect
-                    class={`gh-cell ${cellTone} hover:stroke-text hover:stroke-[1.25px]`}
-                    x={weekIndex * (BLOCK + GAP)}
-                    y={LABEL_HEIGHT + dayIndex * (BLOCK + GAP)}
-                    width={BLOCK}
-                    height={BLOCK}
-                    rx="2"
-                    data-level={activity.level}
-                    data-tip={describe(activity)}
-                  />
-                ),
-            ),
-          )}
-        </svg>
+        <Icon name="simple-icons:github" />
+        GitHub
+      </a>
+      .
+    </p>
 
-        <div class="mt-[0.4rem] flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-muted">
-          <p class="m-0">
-            {totalCount.toLocaleString("en-US")} contributions in {year} on{" "}
-            <a
-              class={linkTone}
-              href={profileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </a>
-            .
-          </p>
-          <div class="ml-auto flex items-center gap-[3px]" aria-hidden="true">
-            <span>Less</span>
-            {[0, 1, 2, 3, 4].map((level) => (
-              <svg
-                width={BLOCK}
-                height={BLOCK}
-                viewBox={`0 0 ${BLOCK} ${BLOCK}`}
-              >
+    <div
+      class="mx-auto w-fit max-w-full [scrollbar-width:thin] [scrollbar-color:var(--border)_transparent] overflow-x-auto overflow-y-hidden pb-1 focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-accent"
+      tabindex="0"
+      aria-label="GitHub contributions, scroll horizontally for the full year"
+    >
+      <svg
+        class="gh-graph block h-auto w-full"
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
+        role="img"
+        aria-label={`${totalCount.toLocaleString("en-US")} contributions${rangeLabel} on GitHub`}
+      >
+        <g
+          class="[&_text]:fill-muted [&_text]:font-sans [&_text]:text-[0.95rem]"
+          dominant-baseline="hanging"
+        >
+          {visibleMonths.map(({ weekIndex, label }) => (
+            <text x={weekIndex * (BLOCK + GAP)} y="0">
+              {label}
+            </text>
+          ))}
+        </g>
+        {weeks.map((week, weekIndex) =>
+          week.map(
+            (activity, dayIndex) =>
+              activity && (
                 <rect
-                  class={cellTone}
+                  class={`gh-cell ${cellTone} hover:stroke-text hover:stroke-[1.25px]`}
+                  x={weekIndex * (BLOCK + GAP)}
+                  y={LABEL_HEIGHT + dayIndex * (BLOCK + GAP)}
                   width={BLOCK}
                   height={BLOCK}
                   rx="2"
-                  data-level={level}
+                  data-level={activity.level}
+                  data-tip={describe(activity)}
                 />
-              </svg>
-            ))}
-            <span>More</span>
-          </div>
+              ),
+          ),
+        )}
+      </svg>
+
+      <div class="mt-[0.4rem] flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-muted">
+        <p class="m-0">
+          {totalCount.toLocaleString("en-US")} contributions in {year} on{" "}
+          <a
+            class={linkTone}
+            href={profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          .
+        </p>
+        <div class="ml-auto flex items-center gap-[3px]" aria-hidden="true">
+          <span>Less</span>
+          {[0, 1, 2, 3, 4].map((level) => (
+            <svg width={BLOCK} height={BLOCK} viewBox={`0 0 ${BLOCK} ${BLOCK}`}>
+              <rect
+                class={cellTone}
+                width={BLOCK}
+                height={BLOCK}
+                rx="2"
+                data-level={level}
+              />
+            </svg>
+          ))}
+          <span>More</span>
         </div>
       </div>
-
-      <div
-        class="gh-tooltip pointer-events-none fixed z-50 [transform:translate(-50%,calc(-100%_-_8px))] rounded-md bg-text px-[0.55rem] py-[0.35rem] font-sans text-xs leading-[1.3] whitespace-nowrap text-bg"
-        role="tooltip"
-        hidden
-      />
     </div>
-  )
-}
+
+    <div
+      class="gh-tooltip pointer-events-none fixed z-50 [transform:translate(-50%,calc(-100%_-_8px))] rounded-md bg-text px-[0.55rem] py-[0.35rem] font-sans text-xs leading-[1.3] whitespace-nowrap text-bg"
+      role="tooltip"
+      hidden
+    />
+  </div>
+)}
 
 <script>
   const root = document.querySelector<HTMLElement>(".gh-contributions");
