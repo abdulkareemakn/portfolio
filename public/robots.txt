@@ -19,4 +19,4 @@ Disallow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://abdulkareem.tech/sitemap-index.xml
+Sitemap: https://abdulkareem.me/sitemap-index.xml
