@@ -1,23 +1,24 @@
 # Portfolio — abdulkareem.tech
 
 Personal portfolio and resume site for Abdul Kareem. Built with Astro as a
-static site, styled from a single global stylesheet, and deployed to Cloudflare
-Workers.
+static site, styled with Tailwind CSS v4 over a small token layer, and deployed
+to Cloudflare Workers.
 
 ## Pages
 
-| Route       | Description                                    |
-| :---------- | :--------------------------------------------- |
-| `/`         | Intro, live status block, tech marquee, socials, GitHub contributions |
-| `/projects` | Engineering dossier of selected projects       |
-| `/kit`      | Directory of daily-use software and tools      |
-| `/resume`   | Print-ready resume (Print / Save as PDF)       |
-| `/connect`  | Link grid to profiles across platforms         |
-| `/404`      | Custom 404 page served by the assets router    |
+| Route       | Description                                 |
+| :---------- | :------------------------------------------ |
+| `/`         | Intro and GitHub contributions              |
+| `/projects` | Selected projects                           |
+| `/kit`      | Directory of daily-use software and tools   |
+| `/resume`   | Print-ready resume (Print / Save as PDF)    |
+| `/connect`  | Link grid to profiles across platforms      |
+| `/404`      | Custom 404 page served by the assets router |
 
 ## Stack
 
 - **Framework:** Astro (static, no server runtime on the edge)
+- **Styling:** Tailwind CSS v4 via `@tailwindcss/vite`
 - **Fonts:** Geist Sans (body) + Geist Mono (code) via Fontsource variable packages, Geist Serif (headings, self-hosted), Noto Nastaliq Urdu (Arabic name)
 - **Icons:** `astro-icon` (Simple Icons for brands) + `runeicons-astro` (UI icons)
 - **Data fetched at build time:** GitHub contributions
@@ -51,23 +52,19 @@ Authenticate once with `cf auth login` before deploying locally. Pushes to
 
 ## Design system
 
-All styling lives in `src/styles/global.css` — the single source of truth. No
-CSS is written in component files.
+Tailwind CSS v4 is wired in through `@tailwindcss/vite`. Pages and components
+are styled with utility classes; `src/styles/global.css` is only the Tailwind
+entry point plus the shared design tokens.
 
-```css
-:root {
-  --bg: #ffffff;           /* plain white light-mode background */
-  --text: #2c232e;         /* body text */
-  --muted: #6b6266;        /* secondary text */
-  --accent: #1a6f5d;       /* links, hover, filled surfaces */
-  --accent-text: #ffffff;  /* text on an --accent fill */
-  --border: #ded5d0;       /* borders, placeholders */
-}
-```
-
-Dark mode is Monokai Pro (Filter Spectrum), applied by
-`@media (prefers-color-scheme: dark)`; there is no manual theme switcher.
-Base font size is `16px`.
+- The palette and fonts are plain CSS variables in `:root`, exposed to Tailwind
+  through `@theme inline` as `bg-bg`, `text-text`, `text-muted`, `bg-accent`,
+  `text-accent-text`, `border-border`, and the `gh-*` contribution ramp.
+- Light and dark resolve through `color-scheme` plus `light-dark()`.
+  `data-theme="dark"` on `<html>` pins the palette; Ctrl/Cmd+B toggles it and
+  the choice is stored in `localStorage`.
+- Base font size is `16px`.
+- The utility scanner is limited to `src/**/*.astro` through `@source`, so
+  class-like strings in docs and agent skill files never reach the build.
 
 ## Structure
 
@@ -77,8 +74,8 @@ Base font size is `16px`.
 │   ├── components/         # Topbar, Socials, GitHubContributions, Footer, Logo
 │   ├── layouts/Layout.astro
 │   ├── pages/              # one .astro file per route (404.astro for the 404 page)
-│   └── styles/global.css   # the only stylesheet
-├── astro.config.mjs        # site URL, sitemap, astro-icon
+│   └── styles/global.css   # Tailwind entry + design tokens
+├── astro.config.mjs        # site URL, sitemap, astro-icon, Tailwind Vite plugin
 ├── cloudflare.config.ts    # cf project config (Worker name, 404 handling)
 ├── wrangler.config.ts      # Wrangler build settings used by cf (asset directory)
 └── wrangler.jsonc          # still read by Workers Builds on push
