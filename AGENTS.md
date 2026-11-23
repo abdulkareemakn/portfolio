@@ -22,7 +22,8 @@ Sidebar is a child of `<main>`, not a sibling. Logo is on the left, nav below it
 ## Logo
 
 `src/components/Logo.astro` — custom "A" letter mark SVG (abstract monogram).
-- Uses `fill="currentColor"` 
+
+- Uses `fill="currentColor"`
 - Link wrapping it is `color: #000` in light mode, `color: #fff` in dark mode
 
 ## Sidebar
@@ -33,13 +34,13 @@ Sidebar is a child of `<main>`, not a sibling. Logo is on the left, nav below it
 
 ## Typography
 
-| Element | Font | Weight | Size | Color |
-|---------|------|--------|------|-------|
-| Headline | Geist Serif | 700 | `clamp(2rem, 5vw, 2.5rem)` | `var(--text)` |
-| Tagline | inherit (body) | — | `1.05rem` | `var(--text)` |
-| Status text | inherit | — | `0.9rem` | `var(--text)` |
-| Bio | inherit | — | `0.95rem` | `var(--text)` |
-| Nav links | Geist Sans | — | `1.125rem` | `var(--text)` |
+| Element     | Font           | Weight | Size                       | Color         |
+| ----------- | -------------- | ------ | -------------------------- | ------------- |
+| Headline    | Geist Serif    | 700    | `clamp(2rem, 5vw, 2.5rem)` | `var(--text)` |
+| Tagline     | inherit (body) | —      | `1.05rem`                  | `var(--text)` |
+| Status text | inherit        | —      | `0.9rem`                   | `var(--text)` |
+| Bio         | inherit        | —      | `0.95rem`                  | `var(--text)` |
+| Nav links   | Geist Sans     | —      | `1.125rem`                 | `var(--text)` |
 
 ## Colors
 
@@ -57,6 +58,7 @@ default, Dark (Filter Spectrum) when the system prefers dark.
 ```
 
 Dark (`prefers-color-scheme: dark`):
+
 ```css
 --bg: #222222;
 --text: #f7f1ff;
@@ -80,8 +82,12 @@ Avatar (3rem circle, `background: var(--border)`) + inline status text (no list 
 ```sh
 astro dev --background   # start dev server in background
 astro dev stop           # stop it
-pnpm run build          # verify build succeeds
+pnpm run build           # verify build succeeds
+pnpm fmt                 # format everything with oxfmt
+pnpm fmt:check           # check formatting without writing
 ```
+
+Formatting is handled by [oxfmt](https://oxc.rs/docs/guide/usage/formatter) (`.oxfmtrc.json`): 80 columns, Tailwind class sorting via `src/styles/global.css`, and Astro support through `@astrojs/compiler-rs`. `.agents/` is excluded.
 
 ## Inspired by
 

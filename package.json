@@ -1,38 +1,39 @@
 {
-	"name": "portfolio",
-	"type": "module",
-	"version": "0.0.1",
-	"engines": {
-		"node": ">=22.12.0"
-	},
-	"scripts": {
-		"dev": "astro dev",
-		"build": "astro build",
-		"preview": "astro build && astro preview",
-		"astro": "astro",
-		"deploy": "astro build && cf deploy"
-	},
-	"dependencies": {
-		"@astrojs/sitemap": "^3.7.3",
-		"@fontsource-variable/geist": "^5.3.0",
-		"@fontsource-variable/geist-mono": "^5.3.0",
-		"@fontsource/noto-nastaliq-urdu": "^5.3.0",
-		"@tailwindcss/vite": "^4.3.5",
-		"astro": "^7.0.7",
-		"astro-icon": "^1.1.5",
-		"runeicons-astro": "^0.1.0",
-		"sharp": "^0.35.4",
-		"tailwindcss": "^4.3.5"
-	},
-	"devDependencies": {
-		"@iconify-json/simple-icons": "^1.2.93",
-		"cf": "1.0.0-beta.21",
-		"prettier": "^3.9.4",
-		"prettier-plugin-astro": "^0.14.1",
-		"prettier-plugin-tailwindcss": "^0.8.1",
-		"wrangler": "^4.152.0"
-	},
-	"workspaces": [
-		"."
-	]
+  "name": "portfolio",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro build && astro preview",
+    "astro": "astro",
+    "deploy": "astro build && cf deploy",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@fontsource/noto-nastaliq-urdu": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.0.7",
+    "astro-icon": "^1.1.5",
+    "runeicons-astro": "^0.1.0",
+    "sharp": "^0.35.4",
+    "tailwindcss": "^4.3.5"
+  },
+  "devDependencies": {
+    "@astrojs/compiler-rs": "^0.5.3",
+    "@iconify-json/simple-icons": "^1.2.93",
+    "cf": "1.0.0-beta.21",
+    "oxfmt": "^0.80.0",
+    "wrangler": "^4.152.0"
+  },
+  "workspaces": [
+    "."
+  ]
 }
