@@ -17,16 +17,26 @@ const links = [
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
-<header class="topbar">
-  <div class="topbar-inner">
-    <a class="logo-link" href="/" aria-label="Abdul Kareem">
+<header class="sticky top-0 z-20 bg-bg print:hidden">
+  <div
+    class="mx-auto grid w-full max-w-[45rem] grid-cols-1 items-center gap-2 px-6 py-3 sm:grid-cols-[1fr_auto_1fr] sm:gap-6"
+  >
+    <a
+      class="inline-flex justify-self-start text-text transition-colors hover:text-accent [&_svg]:size-9"
+      href="/"
+      aria-label="Abdul Kareem"
+    >
       <Logo />
     </a>
 
-    <nav class="nav" aria-label="Primary">
+    <nav
+      class="flex flex-wrap items-center gap-x-5 gap-y-1 font-sans text-base"
+      aria-label="Primary"
+    >
       {
         links.map(({ href, label, hotkey, external }) => (
           <a
+            class="inline-flex items-center text-text no-underline opacity-65 transition-[opacity,color] hover:text-accent hover:opacity-100 focus-visible:rounded-sm focus-visible:text-accent focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent aria-[current=page]:text-accent aria-[current=page]:opacity-100 pointer-coarse:min-h-11"
             href={href}
             data-hotkey={hotkey}
             aria-keyshortcuts={hotkey.toUpperCase()}

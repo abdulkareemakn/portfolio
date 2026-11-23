@@ -40,10 +40,15 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
   </head>
-  <body>
+  <body class="min-h-screen">
     {showTopbar && <Topbar />}
-    <main class="page">
-      <div class="content">
+    <main
+      class:list={[
+        "px-[var(--gutter)] pb-24 print:p-0",
+        showTopbar ? "pt-8" : "pt-28",
+      ]}
+    >
+      <div class="mx-auto w-full max-w-[42rem] print:max-w-none">
         <slot />
       </div>
     </main>

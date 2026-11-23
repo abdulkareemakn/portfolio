@@ -2,65 +2,81 @@
 import Layout from "../layouts/Layout.astro";
 import { RuneIcon } from "runeicons-astro";
 import { Icon } from "astro-icon/components";
+
+const labelClass =
+  "flex items-center gap-[0.6rem] text-[0.95rem] font-medium [&_svg]:size-[1.1rem] [&_svg]:shrink-0";
+const arrowClass =
+  "text-muted transition-[transform,color] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent [&_svg]:size-4";
+const contactRowClass =
+  "group flex items-center justify-between border-b border-border px-[1.1rem] py-[0.85rem] text-text no-underline transition-colors last:border-b-0 hover:bg-[rgba(128,128,128,0.06)] focus-visible:bg-[rgba(128,128,128,0.06)]";
+const linkItemClass =
+  "group flex items-center justify-between rounded-lg border border-border px-[1.1rem] py-[0.85rem] text-text no-underline transition-colors hover:border-accent focus-visible:border-accent";
 ---
 
 <Layout
   title="Connect — Abdul Kareem"
   description="Connect with Abdul Kareem on GitHub, LinkedIn, X, Spotify, Discord, Lichess, Hevy, and the AUR. Find social links, projects, and contact info."
 >
-  <article class="connect">
-    <h1 class="connect-title">Connect</h1>
+  <article class="text-[1.05rem] leading-[1.7] text-text">
+    <h1 class="mb-8 font-serif text-[clamp(1.75rem,4vw,2.25rem)] font-semibold">
+      Connect
+    </h1>
 
-    <div class="contact-card">
+    <div
+      class="mb-8 flex flex-col overflow-hidden rounded-lg border border-border"
+    >
       <a
-        class="contact-row"
+        class={contactRowClass}
         href="mailto:abdulkareemakn@proton.me"
         target="_blank"
         rel="noreferrer"
       >
-        <span class="link-label">
-          <span class="icon"><RuneIcon name="messaging-mail" size={18} /></span>
+        <span class={labelClass}>
+          <RuneIcon name="messaging-mail" size={18} />
           Email
         </span>
-        <span class="arrow"
+        <span class={arrowClass}
           ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
         >
       </a>
 
       <a
-        class="contact-row contact-row--pgp"
+        class={contactRowClass}
         href="/pgp.asc"
         target="_blank"
         rel="noreferrer"
       >
-        <span class="link-label">
-          <span class="icon"><RuneIcon name="identity-lock" size={18} /></span>
-          <span class="link-stack">
+        <span class={`${labelClass} items-start`}>
+          <RuneIcon name="identity-lock" size={18} />
+          <span class="flex min-w-0 flex-col gap-[0.2rem]">
             PGP key
-            <span class="link-fingerprint"
+            <span
+              class="font-mono text-[0.72rem] leading-[1.4] wrap-anywhere text-muted"
               >36D4 7302 992E B464 A582 7601 A942 864C C3B0 172F</span
             >
           </span>
         </span>
-        <span class="arrow"
+        <span class={arrowClass}
           ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
         >
       </a>
     </div>
 
-    <ul class="links-grid">
+    <ul
+      class="m-0 grid list-none grid-cols-2 gap-3 p-0 max-[480px]:grid-cols-1"
+    >
       <li>
         <a
-          class="link-item"
+          class={linkItemClass}
           href="https://github.com/abdulkareemakn"
           target="_blank"
           rel="noreferrer"
         >
-          <span class="link-label">
-            <Icon name="simple-icons:github" class="icon" />
+          <span class={labelClass}>
+            <Icon name="simple-icons:github" />
             GitHub
           </span>
-          <span class="arrow"
+          <span class={arrowClass}
             ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
           >
         </a>
@@ -68,16 +84,16 @@ import { Icon } from "astro-icon/components";
 
       <li>
         <a
-          class="link-item"
+          class={linkItemClass}
           href="https://aur.archlinux.org/account/tmtaxman"
           target="_blank"
           rel="noreferrer"
         >
-          <span class="link-label">
-            <Icon name="simple-icons:archlinux" class="icon" />
+          <span class={labelClass}>
+            <Icon name="simple-icons:archlinux" />
             AUR
           </span>
-          <span class="arrow"
+          <span class={arrowClass}
             ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
           >
         </a>
@@ -85,16 +101,16 @@ import { Icon } from "astro-icon/components";
 
       <li>
         <a
-          class="link-item"
+          class={linkItemClass}
           href="https://www.linkedin.com/in/abdul-kareem-nasir/"
           target="_blank"
           rel="noreferrer"
         >
-          <span class="link-label">
-            <Icon name="simple-icons:linkedin" class="icon" />
+          <span class={labelClass}>
+            <Icon name="simple-icons:linkedin" />
             LinkedIn
           </span>
-          <span class="arrow"
+          <span class={arrowClass}
             ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
           >
         </a>
@@ -102,16 +118,16 @@ import { Icon } from "astro-icon/components";
 
       <li>
         <a
-          class="link-item"
+          class={linkItemClass}
           href="https://x.com/notabdulkareem"
           target="_blank"
           rel="noreferrer"
         >
-          <span class="link-label">
-            <Icon name="simple-icons:x" class="icon" />
+          <span class={labelClass}>
+            <Icon name="simple-icons:x" />
             X (Twitter)
           </span>
-          <span class="arrow"
+          <span class={arrowClass}
             ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
           >
         </a>
@@ -119,16 +135,16 @@ import { Icon } from "astro-icon/components";
 
       <li>
         <a
-          class="link-item"
+          class={linkItemClass}
           href="https://open.spotify.com/user/vaa5i5twowfp79bewq0h5j47h"
           target="_blank"
           rel="noreferrer"
         >
-          <span class="link-label">
-            <Icon name="simple-icons:spotify" class="icon" />
+          <span class={labelClass}>
+            <Icon name="simple-icons:spotify" />
             Spotify
           </span>
-          <span class="arrow"
+          <span class={arrowClass}
             ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
           >
         </a>
@@ -136,43 +152,45 @@ import { Icon } from "astro-icon/components";
 
       <li>
         <a
-          class="link-item"
+          class={linkItemClass}
           href="https://hevy.com/profile/abdulkareemakn"
           target="_blank"
           rel="noreferrer"
         >
-          <span class="link-label">
-            <Icon name="simple-icons:hevy" class="icon" />
+          <span class={labelClass}>
+            <Icon name="simple-icons:hevy" />
             Hevy
           </span>
-          <span class="arrow"
+          <span class={arrowClass}
             ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
           >
         </a>
       </li>
 
       <li>
-        <div class="link-item link-item--static">
-          <span class="link-label">
-            <Icon name="simple-icons:discord" class="icon" />
+        <div
+          class="flex items-center justify-between rounded-lg border border-border px-[1.1rem] py-[0.85rem] text-text"
+        >
+          <span class={labelClass}>
+            <Icon name="simple-icons:discord" />
             Discord
           </span>
-          <span class="link-value">@tmtaxman</span>
+          <span class="font-mono text-[0.85rem] text-muted">@tmtaxman</span>
         </div>
       </li>
 
       <li>
         <a
-          class="link-item"
+          class={linkItemClass}
           href="https://lichess.org/@/Abdul_Kareem1"
           target="_blank"
           rel="noreferrer"
         >
-          <span class="link-label">
-            <Icon name="simple-icons:lichess" class="icon" />
+          <span class={labelClass}>
+            <Icon name="simple-icons:lichess" />
             Lichess
           </span>
-          <span class="arrow"
+          <span class={arrowClass}
             ><RuneIcon name="arrows-arrow-up-right" size={16} /></span
           >
         </a>

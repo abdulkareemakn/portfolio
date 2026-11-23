@@ -1,174 +1,179 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const kitLink =
+  "text-text underline decoration-muted underline-offset-[3px] transition-[text-decoration-color] hover:decoration-text focus-visible:decoration-text";
 ---
 
 <Layout
   title="Kit — Abdul Kareem"
   description="A curated directory of software, developer tools, Linux environment, and applications used daily by software engineer Abdul Kareem."
 >
-  <article class="kit">
-    <h1 class="kit-title">Kit</h1>
-    <p class="kit-intro">
+  <article class="text-[1.05rem] leading-[1.7] text-text">
+    <h1 class="mb-4 font-serif text-[clamp(1.75rem,4vw,2.25rem)] font-semibold">
+      Kit
+    </h1>
+    <p class="mb-10 text-muted">
       A directory of the software and tools I reach for most days, grouped by
       what they do.
     </p>
 
-    <ul class="kit-list">
-      <li>
+    <ul class="m-0 list-disc pl-5">
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://archlinux.org"
           target="_blank"
           rel="noreferrer">Arch Linux</a
         >, Operating System
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://hyprland.org"
           target="_blank"
           rel="noreferrer">Hyprland</a
         >, Wayland Tiling compositor
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://sw.kovidgoyal.net/kitty/"
           target="_blank"
           rel="noreferrer">Kitty</a
         >, Terminal
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://neovim.io"
           target="_blank"
           rel="noreferrer">Neovim</a
         >, Text Editor
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://www.zsh.org"
           target="_blank"
           rel="noreferrer">Zsh</a
         >, Shell
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://tailscale.com"
           target="_blank"
           rel="noreferrer">Tailscale</a
         >, Mesh Networking
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://www.digitalocean.com"
           target="_blank"
           rel="noreferrer">DigitalOcean</a
         >, Cloud
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://zen-browser.app"
           target="_blank"
           rel="noreferrer">Zen</a
         >, Browser
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://proton.me/mail"
           target="_blank"
           rel="noreferrer">Proton Mail</a
         >, Emails
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://typst.app"
           target="_blank"
           rel="noreferrer">Typst</a
         >, Documents &amp; Assignments
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://caddyserver.com"
           target="_blank"
           rel="noreferrer">Caddy</a
         >, Web Server
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://yazi-rs.github.io"
           target="_blank"
           rel="noreferrer">Yazi</a
         >, File Manager
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://raindrop.io"
           target="_blank"
           rel="noreferrer">Raindrop</a
         >, Bookmarks
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://www.hevy.com"
           target="_blank"
           rel="noreferrer">Hevy</a
         >, Workout Tracker
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://www.usememos.com"
           target="_blank"
           rel="noreferrer">Memos</a
         >, Notes
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://ticktick.com"
           target="_blank"
           rel="noreferrer">TickTick</a
         >, Todos
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://www.habitkit.app"
           target="_blank"
           rel="noreferrer">HabitKit</a
         >, Habit Tracking
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://bitwarden.com"
           target="_blank"
           rel="noreferrer">Bitwarden</a
         >, Password Manager
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://www.symfonium.app"
           target="_blank"
           rel="noreferrer">Symfonium</a
         >, Music Player
       </li>
-      <li>
+      <li class="mb-[0.6rem]">
         <a
-          class="kit-link"
+          class={kitLink}
           href="https://lichess.org"
           target="_blank"
           rel="noreferrer">Lichess</a

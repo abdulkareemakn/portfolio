@@ -9,12 +9,23 @@ import { RuneIcon } from "runeicons-astro";
   noindex={true}
   showTopbar={false}
 >
-  <div class="container">
-    <h1 class="headline">404</h1>
-    <p class="exception">NullPointerException</p>
-    <p class="message">The page you're looking for can't be found.</p>
-    <a href="/" class="home-link">
-      <span class="icon"><RuneIcon name="tools-house" size={18} /></span>
+  <div
+    class="flex min-h-[55vh] flex-col items-center justify-center text-center"
+  >
+    <h1
+      class="mb-6 font-serif text-[clamp(2rem,5vw,2.5rem)] leading-none font-bold"
+    >
+      404
+    </h1>
+    <p class="mb-6 font-mono text-[1.15rem] text-muted">NullPointerException</p>
+    <p class="mb-9 text-xl text-text">
+      The page you're looking for can't be found.
+    </p>
+    <a
+      href="/"
+      class="inline-flex items-center gap-2 text-[1.1rem] text-text underline decoration-muted underline-offset-4 transition-[color,text-decoration-color] hover:text-accent hover:decoration-accent focus-visible:text-accent focus-visible:decoration-accent [&_svg]:size-[1.15rem] [&_svg]:shrink-0"
+    >
+      <RuneIcon name="tools-house" size={18} />
       Back Home
     </a>
   </div>

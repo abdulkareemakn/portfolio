@@ -7,30 +7,16 @@ import HomeProjectsPreview from "../components/HomeProjectsPreview.astro";
   title="Projects - Abdul Kareem"
   description="Selected full-stack applications built by Abdul Kareem with Cloudflare Workers, TanStack Start, React, and modern web technologies."
 >
-  <header class="projects-header">
-    <h1>Projects</h1>
-    <p>Selected products I have designed, built, and shipped.</p>
+  <header class="max-w-[38rem]">
+    <h1
+      class="mb-3 font-serif text-[clamp(2rem,4.5vw,2.75rem)] leading-[1.15] font-bold"
+    >
+      Projects
+    </h1>
+    <p class="m-0 text-[1.05rem] leading-[1.6] text-muted">
+      Selected products I have designed, built, and shipped.
+    </p>
   </header>
 
   <HomeProjectsPreview />
 </Layout>
-
-<style>
-  .projects-header {
-    max-width: 38rem;
-  }
-
-  h1 {
-    margin: 0 0 0.75rem;
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 4.5vw, 2.75rem);
-    line-height: 1.15;
-  }
-
-  p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 1.05rem;
-    line-height: 1.6;
-  }
-</style>

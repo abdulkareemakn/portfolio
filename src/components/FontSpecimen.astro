@@ -8,32 +8,38 @@ interface Props {
 const { name, note, otherName, otherHref } = Astro.props;
 ---
 
-<article class="specimen">
-  <h1 class="specimen-title">{name}</h1>
-  <p class="specimen-intro">{note}</p>
+<article class="text-[1.05rem] leading-[1.7]">
+  <h1 class="mb-6 font-serif text-[clamp(1.75rem,4vw,2.25rem)] font-semibold">
+    {name}
+  </h1>
+  <p class="mb-10 text-[1.15rem] leading-[1.7]">{note}</p>
 
-  <section class="specimen-section">
-    <h2>Body</h2>
-    <p>
+  <section class="mb-9">
+    <h2 class="mb-4 font-serif text-xl font-semibold">Body</h2>
+    <p class="mb-2">
       Typography sets the tone long before anyone reads a word. A rounded
       terminal softens a sentence, a tight counter sharpens it. This paragraph
       is set in {name}, the body font for this route.
     </p>
   </section>
 
-  <section class="specimen-section">
-    <h2>Pangram</h2>
-    <p class="specimen-pangram">Sphinx of black quartz, judge my vow. 0123456789</p>
-  </section>
-
-  <section class="specimen-section">
-    <h2>Weights</h2>
-    <p class="specimen-weights">
-      <span class="specimen-w400">Regular 400</span>
-      <span class="specimen-w500">Medium 500</span>
-      <span class="specimen-w700">Bold 700</span>
+  <section class="mb-9">
+    <h2 class="mb-4 font-serif text-xl font-semibold">Pangram</h2>
+    <p class="mb-2 text-[1.35rem]">
+      Sphinx of black quartz, judge my vow. 0123456789
     </p>
   </section>
 
-  <p class="specimen-switch"><a href={otherHref}>See {otherName} →</a></p>
+  <section class="mb-9">
+    <h2 class="mb-4 font-serif text-xl font-semibold">Weights</h2>
+    <p class="mb-2 flex flex-wrap gap-x-6 gap-y-2">
+      <span class="font-normal">Regular 400</span>
+      <span class="font-medium">Medium 500</span>
+      <span class="font-bold">Bold 700</span>
+    </p>
+  </section>
+
+  <p class="mb-2">
+    <a class="text-accent" href={otherHref}>See {otherName} →</a>
+  </p>
 </article>

@@ -1,68 +1,98 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const itemClass = "mb-[1.1rem]";
+const itemHeadClass = "flex items-baseline justify-between gap-4 font-semibold";
+const dateClass = "font-normal whitespace-nowrap text-muted";
+const subClass = "flex justify-between gap-4 text-muted italic";
+const bulletsClass = "mt-[0.4rem] mb-0 list-disc pl-[1.1rem]";
 ---
 
 <Layout
   title="Resume"
   description="Resume of Abdul Kareem: Software Engineering student at COMSATS Islamabad specializing in full-stack development and cloud edge infrastructure."
 >
-  <div class="resume-toolbar">
-    <h1 class="resume-title">Resume</h1>
-    <button class="print-btn" type="button">Download PDF</button>
+  <div class="mb-8 flex items-baseline justify-between gap-4 print:hidden">
+    <h1 class="m-0 font-serif text-[clamp(1.75rem,4vw,2.25rem)] font-semibold">
+      Resume
+    </h1>
+    <button
+      class="print-btn min-h-12 cursor-pointer rounded-md border border-border bg-bg px-4 py-2 font-sans text-[0.85rem] text-text transition-colors hover:border-accent hover:text-accent"
+      type="button">Download PDF</button
+    >
   </div>
 
-  <article class="resume">
-    <header class="resume-head">
-      <h2>Abdul Kareem</h2>
-      <p class="resume-contact">
+  <article class="text-[0.95rem] leading-[1.6] text-text print:text-[11px]">
+    <header class="mb-6 border-b-2 border-border pb-4">
+      <h2
+        class="mb-[0.35rem] font-serif text-[1.6rem] font-semibold print:text-[1.4rem]"
+      >
+        Abdul Kareem
+      </h2>
+      <p class="m-0 flex flex-wrap gap-2 text-muted">
         Lahore, Pakistan
         <span aria-hidden="true">|</span>
-        <a href="mailto:abdulkareemakn@proton.me">Email</a>
+        <a
+          class="wrap-anywhere text-accent no-underline hover:underline"
+          href="mailto:abdulkareemakn@proton.me">Email</a
+        >
         <span aria-hidden="true">|</span>
-        <a href="https://www.linkedin.com/in/abdul-kareem-nasir/">LinkedIn</a>
+        <a
+          class="wrap-anywhere text-accent no-underline hover:underline"
+          href="https://www.linkedin.com/in/abdul-kareem-nasir/">LinkedIn</a
+        >
         <span aria-hidden="true">|</span>
-        <a href="https://github.com/abdulkareemakn">GitHub</a>
+        <a
+          class="wrap-anywhere text-accent no-underline hover:underline"
+          href="https://github.com/abdulkareemakn">GitHub</a
+        >
       </p>
     </header>
 
-    <section class="resume-section">
-      <h3>Education</h3>
-      <div class="resume-item">
-        <div class="resume-item-head">
-          <span class="resume-item-title">COMSATS University Islamabad</span>
-          <span class="resume-item-date">Sep 2024 — Sep 2028</span>
+    <section class="mb-6">
+      <h3
+        class="mb-3 border-b border-border pb-1 font-serif text-[1.05rem] font-semibold tracking-[0.08em] uppercase"
+      >
+        Education
+      </h3>
+      <div class={itemClass}>
+        <div class={itemHeadClass}>
+          <span>COMSATS University Islamabad</span>
+          <span class={dateClass}>Sep 2024 — Sep 2028</span>
         </div>
-        <div class="resume-item-sub">
+        <div class={subClass}>
           <span>BS in Software Engineering</span>
           <span>Lahore, Pakistan</span>
         </div>
       </div>
-      <div class="resume-item">
-        <div class="resume-item-head">
-          <span class="resume-item-title">Punjab Group of Colleges</span>
-          <span class="resume-item-date">Aug 2022 — Aug 2024</span>
+      <div class={itemClass}>
+        <div class={itemHeadClass}>
+          <span>Punjab Group of Colleges</span>
+          <span class={dateClass}>Aug 2022 — Aug 2024</span>
         </div>
-        <div class="resume-item-sub">
+        <div class={subClass}>
           <span>Intermediate in Computer Science</span>
           <span>Lahore, Pakistan</span>
         </div>
       </div>
     </section>
 
-    <section class="resume-section">
-      <h3>Experience</h3>
-      <div class="resume-item">
-        <div class="resume-item-head">
-          <span class="resume-item-title"
-            >Self-Hosted Infrastructure &amp; Homelab</span
-          >
-          <span class="resume-item-date">Jul 2025 — Present</span>
+    <section class="mb-6">
+      <h3
+        class="mb-3 border-b border-border pb-1 font-serif text-[1.05rem] font-semibold tracking-[0.08em] uppercase"
+      >
+        Experience
+      </h3>
+      <div class={itemClass}>
+        <div class={itemHeadClass}>
+          <span>Self-Hosted Infrastructure &amp; Homelab</span>
+          <span class={dateClass}>Jul 2025 — Present</span>
         </div>
-        <div class="resume-item-sub">
+        <div class={subClass}>
           <span>Personal Project</span>
           <span>Lahore, Pakistan</span>
         </div>
-        <ul class="resume-bullets">
+        <ul class={bulletsClass}>
           <li>
             Deployed and maintained various containerized services (Navidrome,
             Memos, OpenGist, Litestream) on a DigitalOcean VPS using Docker
@@ -82,17 +112,21 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </section>
 
-    <section class="resume-section">
-      <h3>Projects</h3>
-      <div class="resume-item">
-        <div class="resume-item-head">
-          <span class="resume-item-title">Ayak</span>
-          <span class="resume-item-date">2026 — Present</span>
+    <section class="mb-6">
+      <h3
+        class="mb-3 border-b border-border pb-1 font-serif text-[1.05rem] font-semibold tracking-[0.08em] uppercase"
+      >
+        Projects
+      </h3>
+      <div class={itemClass}>
+        <div class={itemHeadClass}>
+          <span>Ayak</span>
+          <span class={dateClass}>2026 — Present</span>
         </div>
-        <p class="resume-item-tech">
+        <p class="mt-[0.1rem] mb-1 text-[0.9rem] text-muted italic">
           TanStack Start, Cloudflare Workers, D1, R2
         </p>
-        <ul class="resume-bullets">
+        <ul class={bulletsClass}>
           <li>
             Developed a full-stack e-commerce platform for a homemade jewelry
             store using TanStack Start, deployed on Cloudflare Workers.
@@ -112,13 +146,15 @@ import Layout from "../layouts/Layout.astro";
           </li>
         </ul>
       </div>
-      <div class="resume-item">
-        <div class="resume-item-head">
-          <span class="resume-item-title">Orbit</span>
-          <span class="resume-item-date">2026 — Present</span>
+      <div class={itemClass}>
+        <div class={itemHeadClass}>
+          <span>Orbit</span>
+          <span class={dateClass}>2026 — Present</span>
         </div>
-        <p class="resume-item-tech">FastAPI, Vue 3, PostgreSQL</p>
-        <ul class="resume-bullets">
+        <p class="mt-[0.1rem] mb-1 text-[0.9rem] text-muted italic">
+          FastAPI, Vue 3, PostgreSQL
+        </p>
+        <ul class={bulletsClass}>
           <li>
             Built a REST API with FastAPI enabling university students to track
             attendance, quiz, and assignment marks across courses.
@@ -137,13 +173,15 @@ import Layout from "../layouts/Layout.astro";
           </li>
         </ul>
       </div>
-      <div class="resume-item">
-        <div class="resume-item-head">
-          <span class="resume-item-title">Personal Developer Blog</span>
-          <span class="resume-item-date">2026 — Present</span>
+      <div class={itemClass}>
+        <div class={itemHeadClass}>
+          <span>Personal Developer Blog</span>
+          <span class={dateClass}>2026 — Present</span>
         </div>
-        <p class="resume-item-tech">Astro, Cloudflare Pages</p>
-        <ul class="resume-bullets">
+        <p class="mt-[0.1rem] mb-1 text-[0.9rem] text-muted italic">
+          Astro, Cloudflare Pages
+        </p>
+        <ul class={bulletsClass}>
           <li>
             Built and deployed a personal blog using Astro on Cloudflare Pages,
             achieving a perfect 100 Lighthouse score.
@@ -164,19 +202,27 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </section>
 
-    <section class="resume-section">
-      <h3>Technical Skills</h3>
-      <dl class="resume-skills">
-        <dt>Programming Languages</dt>
-        <dd>Python, C++, SQL (Postgres, SQLite, MSSQL), TypeScript, Go</dd>
-        <dt>Markup</dt>
-        <dd>HTML5, Markdown, Typst</dd>
-        <dt>Frameworks</dt>
-        <dd>Astro, FastAPI, Hono, React, TanStack Start, Tailwind CSS</dd>
-        <dt>Infrastructure</dt>
-        <dd>Cloudflare, Tailscale, Linux, Caddy</dd>
-        <dt>Developer Tools</dt>
-        <dd>Git, Docker &amp; Docker Compose, Bash</dd>
+    <section class="mb-6">
+      <h3
+        class="mb-3 border-b border-border pb-1 font-serif text-[1.05rem] font-semibold tracking-[0.08em] uppercase"
+      >
+        Technical Skills
+      </h3>
+      <dl class="m-0 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
+        <dt class="font-semibold">Programming Languages</dt>
+        <dd class="m-0">
+          Python, C++, SQL (Postgres, SQLite, MSSQL), TypeScript, Go
+        </dd>
+        <dt class="font-semibold">Markup</dt>
+        <dd class="m-0">HTML5, Markdown, Typst</dd>
+        <dt class="font-semibold">Frameworks</dt>
+        <dd class="m-0">
+          Astro, FastAPI, Hono, React, TanStack Start, Tailwind CSS
+        </dd>
+        <dt class="font-semibold">Infrastructure</dt>
+        <dd class="m-0">Cloudflare, Tailscale, Linux, Caddy</dd>
+        <dt class="font-semibold">Developer Tools</dt>
+        <dd class="m-0">Git, Docker &amp; Docker Compose, Bash</dd>
       </dl>
     </section>
   </article>
@@ -186,32 +232,4 @@ import Layout from "../layouts/Layout.astro";
       .querySelector(".print-btn")
       ?.addEventListener("click", () => window.print());
   </script>
-
-  <style is:global>
-    @media print {
-      .topbar,
-      .print-btn,
-      .resume-toolbar {
-        display: none !important;
-      }
-
-      body {
-        max-width: none;
-        padding: 0;
-      }
-
-      .content {
-        max-width: none;
-      }
-
-      .resume {
-        max-width: none;
-        font-size: 11px;
-      }
-
-      .resume-head h2 {
-        font-size: 1.4rem;
-      }
-    }
-  </style>
 </Layout>
